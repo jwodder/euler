@@ -1,3 +1,8 @@
+r"""A palindromic number reads the same both ways. The largest palindrome made
+    from the product of two 2-digit numbers is $9009 = 91\times 99$.
+
+    Find the largest palindrome made from the product of two 3-digit numbers."""
+
 The largest palindromic number that is the product of two 3-digit numbers is
 most likely 6 digits in length.  Thus, it will be of the form n = ABCCBA, and
 so:
