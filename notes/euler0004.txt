@@ -1,0 +1,14 @@
+The largest palindromic number that is the product of two 3-digit numbers is
+most likely 6 digits in length.  Thus, it will be of the form n = ABCCBA, and
+so:
+
+    n = A * 100001 + B * 10010 + C * 1100
+      = (A * 11 * 9091) + (B * 2 * 5 * 7 * 11 * 13) + (C * 2 * 5 * 11)
+      = 11 * (A * 9091 + B * 2*5*7*13 + C*2*5)
+
+Hence, since n must be a multiple of 11, at least one of its factors must be a
+multiple of 11.
+
+uvw * xyz
+= wz + 10vz + 100uz + 10wy + 100vy + 1000ux + 100wx + 1000vw + 10000ux
+= wz + 10(vz + wy) + 100(uz + vy + wx) + 1000(ux + vw) + 10000(ux)
