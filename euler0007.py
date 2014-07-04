@@ -4,8 +4,8 @@
 
    What is the 10 001st prime number?"""
 
-import primes
+import eulerlib
 
-p = primes.primeIter()
+p = eulerlib.primeIter()
 for _ in range(10000): p.next()
 print p.next()

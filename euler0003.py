@@ -4,11 +4,11 @@
    What is the largest prime factor of the number 600851475143?"""
 
 import sys
-import primes
+import eulerlib
 
 n = 600851475143
 
-for p in primes.primeIter():
+for p in eulerlib.primeIter():
     while n % p == 0:
 	n //= p
 	if n == 1:

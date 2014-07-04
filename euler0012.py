@@ -7,9 +7,9 @@
 
    Let us list the factors of the first seven triangle numbers:
 
-	1: 1
-	3: 1,3
-	6: 1,2,3,6
+        1: 1
+        3: 1,3
+        6: 1,2,3,6
        10: 1,2,5,10
        15: 1,3,5,15
        21: 1,3,7,21
@@ -21,14 +21,12 @@
    divisors?"""
 
 import itertools
-import operator
-import primes
+import eulerlib
 
 prevQty = 1
 for i in itertools.count(2):
-    qty = reduce(operator.mul, ((k if p==2 else k+1)
-				for p,k in primes.factor(i+1)), 1)
-    # qty == number of divisors of i+1
+    qty = eulerlib.product((k if p==2 else k+1) for p,k in eulerlib.factor(i+1))
+    # qty == number of divisors of i+1 (or of (i+1)//2 when i+1 is even)
     if qty * prevQty > 500:
 	print i*(i+1)//2
 	break

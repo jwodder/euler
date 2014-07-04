@@ -1,4 +1,5 @@
 import itertools
+import operator
 
 primeCache = [2,3]
 
@@ -49,3 +50,5 @@ def factor(n, primal=None):
 	    if k > 0: yield (p,k)
 	else:
 	    yield (n, 1)  ### ???
+
+def product(xs): return reduce(operator.mul, xs, 1)
