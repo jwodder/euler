@@ -52,3 +52,15 @@ def factor(n, primal=None):
 	    yield (n, 1)  ### ???
 
 def product(xs): return reduce(operator.mul, xs, 1)
+
+def divisors(n):
+    primals = [[p**i for i in range(k+1)] for (p,k) in factor(n)]
+    divs = [1]
+    for ps in primals:
+	divs = [x*y for x in divs for y in ps]
+    return divs
+
+def aliquot(n):
+    """Sum of proper divisors of `n`"""
+    if n < 1: raise ValueError('argument must be positive')
+    return product(sum(p**i for i in range(k+1)) for (p,k) in factor(n)) - n
