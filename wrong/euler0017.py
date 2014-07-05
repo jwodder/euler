@@ -58,4 +58,4 @@ def numberLength(n):
 		lengths[n-1] += lengths[thousands-1] + len('thousand')
     return lengths[n-1]
 
-print sum(numberLength(i) for i in range(1, 1001))
+print sum(numberLength(i) for i in xrange(1, 1001))

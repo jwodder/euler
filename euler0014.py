@@ -23,7 +23,7 @@ r"""The following iterative sequence is defined for the set of positive
 
 lengths = {1: 1}
 longest = 1
-for i in range(2, 1000001):
+for i in xrange(2, 1000001):
     chain = []
     j = i
     while j not in lengths:

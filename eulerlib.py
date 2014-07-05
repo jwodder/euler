@@ -13,7 +13,6 @@ def primeIter():
 	if i < len(primeCache):
 	    yield primeCache[i]
 	else:
-	    # This is so not thread-safe.
 	    j = primeCache[-1] + 2
 	    while not isPrime(j): j += 2
 	    primeCache.append(j)
@@ -49,7 +48,7 @@ def factor(n, primal=None):
 		k += 1
 	    if k > 0: yield (p,k)
 	else:
-	    yield (n, 1)  ### ???
+	    yield (n, 1)
 
 def product(xs): return reduce(operator.mul, xs, 1)
 

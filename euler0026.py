@@ -20,11 +20,10 @@
 
 maxD = 1
 maxCycle = 0
-for i in range(2, 1000):
-    if i % 2 == 0 or i % 5 == 0:
-	# `i` has the same cycle length as another, smaller number, so we can
-	# skip it.
-	continue
+for i in xrange(3, 1000, 2):
+    # Values divisible by 2 or 5 have the same cycle length as other, smaller
+    # numbers, so we can skip them.
+    if i % 5 == 0: continue
     x = 10 % i
     n = 1
     while x != 1:

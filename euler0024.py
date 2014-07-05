@@ -10,7 +10,7 @@
    5, 6, 7, 8 and 9?"""
 
 p = list('0123456789')
-for _ in range(999999):
+for _ in xrange(999999):
     for i in range(len(p)-2, -1, -1):
 	if p[i] < p[i+1]:
 	    i2 = len(p)-1

@@ -1,0 +1,11 @@
+Code to focus on improving:
+ - primeIter in eulerlib.py
+ - euler0002.py?
+ - euler0004.cpp
+  - Use a set instead of a priority_queue in order to avoid considering the
+    same pair twice
+ - euler0005.py
+  - Would using a normal `lcm` method be faster?
+ - euler0021.py
+  - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
+ - euler0023.py

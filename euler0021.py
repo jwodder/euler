@@ -15,12 +15,11 @@ from eulerlib import aliquot
 
 calculated = set()
 accum = 0
-for i in range(2, 10001):
+for i in xrange(2, 10001):
     if i in calculated: continue
     calculated.add(i)
     j = aliquot(i)
-    if j in calculated: continue  # Is this right?
-    calculated.add(j)
     if i != j and aliquot(j) == i:
+	calculated.add(j)
 	accum += i + j
 print accum

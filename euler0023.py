@@ -23,7 +23,7 @@ from eulerlib import aliquot
 n = 28123
 summable = set()
 abundant = []
-for i in range(1, n+1):
+for i in xrange(1, n+1):
     if aliquot(i) > i:
         abundant.append(i)
 	summable.update(i+j for j in abundant if i+j <= n)

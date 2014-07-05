@@ -7,5 +7,5 @@
 import eulerlib
 
 p = eulerlib.primeIter()
-for _ in range(10000): p.next()
+for _ in xrange(10000): p.next()
 print p.next()

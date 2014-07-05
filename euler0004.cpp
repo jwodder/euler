@@ -4,9 +4,9 @@
  * Find the largest palindrome made from the product of two 3-digit numbers.
  */
 
-/* Note: Assuming the largest palindrome is 6 digits long, it can be shown to
- * be a multiple of 11, and thus at least one of its factors must be a multiple
- * of 11. */
+/* Note: Assuming the largest palindrome is 6 digits long (which it is), it can
+ * be shown to be a multiple of 11, and thus at least one of its factors must
+ * be a multiple of 11. */
 
 #include <cstdio>
 #include <cstring>
@@ -43,10 +43,10 @@ int main(void) {
   int n = x.first * x.second;
   if (isPalindrome(n)) {
    printf("%d\n", n);
-   return 0;
+   break;
   }
   nextHeap.push(make_pair(x.first - 11, x.second));
   nextHeap.push(make_pair(x.first, x.second - 1));
  }
- return 1;
+ return 0;
 }
