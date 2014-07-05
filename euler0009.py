@@ -9,10 +9,17 @@
 
    Find the product $abc$."""
 
+# Assuming that the target triplet is a multiple of a smaller triplet (which it
+# is), we only need to find one triplet whose sum divides 1000 and then
+# multiply each element by the quotient.
+
+import math
 import sys
+
 for a in xrange(1, 1000):
     for b in range(a+1, (1000-a+1)//2):
-	c = 1000 - a - b
-	if a*a + b*b == c*c:
-	    print a*b*c
+	c = math.sqrt(a*a + b*b)
+	c2 = int(math.modf(c)[1])
+	if c == c2 and 1000 % (a+b+c2) == 0:
+	    print a*b*c2 * (1000 // (a+b+c2))**3
 	    sys.exit()
