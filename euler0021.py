@@ -13,16 +13,14 @@ r"""Let $d(n)$ be defined as the sum of proper divisors of $n$ (numbers less
 
 from eulerlib import aliquot
 
-aliquots = {}
-
-def getAliquot(n):
-    if n not in aliquots:
-	aliquots[n] = aliquot(n)
-    return aliquots[n]
-
-def amicable(n):
-    if n == 1: return False
-    a1 = getAliquot(n)
-    return a1 != n and getAliquot(a1) == n
-
-print sum(i for i in range(2, 10001) if amicable(i))
+calculated = set()
+accum = 0
+for i in range(2, 10001):
+    if i in calculated: continue
+    calculated.add(i)
+    j = aliquot(i)
+    if j in calculated: continue  # Is this right?
+    calculated.add(j)
+    if i != j and aliquot(j) == i:
+	accum += i + j
+print accum
