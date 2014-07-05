@@ -10,7 +10,6 @@
 
 #include <cstdio>
 #include <cstring>
-#include <iostream>
 #include <queue>
 #include <utility>
 #include <vector>
@@ -39,11 +38,11 @@ int main(void) {
  nextHeap.push(make_pair(990, 999));
  for (;;) {
   intpair x = nextHeap.top();
-  if (x.first < 100 || x.second < 100) continue;
   nextHeap.pop();
+  if (x.first < 100 || x.second < 100) continue;
   int n = x.first * x.second;
   if (isPalindrome(n)) {
-   cout << n << endl;
+   printf("%d\n", n);
    return 0;
   }
   nextHeap.push(make_pair(x.first - 11, x.second));
