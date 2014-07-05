@@ -54,6 +54,7 @@ def factor(n, primal=None):
 def product(xs): return reduce(operator.mul, xs, 1)
 
 def divisors(n):
+    if n < 1: raise ValueError('argument must be positive')
     primals = [[p**i for i in range(k+1)] for (p,k) in factor(n)]
     divs = [1]
     for ps in primals:
