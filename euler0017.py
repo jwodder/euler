@@ -46,7 +46,7 @@ def numberLength(n):
 	    if lengths[lastTwo-1] == 0:
 		lengths[lastTwo-1] = lengths[lastTwo - lastTwo%10 - 1] \
 				   + lengths[lastTwo%10 - 1]
-	    lengths[n-1] += lengths[lastTwo-1]
+	    lengths[n-1] = lengths[lastTwo-1]
 	firstTwo = n // 100
 	if firstTwo != 0:
 	    if lastTwo != 0: lengths[n-1] += len('and')
