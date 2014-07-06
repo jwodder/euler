@@ -10,7 +10,7 @@
 
 #include <cstdio>
 #include <cstring>
-#include <queue>
+#include <set>
 #include <utility>
 #include <vector>
 using namespace std;
@@ -34,19 +34,21 @@ bool isPalindrome(int n) {
 }
 
 int main(void) {
- priority_queue<intpair, vector<intpair>, PairCmp> nextHeap;
- nextHeap.push(make_pair(990, 999));
+ set<intpair, PairCmp> nextHeap;
+ nextHeap.insert(make_pair(990, 999));
  for (;;) {
-  intpair x = nextHeap.top();
-  nextHeap.pop();
+  set<intpair, PairCmp>::iterator iter = nextHeap.end();
+  iter--;
+  intpair x = *iter;
+  nextHeap.erase(iter);
   if (x.first < 100 || x.second < 100) continue;
   int n = x.first * x.second;
   if (isPalindrome(n)) {
    printf("%d\n", n);
    break;
   }
-  nextHeap.push(make_pair(x.first - 11, x.second));
-  nextHeap.push(make_pair(x.first, x.second - 1));
+  nextHeap.insert(make_pair(x.first - 11, x.second));
+  nextHeap.insert(make_pair(x.first, x.second - 1));
  }
  return 0;
 }

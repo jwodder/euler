@@ -60,7 +60,14 @@ def divisors(n):
 	divs = [x*y for x in divs for y in ps]
     return divs
 
+def sumPowers(n,k):
+    """Like ``sum(n**i for i in range(k+1))``, but more efficient.
+
+       `n` must be an integer greater than 1."""
+    return (n ** (k+1) - 1) // (n-1)
+
 def aliquot(n):
     """Sum of proper divisors of `n`"""
     if n < 1: raise ValueError('argument must be positive')
-    return product(sum(p**i for i in range(k+1)) for (p,k) in factor(n)) - n
+    #return product(sumPowers(*pk) for pk in factor(n)) - n
+    return product(itertools.starmap(sumPowers, factor(n))) - n
