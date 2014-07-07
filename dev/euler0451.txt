@@ -1,0 +1,34 @@
+r"""Consider the number 15.
+
+    There are eight positive numbers less than 15 which are coprime to 15: 1,
+    2, 4, 7, 8, 11, 13, 14.
+
+    The modular inverses of these numbers modulo 15 are: 1, 8, 4, 13, 2, 11, 7,
+    14 because
+
+    1*1 mod 15=1
+    2*8=16 mod 15=1
+    4*4=16 mod 15=1
+    7*13=91 mod 15=1
+    11*11=121 mod 15=1
+    14*14=196 mod 15=1
+
+    Let $I(n)$ be the largest positive number $m$ smaller than $n-1$ such that
+    the modular inverse of $m$ modulo $n$ equals $m$ itself.
+
+    So $I(15)=11$.
+
+    Also $I(100)=51$ and $I(7)=1$.
+
+    Find $\sum I(n)$ for $3\leq n\leq 2\cdot 10^7$"""
+
+- If $4\mid n$, then $\frac{n}{2}\pm 1$ have order 2 in $\Z_n^\times$.
+- [Conjecture] For all $n\in\Z$, $n>2$, $\Z_{2^n}^\times$ contains exactly
+  three elements of order 2: $-1$, $2^{n-1}-1$, and $2^{n-1}+1$.
+- $x^2\equiv 1\pmod{p}$ iff $x\equiv\pm 1\pmod{p}$
+ - When $n$ is prime, $I(n) = 1$.
+- $x^2\equiv 1\pmod{p^a}$ iff $x\equiv\pm 1\pmod{p^a}$ ($p$ odd)
+ - For all odd primes $p$ and positive integers $a$, $I(p^a) = 1$.
+- Given a positive integer $n>2$, let $a$ be the largest power of 2 that
+  divides $\varphi(n)$; then there are at most $a-1$ involutions in
+  $\Z_n^\times$.

@@ -12,7 +12,6 @@
 #include <cstring>
 #include <set>
 #include <utility>
-#include <vector>
 using namespace std;
 
 typedef pair<int,int> intpair;

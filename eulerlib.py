@@ -71,3 +71,19 @@ def aliquot(n):
     if n < 1: raise ValueError('argument must be positive')
     #return product(sumPowers(*pk) for pk in factor(n)) - n
     return product(itertools.starmap(sumPowers, factor(n))) - n
+
+# cross = itertools.product  # Python v.2.6+
+def cross(*args):
+    result = [[]]
+    for pool in map(tuple, args):
+	result = [x+[y] for x in result for y in pool]
+    for prod in result:
+	yield tuple(prod)
+
+def modInverse(a,n):
+    (u, uc) = (abs(n), 0)
+    (l, lc) = (a % u, 1)
+    while l > 1:
+	(u, uc, l, lc) = (l, lc, u % l, uc - lc * (u//l))
+    if l == 1: return lc % abs(n)
+    else: raise ValueError('%d has no multiplicative inverse modulo %d' % (a,n))
