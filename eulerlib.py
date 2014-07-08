@@ -74,11 +74,19 @@ def aliquot(n):
 
 # cross = itertools.product  # Python v.2.6+
 def cross(*args):
-    result = [[]]
-    for pool in map(tuple, args):
-	result = [x+[y] for x in result for y in pool]
-    for prod in result:
-	yield tuple(prod)
+    args = map(tuple, args)
+    if not all(args): return
+    indices = [0] * len(args)
+    while True:
+	yield tuple(arg[i] for (arg, i) in zip(args, indices))
+	for i in range(len(indices)-1, -1, -1):
+	    indices[i] += 1
+	    if indices[i] >= len(args[i]):
+		indices[i] = 0
+	    else:
+		break
+	else:
+	    break
 
 def modInverse(a,n):
     (u, uc) = (abs(n), 0)
@@ -87,3 +95,7 @@ def modInverse(a,n):
 	(u, uc, l, lc) = (l, lc, u % l, uc - lc * (u//l))
     if l == 1: return lc % abs(n)
     else: raise ValueError('%d has no multiplicative inverse modulo %d' % (a,n))
+
+def totient(n):
+    if n <= 0: raise ValueError('n must be positive')
+    return product(p**(k-1) * (p-1) for (p,k) in factor(n))

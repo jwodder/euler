@@ -1,5 +1,5 @@
 Code to focus on improving:
- - primeIter in eulerlib.py
+ - primeIter and factor in eulerlib.py
  - euler0002.py?
  - euler0005.py
   - Would using a normal `lcm` method be faster?
