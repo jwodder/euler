@@ -50,7 +50,5 @@ triangle = [[75],
 
 accums = triangle[0]
 for row in triangle[1:]:
-    accums = [row[0] + accums[0]] + [row[i] + max(accums[i-1], accums[i])
-				     for i in range(1, len(row)-1)] \
-				  + [row[-1] + accums[-1]]
+    accums = map(lambda a,b,c: a + max(b,c), row, accums+[0], [0]+accums)
 print max(accums)
