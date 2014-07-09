@@ -1,6 +1,9 @@
 Code to focus on improving:
  - primeIter and factor in eulerlib.py
  - euler0002.py?
+ - euler0004.cpp
+  - Look for a way to iterate over pairs of integers ordered by their product
+    without getting sets/heaps involved
  - euler0005.py
   - Would using a normal `lcm` method be faster?
  - euler0013.py
@@ -8,5 +11,8 @@ Code to focus on improving:
  - euler0021.py
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py
+ - euler0059.py
+  - Discard any characters from the passphrase that produce unacceptable output
+    characters
 
 Should the problem titles be included in the docstrings?
