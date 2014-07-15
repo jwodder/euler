@@ -16,5 +16,3 @@ Code to focus on improving:
   - Discard any characters from the passphrase that produce unacceptable output
     characters
  - euler0081.py and euler0083.py?
-
-Should the problem titles be included in the docstrings?

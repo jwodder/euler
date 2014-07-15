@@ -1,5 +1,7 @@
 #!/usr/bin/python
-"""NOTE: This problem is a significantly more challenging version of Problem
+"""Path sum: four ways
+
+   NOTE: This problem is a significantly more challenging version of Problem
    81.
 
    In the 5 by 5 matrix below, the minimal path sum from the top left to the

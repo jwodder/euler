@@ -1,5 +1,7 @@
 #!/usr/bin/python
-r"""The following iterative sequence is defined for the set of positive
+r"""Longest Collatz sequence
+
+    The following iterative sequence is defined for the set of positive
     integers:
 
     \begin{eqnarray*}

@@ -1,5 +1,7 @@
 #!/usr/bin/python
-r"""An irrational decimal fraction is created by concatenating the positive
+r"""Champernowne's constant
+
+    An irrational decimal fraction is created by concatenating the positive
     integers:
 
     $$0.12345678910[1]112131415161718192021\ldots$$

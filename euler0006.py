@@ -1,5 +1,7 @@
 #!/usr/bin/python
-r"""The sum of the squares of the first ten natural numbers is,
+r"""Sum square difference
+
+    The sum of the squares of the first ten natural numbers is,
 
     $$1^2 + 2^2 + \cdots + 10^2 = 385$$
 

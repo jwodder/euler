@@ -1,5 +1,7 @@
 #!/usr/bin/python
-"""A unit fraction contains 1 in the numerator.  The decimal representation of
+"""Reciprocal cycles
+
+   A unit fraction contains 1 in the numerator.  The decimal representation of
    the unit fractions with denominators 2 to 10 are given:
 
        1/2  = 0.5

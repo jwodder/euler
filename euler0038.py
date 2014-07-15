@@ -1,5 +1,7 @@
 #!/usr/bin/python
-r"""Take the number 192 and multiply it by each of 1, 2, and 3:
+r"""Pandigital multiples
+
+    Take the number 192 and multiply it by each of 1, 2, and 3:
 
     $$192\times 1 = 192$$
     $$192\times 2 = 384$$
