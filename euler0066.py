@@ -31,9 +31,8 @@ from math       import sqrt, floor
 from eulerlib   import reduceFrac
 
 def sqrtConvergents(x):
-    """Returns the successive convergents of the continued fraction
-       representation of ``sqrt(x)`` as unreduced ``(numerator, denominator)``
-       pairs"""
+    """Returns the successive convergents of the simple continued fraction
+       representation of ``sqrt(x)`` as ``(numerator, denominator)`` pairs"""
     def continuedFrac(d):
         P = 0
 	Q = 1
@@ -50,21 +49,20 @@ def sqrtConvergents(x):
     a1 = cfiter.next()
     (pk, qk) = (a0, 1)
     (pk1, qk1) = (a0 * a1 + 1, a1)
-    yield (pk, qk)
-    yield (pk1, qk1)
+    yield reduceFrac(pk, qk)
+    yield reduceFrac(pk1, qk1)
     for a in cfiter:
 	((pk,qk), (pk1, qk1)) = ((pk1, qk1), (a * pk1 + pk, a * qk1 + qk))
-	yield (pk1, qk1)
+	yield reduceFrac(pk1, qk1)
 
 squares = set(i*i for i in range(32))  # all perfect squares <= 1000
 
 maxX = 0
 maxD = 0
-for d in range(2, 1001):
+for d in xrange(2, 1001):
     if d in squares:
 	continue
     for (x,y) in sqrtConvergents(d):
-	(x,y) = reduceFrac(x,y)
 	if x*x - d * y * y == 1:
 	    if x > maxX:
 		maxX = x

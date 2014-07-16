@@ -4,8 +4,6 @@ Code to focus on improving:
  - euler0004.cpp
   - Look for a way to iterate over pairs of integers ordered by their product
     without getting sets/heaps involved
- - euler0005.py
-  - Would using a normal `lcm` method be faster?
  - euler0013.py
   - Would considering even fewer leading digits work?
  - euler0021.py
