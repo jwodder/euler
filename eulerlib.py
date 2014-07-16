@@ -93,9 +93,29 @@ def modInverse(a,n):
     (l, lc) = (a % u, 1)
     while l > 1:
 	(u, uc, l, lc) = (l, lc, u % l, uc - lc * (u//l))
-    if l == 1: return lc % abs(n)
-    else: raise ValueError('%d has no multiplicative inverse modulo %d' % (a,n))
+    if l == 1:
+	return lc % abs(n)
+    else:
+	raise ValueError('%d has no multiplicative inverse modulo %d' % (a,n))
 
 def totient(n):
     if n <= 0: raise ValueError('n must be positive')
     return product(p**(k-1) * (p-1) for (p,k) in factor(n))
+
+def gcd(x,y):
+    (a,b) = (abs(x), abs(y))
+    if   a == 0 and b == 0: return 0
+    elif a == 0 or  b == 0: return a or b
+    while b != 0:
+	(a,b) = (b, a % b)
+    return a
+
+def lcm(x,y):
+    d = gcd(x,y)
+    return 0 if d == 0 else abs(x*y) // d
+
+def reduceFrac(x,y):
+    if x <= 0 and y <= 0:
+	(x,y) = (-x, -y)
+    d = gcd(x,y)
+    return (0,0) if d == 0 else (x // d, y // d)
