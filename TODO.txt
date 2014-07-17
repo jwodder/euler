@@ -10,7 +10,4 @@ Code to focus on improving:
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py
  - euler0039.py
- - euler0059.py
-  - Discard any characters from the passphrase that produce unacceptable output
-    characters
  - euler0081.py and euler0083.py?
