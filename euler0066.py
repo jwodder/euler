@@ -34,16 +34,14 @@ def sqrtConvergents(x):
     """Returns the successive convergents of the simple continued fraction
        representation of ``sqrt(x)`` as ``(numerator, denominator)`` pairs"""
     def continuedFrac(d):
-        P = 0
-	Q = 1
 	sqrtD = sqrt(d)
-	a = floor(sqrtD)
-	yield int(a)
+	P = 0
+	Q = 1
 	while True:
+	    a = int(floor((P + sqrtD) / Q))
+	    yield a
 	    P = a * Q - P
-	    Q = (d - P*P) / Q
-	    a = floor((P + sqrtD) / Q)
-	    yield int(a)
+	    Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
     cfiter = continuedFrac(x)
     a0 = cfiter.next()
     a1 = cfiter.next()
