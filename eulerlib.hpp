@@ -20,13 +20,11 @@ int modInverse(int, int);
 int modulo(int, int);
 int intexp(int, int);
 
-template<class T, class Iter>
-T sum(Iter first, Iter last) {
+template<class T, class Iter> T sum(Iter first, Iter last) {
  return std::accumulate<Iter, T>(first, last, T(0));
 }
 
-template<class T, class Iter>
-T product(Iter first, Iter last) {
+template<class T, class Iter> T product(Iter first, Iter last) {
  return std::accumulate<Iter, T>(first, last, T(1), std::multiplies<T>());
 }
 
