@@ -9,5 +9,6 @@ Code to focus on improving:
  - euler0021.py
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py
+ - euler0024.py - Use Lehmer codes
  - euler0039.py
  - euler0081.py and euler0083.py?
