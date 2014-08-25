@@ -11,14 +11,14 @@
    What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4,
    5, 6, 7, 8 and 9?"""
 
-p = list('0123456789')
-for _ in xrange(999999):
-    for i in range(len(p)-2, -1, -1):
-	if p[i] < p[i+1]:
-	    i2 = len(p)-1
-	    while p[i] >= p[i2]:
-		i2 -= 1
-	    p[i], p[i2] = p[i2], p[i]
-	    p[i+1:] = reversed(p[i+1:])
-	    break
-print ''.join(p)
+lehmer = 999999
+degree = 10
+mapping = []
+for i in range(1, degree+1):
+    c = lehmer % i
+    for (j,y) in enumerate(mapping):
+	if y >= c:
+	    mapping[j] += 1
+    mapping.insert(0,c)
+    lehmer //= i
+print ''.join(str(c) for c in mapping)
