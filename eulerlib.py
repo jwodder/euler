@@ -122,6 +122,6 @@ def reduceFrac(x,y):
 
 def factorial(n): return product(xrange(2,n+1))
 
-def nPr(n,r): return factorial(n) // factorial(n-r)
+def nPr(n,r): return product(xrange(n-r+1, n+1))
 
 def nCr(n,r): return nPr(n,r) // factorial(r)
