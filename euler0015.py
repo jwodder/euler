@@ -11,10 +11,5 @@ r"""Lattice paths
 # identified by which 20 of the 40 steps you use to move down (or,
 # equivalently, right)
 
-from eulerlib import product
-
-def factorial(n): return product(range(2,n+1))
-def nPr(n,r): return factorial(n) // factorial(n-r)
-def nCr(n,r): return nPr(n,r) // factorial(r)
-
+from eulerlib import nCr
 print nCr(40, 20)

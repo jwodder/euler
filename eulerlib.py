@@ -119,3 +119,9 @@ def reduceFrac(x,y):
 	(x,y) = (-x, -y)
     d = gcd(x,y)
     return (0,0) if d == 0 else (x // d, y // d)
+
+def factorial(n): return product(xrange(2,n+1))
+
+def nPr(n,r): return factorial(n) // factorial(n-r)
+
+def nCr(n,r): return nPr(n,r) // factorial(r)
