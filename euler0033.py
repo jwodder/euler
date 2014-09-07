@@ -20,48 +20,19 @@ from eulerlib import product, gcd
 
 fractions = []
 
-# ab/bc = a/c
-#   (10a + b)c = (10b + c)a
-#   10ac + bc = 10ba + ca
-#   9ac = b(10a - c)
-for a in range(1, 10):
-    for b in range(1, 10):
-	ab = a * 10 + b
-	for c in range(1, 10):
-	    bc = 10 * b + c
-	    if ab >= bc: continue
-	    if ab * c == bc * a:
-		fractions.append((a,c))
+def checkFrac(ab,c,d, a2, b2):
+    cd = c*10 + d
+    if ab < cd and ab * b2 == cd * a2:
+	fractions.append((a2, b2))
 
-# ab/cb = a/c
 for a in range(1, 10):
     for b in range(1, 10):
-	ab = a * 10 + b
+	ab = a*10 + b
 	for c in range(1, 10):
-	    cb = 10 * c + b
-	    if ab >= cb: continue
-	    if ab * c == cb * a:
-		fractions.append((a,c))
-
-# ab/ac = b/c
-for a in range(1, 10):
-    for b in range(1, 10):
-	ab = a * 10 + b
-	for c in range(b+1, 10):
-	    ac = 10 * a + c
-	    #if ab >= ac: continue
-	    if ab * c == ac * b:
-		fractions.append((b,c))
-
-# ab/ca = b/c
-for a in range(1, 10):
-    for b in range(1, 10):
-	ab = a * 10 + b
-	for c in range(1, 10):
-	    ca = 10 * c + a
-	    if ab >= ca: continue
-	    if ab * c == ca * b:
-		fractions.append((b,c))
+	    checkFrac(ab,b,c, a,c)  # ab/bc = a/c
+	    checkFrac(ab,c,b, a,c)  # ab/cb = a/c
+	    checkFrac(ab,a,c, b,c)  # ab/ac = b/c
+	    checkFrac(ab,c,a, b,c)  # ab/ca = b/c
 
 (nums, denoms) = zip(*fractions)
 num = product(nums)
