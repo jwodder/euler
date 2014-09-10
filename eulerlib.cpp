@@ -57,6 +57,10 @@ deque<intpair> factor(int n) {
    k++;
   }
   if (k>0) fctrs.push_back(intpair(p,k));
+  if (p*p > n && n != 1) {
+   fctrs.push_back(intpair(n,1));
+   break;
+  }
  }
  return fctrs;
 }

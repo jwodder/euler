@@ -47,6 +47,9 @@ def factor(n, primal=None):
 		n //= p
 		k += 1
 	    if k > 0: yield (p,k)
+	    if p*p > n and n != 1:
+		yield (n, 1)
+		break
 	else:
 	    yield (n, 1)
 
