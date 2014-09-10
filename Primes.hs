@@ -16,8 +16,9 @@ module Primes where
  factor = fst . factorWith (2 : [3,5..])
 
  -- |@factorWith primes n@ decomposes @n@ into a product of powers of elements
- -- of @primes@ (which are assumed to all be coprime and positive) and a
- -- coprime quotient.  Specifically, it returns a pair containing:
+ -- of @primes@ (which are assumed to be ascending, pairwise coprime, and
+ -- positive) and a coprime quotient.  Specifically, it returns a pair
+ -- containing:
  --
  -- * a list of pairs of factors of @n@ in @primes@ and their
  --   multiplicities/exponents, and
@@ -35,8 +36,9 @@ module Primes where
 		     | otherwise = error "Provably redundant and unreachable"
   where factor' _  1    = ([], 1)
 	factor' [] m    = ([], m)
-	factor' (p:q) m | mod m p == 0 = (p, k) &: factor' q x
+	factor' (p:q) m | mod m p == 0 = (p,k) &: factor' q x
 	 where (k,x) = until (\(_,y) -> mod y p /= 0)
 			     (\(j,y) -> (j+1, div y p)) (0, m)
+	factor' (p:_) m | p*p > m = ([(m,1)], 1)
 	factor' (_:q) m = factor' q m
 	x &: (xs, y) = (x:xs, y)
