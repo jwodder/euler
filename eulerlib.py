@@ -4,7 +4,7 @@ import operator
 primeCache = [2,3]
 
 def primeIter():
-    def isPrime(n):
+    def _isPrime(n):
 	for k in primeCache[1:]:
 	    if k * k >  n: return True
 	    if n % k == 0: return False
@@ -14,7 +14,7 @@ def primeIter():
 	    yield primeCache[i]
 	else:
 	    j = primeCache[-1] + 2
-	    while not isPrime(j): j += 2
+	    while not _isPrime(j): j += 2
 	    primeCache.append(j)
 	    yield j
 	i += 1
@@ -52,6 +52,12 @@ def factor(n, primal=None):
 		break
 	else:
 	    yield (n, 1)
+
+def isPrime(n):
+    if n < 2: return False
+    for p in primeIter():
+	if p * p >  n: return True
+	if n % p == 0: return n == p
 
 def product(xs): return reduce(operator.mul, xs, 1)
 
