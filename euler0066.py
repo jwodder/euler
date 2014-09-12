@@ -1,7 +1,7 @@
 #!/usr/bin/python
 r"""Diophantine equation
 
-    Consider quadratic Diophantine equations of the form:</p>
+    Consider quadratic Diophantine equations of the form:
 
     $$x^2 - Dy^2 = 1$$
 
