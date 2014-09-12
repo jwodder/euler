@@ -22,20 +22,7 @@ r"""Square root convergents
 
 from itertools import chain, repeat, islice
 from math      import floor, log10
-from eulerlib  import reduceFrac
-
-def convergents(cfiter):
-    """Returns the successive convergents of a given simple continued fraction
-       as ``(numerator, denominator)`` pairs"""
-    a0 = cfiter.next()
-    a1 = cfiter.next()
-    (pk, qk) = (a0, 1)
-    (pk1, qk1) = (a0 * a1 + 1, a1)
-    yield reduceFrac(pk, qk)
-    yield reduceFrac(pk1, qk1)
-    for a in cfiter:
-	((pk,qk), (pk1, qk1)) = ((pk1, qk1), (a * pk1 + pk, a * qk1 + qk))
-	yield reduceFrac(pk1, qk1)
+from eulerlib  import convergents
 
 cf = chain([1], repeat(2))
 print sum(1 for (n,d) in islice(convergents(cf), 1, 1001)

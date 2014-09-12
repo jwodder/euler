@@ -134,3 +134,16 @@ def factorial(n): return product(xrange(2,n+1))
 def nPr(n,r): return product(xrange(n-r+1, n+1))
 
 def nCr(n,r): return nPr(n,r) // factorial(r)
+
+def convergents(cfiter):
+    """Returns the successive convergents of a given simple continued fraction
+       as ``(numerator, denominator)`` pairs"""
+    a0 = cfiter.next()
+    a1 = cfiter.next()
+    (pk, qk) = (a0, 1)
+    (pk1, qk1) = (a0 * a1 + 1, a1)
+    yield reduceFrac(pk, qk)
+    yield reduceFrac(pk1, qk1)
+    for a in cfiter:
+	((pk,qk), (pk1, qk1)) = ((pk1, qk1), (a * pk1 + pk, a * qk1 + qk))
+	yield reduceFrac(pk1, qk1)
