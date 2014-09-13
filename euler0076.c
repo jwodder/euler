@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-int cache[100][100];
+int cache[101][100];
 
 int partitionQty(int qty, int mx) {
  /* Returns the number of ways `qty` can be written as a sum of integers each
