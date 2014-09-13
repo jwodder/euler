@@ -15,17 +15,20 @@
 
 #include <stdio.h>
 
+int cache[100][100];
+
 int partitionQty(int qty, int mx) {
  /* Returns the number of ways `qty` can be written as a sum of integers each
   * no greater than `mx` */
- if (qty == 0) return 1;
- else {
-  int sum = 0;
-  for (int i = qty < mx ? qty : mx; i > 0; i--) {
-   sum += partitionQty(qty-i, i);
+ if (cache[qty][mx] == 0) {
+  if (qty == 0) cache[qty][mx] = 1;
+  else {
+   for (int i = qty < mx ? qty : mx; i > 0; i--) {
+    cache[qty][mx] += partitionQty(qty-i, i);
+   }
   }
-  return sum;
  }
+ return cache[qty][mx];
 }
 
 int main(void) {
