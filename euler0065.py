@@ -7,7 +7,7 @@ r"""Convergents of e
     \cdots}}}}$$
 
     The infinite continued fraction can be written, $\sqrt{2} = [1;(2)]$, $(2)$
-    indicates that 2 repeats _ad infinitum_.  In a similar way, $\sqrt{23} =
+    indicates that 2 repeats *ad infinitum*.  In a similar way, $\sqrt{23} =
     [4;(1,3,1,8)]$.
 
     It turns out that the sequence of partial values of continued fractions for
