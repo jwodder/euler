@@ -10,8 +10,6 @@ Code to focus on improving:
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py
  - euler0039.py
- - euler0046.cpp
-  - Make the code use the functions in eulerlib.cpp instead of copies of them
  - euler0076.c
  - euler0081.py and euler0083.py?
  - euler0096.py

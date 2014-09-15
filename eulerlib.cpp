@@ -5,11 +5,11 @@
 #include "eulerlib.hpp"
 using namespace std;
 
-deque<int> primes;
+deque<int> primeCache;
 
-static bool isPrime(int n) {
+bool _isPrime(int n) {
  deque<int>::const_iterator iter;
- for (iter = primes.begin(); iter != primes.end(); iter++) {
+ for (iter = primeCache.begin(); iter != primeCache.end(); iter++) {
   int k = *iter;
   if (k*k > n) return true;
   if (n % k == 0) return false;
@@ -17,25 +17,25 @@ static bool isPrime(int n) {
  return true;
 }
 
-static int nextPrime() {
- if (primes.empty()) {
-  primes.push_back(2);
+int nextPrime() {
+ if (primeCache.empty()) {
+  primeCache.push_back(2);
   return 2;
- } else if (primes.size() == 1) {
-  primes.push_back(3);
+ } else if (primeCache.size() == 1) {
+  primeCache.push_back(3);
   return 3;
  } else {
-  int j = primes.back() + 2;
-  while (!isPrime(j)) j += 2;
-  primes.push_back(j);
+  int j = primeCache.back() + 2;
+  while (!_isPrime(j)) j += 2;
+  primeCache.push_back(j);
   return j;
  }
 }
 
-PrimeIter::PrimeIter() : iter(primes.begin()) { }
+PrimeIter::PrimeIter() : iter(primeCache.begin()) { }
 
 int PrimeIter::next() {
- if (iter == primes.end()) return nextPrime();
+ if (iter == primeCache.end()) return nextPrime();
  else return *iter++;
 }
 

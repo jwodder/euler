@@ -9,6 +9,10 @@
 
 typedef std::pair<int,int> intpair;
 
+extern std::deque<int> primeCache;
+bool _isPrime(int);
+int nextPrime();
+
 struct PrimeIter {
  std::deque<int>::const_iterator iter;
  PrimeIter();

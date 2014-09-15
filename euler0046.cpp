@@ -21,34 +21,8 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include "eulerlib.hpp"
 using namespace std;
-
-deque<int> primes;
-
-bool isPrime(int n) {
- deque<int>::const_iterator iter;
- for (iter = primes.begin(); iter != primes.end(); iter++) {
-  int k = *iter;
-  if (k*k > n) return true;
-  if (n % k == 0) return false;
- }
- return true;
-}
-
-int nextPrime() {
- if (primes.empty()) {
-  primes.push_back(2);
-  return 2;
- } else if (primes.size() == 1) {
-  primes.push_back(3);
-  return 3;
- } else {
-  int j = primes.back() + 2;
-  while (!isPrime(j)) j += 2;
-  primes.push_back(j);
-  return j;
- }
-}
 
 /** A compressed vector<bool> that only stores values at odd indices */
 struct OddVecBool {
@@ -78,7 +52,7 @@ int main() {
  writable.setBit(3 + 2*4);
  writable.setBit(3 + 2*9);
  for (;;) {
-  int lastPrime = primes.back();
+  int lastPrime = primeCache.back();
   int pnext = nextPrime();
   writable.resizeForMax(pnext + 2*pnext*pnext);
   writable.setBit(pnext);
@@ -86,7 +60,7 @@ int main() {
    writable.setBit(pnext + 2*i*i);
   }
   deque<int>::const_iterator iter;
-  for (iter = primes.begin(); iter != primes.end(); iter++) {
+  for (iter = primeCache.begin(); iter != primeCache.end(); iter++) {
    for (int i = lastPrime+1; i < pnext+1; i++) {
     writable.setBit(*iter + 2*i*i);
    }
