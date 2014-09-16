@@ -9,5 +9,5 @@ Code to focus on improving:
  - euler0023.py
  - euler0039.py
  - euler0076.c
- - euler0081.py and euler0083.py?
+ - euler008[123].py?
  - euler0096.py
