@@ -4,8 +4,6 @@ Code to focus on improving:
  - euler0004.cpp
   - Look for a way to iterate over pairs of integers ordered by their product
     without getting sets/heaps involved
- - euler0013.py
-  - Would considering even fewer leading digits work?
  - euler0021.py
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py

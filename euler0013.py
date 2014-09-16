@@ -105,6 +105,6 @@
        20849603980134001723930671666823555245252804609722
        53503534226472524250874054075591789781264330331690"""
 
-#nums = map(int, __doc__.splitlines()[3:])  # This is efficient enough, but...
-nums = map(lambda s: int(s.strip()[:12]), __doc__.splitlines()[3:])
+#nums = map(int, __doc__.splitlines()[5:])  # This is efficient enough, but...
+nums = map(lambda s: int(s.strip()[:12]), __doc__.splitlines()[5:])
 print str(sum(nums))[:10]
