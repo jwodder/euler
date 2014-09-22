@@ -138,6 +138,7 @@ def nCr(n,r): return nPr(n,r) // factorial(r)
 def convergents(cfiter):
     """Returns the successive convergents of a given simple continued fraction
        as ``(numerator, denominator)`` pairs"""
+    cfiter = iter(cfiter)
     a0 = cfiter.next()
     a1 = cfiter.next()
     (pk, qk) = (a0, 1)
