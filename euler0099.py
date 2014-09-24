@@ -19,5 +19,5 @@ from __future__ import with_statement
 from math       import log
 
 with open('data/base_exp.txt') as fp:
-    nums = map(lambda s: map(int, s.split(',')), fp)
+    nums = map(lambda s: map(float, s.split(',')), fp)
 print max(xrange(len(nums)), key=lambda i: nums[i][1] * log(nums[i][0])) + 1
