@@ -23,16 +23,22 @@ r"""Totient maximum
     Find the value of $n\leq 1,000,000$ for which $n/\varphi(n)$ is a
     maximum."""
 
-from __future__ import division
-from eulerlib   import totient, factor, product
+# $n/\varphi(n)$ simplifies to $\prod_{p\mid n} \frac{p}{p-1}$, so in order to
+# maximize this, we just need to cram as many prime numbers together as
+# possible while keeping the product below 1000001 and giving preference to
+# smaller primes (which have larger $\frac{p}{p-1}$ ratios).  Because
+# multiplicities greater than 1 have no effect on $n/\varphi(n)$ and serve only
+# to limit what other primes can be crammed into the result, each prime should
+# be used no more than once.  Thus, we simply take the longest sequence of
+# consecutive primes starting at 2 whose product is less than 1000001.
 
-maxN = 0
-maxRatio = 0
-for n in range(2, 1000001):
-    #ratio = n / totient(n)
-    ratio = product(1 - 1/p for p,_ in factor(n))
-    if ratio > maxRatio:
-	maxRatio = ratio
-	maxN = n
-    print n
-print maxN
+from eulerlib import primeIter
+
+n = 1
+for p in primeIter():
+    np = n * p
+    if np <= 1000000:
+	n = np
+    else:
+	break
+print n
