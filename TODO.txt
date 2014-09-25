@@ -12,4 +12,5 @@ Code to focus on improving:
  - euler0076.c
  - euler008[123].py?
  - euler0096.py
+ - euler0205.py?
  - euler0206.py
