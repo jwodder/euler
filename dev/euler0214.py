@@ -38,4 +38,4 @@ def length25(p):
 	i += 1
     return i == 25
 
-print sum(itertools.ifilter(length25, nPrimes(amount=None, bound=40000000)))
+print sum(itertools.ifilter(length25, nPrimes(bound=40000000)))

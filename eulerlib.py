@@ -19,11 +19,11 @@ def primeIter():
 	    yield j
 	i += 1
 
-def nPrimes(amount=1000, bound=None):
+def nPrimes(amount=None, bound=None):
     """Returns an iterator over the first `amount` prime numbers less than or
        equal to `bound`"""
     if amount is None and bound is None:
-	return iter([])
+	amount=1000
     primes = primeIter()
     if bound is not None:
 	primes = itertools.takewhile(lambda p: p<=bound, primes)

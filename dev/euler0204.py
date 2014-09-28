@@ -21,7 +21,7 @@ sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import nPrimes, cross, product
 
 limit = 1000000000
-primes = list(nPrimes(amount=None, bound=100))
+primes = list(nPrimes(bound=100))
 
 primePowers = []
 for p in primes:
