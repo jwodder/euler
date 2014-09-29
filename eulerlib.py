@@ -1,3 +1,4 @@
+from   bisect import bisect_left
 import itertools
 import operator
 
@@ -54,10 +55,14 @@ def factor(n, primal=None):
 	    yield (n, 1)
 
 def isPrime(n):
-    if n < 2: return False
-    for p in primeIter():
-	if p * p >  n: return True
-	if n % p == 0: return n == p
+    if n < 2:
+	return False
+    elif n <= primeCache[-1]:
+	return primeCache[bisect_left(primeCache, n)] == n
+    else:
+	for p in primeIter():
+	    if p * p >  n: return True
+	    if n % p == 0: return n == p
 
 def product(xs): return reduce(operator.mul, xs, 1)
 
