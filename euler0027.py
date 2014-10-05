@@ -28,7 +28,7 @@ r"""Quadratic primes
 
 from itertools import dropwhile
 from math      import sqrt
-from eulerlib  import nPrimes, isPrime
+from eulerlib  import primeIter, isPrime
 
 maxPrimes = 40
 maxCoefProd = 41
@@ -39,7 +39,7 @@ maxCoefProd = 41
 # produce no more than $b$ consecutive primes, and so testing anything with
 # $b<=41$ is pointless.
 
-for b in dropwhile(lambda p: p<=41, nPrimes(bound=1000)):
+for b in dropwhile(lambda p: p<=41, primeIter(bound=1000)):
     for a in xrange(-999, 1000):
 	if a == b+1 or a == b-1:
 	    # The quadratic can be factored into (n ± b)(n ± 1) and so will

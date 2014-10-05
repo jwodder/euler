@@ -4,33 +4,26 @@ import operator
 
 primeCache = [2,3]
 
-def primeIter():
+def primeIter(amount=None, bound=None):
+    """Returns an iterator over the first `amount` prime numbers less than or
+       equal to `bound`, or over all primes if both parameters are `None`"""
     def _isPrime(n):
 	for k in primeCache[1:]:
 	    if k * k >  n: return True
 	    if n % k == 0: return False
     i=0
-    while True:
+    while amount is None or i < amount:
 	if i < len(primeCache):
 	    yield primeCache[i]
 	else:
 	    j = primeCache[-1] + 2
 	    while not _isPrime(j): j += 2
 	    primeCache.append(j)
-	    yield j
+	    if bound is None or j <= bound:
+		yield j
+	    else:
+		return
 	i += 1
-
-def nPrimes(amount=None, bound=None):
-    """Returns an iterator over the first `amount` prime numbers less than or
-       equal to `bound`"""
-    if amount is None and bound is None:
-	amount=1000
-    primes = primeIter()
-    if bound is not None:
-	primes = itertools.takewhile(lambda p: p<=bound, primes)
-    if amount is not None:
-	primes = itertools.islice(primes, amount)
-    return primes
 
 def factor(n, primal=None):
     if n == 0:

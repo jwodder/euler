@@ -28,7 +28,7 @@ r"""Totient Chains
 import itertools
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import nPrimes, totient
+from eulerlib import primeIter, totient
 
 def length25(p):
     x = p-1
@@ -38,4 +38,4 @@ def length25(p):
 	i += 1
     return i == 25
 
-print sum(itertools.ifilter(length25, nPrimes(bound=40000000)))
+print sum(itertools.ifilter(length25, primeIter(bound=40000000)))
