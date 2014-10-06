@@ -10,7 +10,6 @@
 	18 [ 5]  4 [ 3] 12
        [17] 16  15  14 [13]
 
-
    It can be verified that the sum of the numbers on the diagonals is 101.
 
    What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral
