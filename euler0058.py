@@ -27,9 +27,8 @@ from eulerlib import isPrime
 primeQty = 0
 compositeQty = 1
 prev = 1
-i = 1
-while primeQty * 9 >= compositeQty or i == 1:
-    sidelen = 2*i
+sidelen = 2  # Actually the side length minus 1
+while primeQty * 9 >= compositeQty or sidelen == 2:
     ur = prev + sidelen
     ul = ur + sidelen
     ll = ul + sidelen
@@ -40,6 +39,5 @@ while primeQty * 9 >= compositeQty or i == 1:
 	else:
 	    compositeQty += 1
     prev = lr
-    i += 1
-    #print 'i = %d, primes = %d, composites = %d' % (i, primeQty, compositeQty)
-print 2*i - 1
+    sidelen += 2
+print sidelen - 1
