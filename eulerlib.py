@@ -150,10 +150,10 @@ def convergents(cfiter):
 def partitions(n):
     def gen(qty, mx):
 	if qty == 0:
-	    yield []
+	    yield ()
 	else:
 	    for i in range(min(qty,mx), 0, -1):
 		for xs in gen(qty-i, i):
-		    yield [i] + xs
+		    yield (i,) + xs
     if n < 1: raise ValueError
     else: return gen(n,n)
