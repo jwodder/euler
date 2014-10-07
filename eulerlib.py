@@ -146,3 +146,14 @@ def convergents(cfiter):
     for a in cfiter:
 	((pk,qk), (pk1, qk1)) = ((pk1, qk1), (a * pk1 + pk, a * qk1 + qk))
 	yield reduceFrac(pk1, qk1)
+
+def partitions(n):
+    def gen(qty, mx):
+	if qty == 0:
+	    yield []
+	else:
+	    for i in range(min(qty,mx), 0, -1):
+		for xs in gen(qty-i, i):
+		    yield [i] + xs
+    if n < 1: raise ValueError
+    else: return gen(n,n)
