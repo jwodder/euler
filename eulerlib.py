@@ -1,5 +1,6 @@
 from   bisect import bisect_left
 import itertools
+import math
 import operator
 
 primeCache = [2,3]
@@ -157,3 +158,7 @@ def partitions(n):
 		    yield (i,) + xs
     if n < 1: raise ValueError
     else: return gen(n,n)
+
+def isPerfectSquare(n):
+    x = math.sqrt(n)
+    return x == int(math.modf(x)[1])
