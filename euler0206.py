@@ -9,9 +9,9 @@
 
 # The last digit of the answer must be 0 (and thus the last two digits of the
 # square must be 0).
-#
+
 # The penultimate digit of the answer must be either 3 or 7.
-#
+
 # The answer must therefore be of the form 1_______30 or 1_______70.
 
 #from   math import sqrt, ceil

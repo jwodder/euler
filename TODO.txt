@@ -13,3 +13,6 @@ Code to focus on improving:
  - euler0096.py
  - euler0205.py?
  - euler0206.py
+
+- Move the implementations of Dijkstra's algorithm from euler008[123].py (and
+  elsewhere?) to eulerlib.py
