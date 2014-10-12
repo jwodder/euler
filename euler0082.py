@@ -19,6 +19,7 @@
    left column to the right column."""
 
 from __future__ import with_statement
+from eulerlib   import dijkstraLength
 
 with open('data/matrix.txt') as fp:
     matrix = map(lambda s: map(int, s.split(',')), fp)
@@ -32,11 +33,9 @@ start = (-1, -1)
 destination = (height, width)
 matrix.append([0] * (width+1))
 
-distances = [[None] * (width+1) for _ in range(height+1)]
-unvisited = set((y,x) for y in range(height) for x in range(width))
-unvisited.add(start)
-unvisited.add(destination)
-current = start
+nodes = set((y,x) for y in range(height) for x in range(width))
+nodes.add(start)
+nodes.add(destination)
 
 def neighbors(node):
     if node == start:
@@ -53,22 +52,6 @@ def neighbors(node):
 	if x == width-1:
 	    yield destination
 
-def nodeDist(node): return 0 if node == start else distances[node[0]][node[1]]
+def length(_, node): return matrix[node[0]][node[1]]
 
-while True:
-    for (y,x) in neighbors(current):
-	if (y,x) in unvisited:
-	    newdist = nodeDist(current) + matrix[y][x]
-	    olddist = nodeDist((y,x))
-	    if olddist is None or olddist > newdist:
-		distances[y][x] = newdist
-    unvisited.remove(current)
-    if destination not in unvisited:
-	print nodeDist(destination)
-	break
-    visitable = [n for n in unvisited if nodeDist(n) is not None]
-    if visitable:
-	current = min(visitable, key=nodeDist)
-    else:
-	print "No route to endpoint"
-	break
+print dijkstraLength(start, destination, nodes, neighbors, length)

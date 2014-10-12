@@ -16,18 +16,14 @@
    top left to the bottom right by only moving right and down."""
 
 from __future__ import with_statement
+from eulerlib   import dijkstraLength
 
 with open('data/matrix.txt') as fp:
     matrix = map(lambda s: map(int, s.split(',')), fp)
 
 width  = len(matrix[0])
 height = len(matrix)
-destination = (height-1, width-1)
-
-distances = [[None] * width for _ in range(height)]
-distances[0][0] = matrix[0][0]
-unvisited = set((y,x) for y in range(height) for x in range(width))
-current = (0,0)
+nodes  = set((y,x) for y in range(height) for x in range(width))
 
 def neighbors(node):
     (y,x) = node
@@ -36,22 +32,6 @@ def neighbors(node):
     if x+1 < width:
 	yield (y, x+1)
 
-def nodeDist(node): return distances[node[0]][node[1]]
+def length(_, node): return matrix[node[0]][node[1]]
 
-while True:
-    for (y,x) in neighbors(current):
-	if (y,x) in unvisited:
-	    newdist = nodeDist(current) + matrix[y][x]
-	    olddist = nodeDist((y,x))
-	    if olddist is None or olddist > newdist:
-		distances[y][x] = newdist
-    unvisited.remove(current)
-    if destination not in unvisited:
-	print nodeDist(destination)
-	break
-    visitable = [n for n in unvisited if nodeDist(n) is not None]
-    if visitable:
-	current = min(visitable, key=nodeDist)
-    else:
-	print "No route to endpoint"
-	break
+print dijkstraLength((0,0), (height-1, width-1), nodes, neighbors, length) + matrix[0][0]
