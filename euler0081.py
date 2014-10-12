@@ -23,7 +23,6 @@ with open('data/matrix.txt') as fp:
 
 width  = len(matrix[0])
 height = len(matrix)
-nodes  = set((y,x) for y in range(height) for x in range(width))
 
 def neighbors(node):
     (y,x) = node
@@ -34,4 +33,4 @@ def neighbors(node):
 
 def length(_, node): return matrix[node[0]][node[1]]
 
-print dijkstraLength((0,0), (height-1, width-1), nodes, neighbors, length) + matrix[0][0]
+print dijkstraLength((0,0), (height-1, width-1), neighbors, length) + matrix[0][0]

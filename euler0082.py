@@ -33,10 +33,6 @@ start = (-1, -1)
 destination = (height, width)
 matrix.append([0] * (width+1))
 
-nodes = set((y,x) for y in range(height) for x in range(width))
-nodes.add(start)
-nodes.add(destination)
-
 def neighbors(node):
     if node == start:
 	for y in xrange(height):
@@ -54,4 +50,4 @@ def neighbors(node):
 
 def length(_, node): return matrix[node[0]][node[1]]
 
-print dijkstraLength(start, destination, nodes, neighbors, length)
+print dijkstraLength(start, destination, neighbors, length)

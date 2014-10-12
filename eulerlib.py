@@ -168,27 +168,26 @@ def isPerfectSquare(n):
     #return x == math.trunc(x)  # Python v.2.6+
     #return x.is_integer()  # Python v.2.6+
 
-def dijkstraLength(start, end, allPoints, neighbors, length):
-    """Returns the length of the shortest path from `start` to `end` using the
-       points in the iterable `allPoints`.  `neighbors` must be a function that
-       takes a point and returns an iterable of all of its neighbors.  `length`
-       must be a function that takes two neighboring points `x` and `y` and
-       returns the length of the edge from `x` to `y`.  All points must be
-       hashable."""
-    unvisited = set(allPoints)
+def dijkstraLength(start, end, neighbors, length):
+    """Returns the length of the shortest path from `start` to `end`.
+       `neighbors` must be a function that takes a vertex and returns an
+       iterable of all of its neighbors.  `length` must be a function that
+       takes two neighboring vertices `x` and `y` and returns the length of the
+       edge from `x` to `y`.  All vertices must be hashable."""
+    visited = set()
     distances = {start: 0}
     current = start
     while True:
 	for p in neighbors(current):
-	    if p in unvisited:
+	    if p not in visited:
 		newdist = distances[current] + length(current, p)
 		olddist = distances.get(p, None)
 		if olddist is None or olddist > newdist:
 		    distances[p] = newdist
-	unvisited.remove(current)
-	if end not in unvisited:
+	visited.add(current)
+	if end in visited:
 	    return distances[end]
-	visitable = [p for p in unvisited if p in distances]
+	visitable = [p for p in distances if p not in visited]
 	if visitable:
 	    current = min(visitable, key=lambda p: distances[p])
 	else:
