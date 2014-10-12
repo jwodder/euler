@@ -161,4 +161,8 @@ def partitions(n):
 
 def isPerfectSquare(n):
     x = math.sqrt(n)
-    return x == int(math.modf(x)[1])
+    #return x == int(math.modf(x)[1])
+    return x == math.modf(x)[1]
+    #return math.modf(x)[0] == 0
+    #return x == math.floor(x)
+    #return x == math.trunc(x)  # Python v.2.6+

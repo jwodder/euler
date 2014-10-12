@@ -84,14 +84,12 @@ def sqrtCF_PQ(d):
 qty = 0
 for n in xrange(2, 10000):
     if isPerfectSquare(n): continue
-    pqs = {}
-    i = 0
-    for pq in sqrtCF_PQ(n):
-	if pq in pqs:
-	    if (i - pqs[pq]) % 2 == 1:
-		qty += 1
-	    break
-	else:
-	    pqs[pq] = i
-	    i += 1
+    pqs = sqrtCF_PQ(n)
+    pqs.next()
+    start = pqs.next()
+    i = 1
+    while start != pqs.next():
+	i += 1
+    if i % 2 == 1:
+	qty += 1
 print qty
