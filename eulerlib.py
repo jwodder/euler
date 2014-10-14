@@ -15,15 +15,15 @@ def primeIter(amount=None, bound=None):
     i=0
     while amount is None or i < amount:
 	if i < len(primeCache):
-	    yield primeCache[i]
+	    p = primeCache[i]
 	else:
-	    j = primeCache[-1] + 2
-	    while not _isPrime(j): j += 2
-	    primeCache.append(j)
-	    if bound is None or j <= bound:
-		yield j
-	    else:
-		return
+	    p = primeCache[-1] + 2
+	    while not _isPrime(p): p += 2
+	    primeCache.append(p)
+	if bound is None or p <= bound:
+	    yield p
+	else:
+	    return
 	i += 1
 
 def factor(n, primal=None):
