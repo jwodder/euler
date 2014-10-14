@@ -1,4 +1,3 @@
-import operator
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import factor, modInverse, cross

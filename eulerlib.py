@@ -167,6 +167,8 @@ def isPerfectSquare(n):
     #return x == math.floor(x)
     #return x == math.trunc(x)  # Python v.2.6+
     #return x.is_integer()  # Python v.2.6+
+    #y = int(x)
+    #return n in ((y-1)**2, y**2, (y+1)**2)
 
 def dijkstraLength(start, end, neighbors, length):
     """Returns the length of the shortest path from `start` to `end`.
