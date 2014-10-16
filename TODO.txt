@@ -8,6 +8,9 @@ Code to focus on improving:
  - euler0023.py
  - euler0039.py
  - euler0046.py
+ - euler0052.py
+  - The code could stand to be more correct rather than only working because
+    the answer isn't one of the possibilities it skips.
  - euler0076.c
  - euler0096.py
  - euler0205.py?
