@@ -58,6 +58,21 @@ def isPrime(n):
 	    if p * p >  n: return True
 	    if n % p == 0: return n == p
 
+def isPrime2(n):
+    if n < 2:
+	return False
+    elif n <= primeCache[-1]:
+	return primeCache[bisect_left(primeCache, n)] == n
+    else:
+	for p in primeCache:
+	    if p * p >  n: return True
+	    if n % p == 0: return False
+	p = primeCache[-1] + 2
+	while True:
+	    if p * p >  n: return True
+	    if n % p == 0: return n == p
+	    p += 2
+
 def product(xs): return reduce(operator.mul, xs, 1)
 
 def divisors(n):
