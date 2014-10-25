@@ -84,9 +84,8 @@ def divisors(n):
     return divs
 
 def sumPowers(n,k):
-    """Like ``sum(n**i for i in range(k+1))``, but more efficient.
-
-       `n` must be an integer greater than 1."""
+    """Like ``sum(n**i for i in range(k+1))``, but more efficient.  `n` must be
+       an integer greater than 1."""
     return (n ** (k+1) - 1) // (n-1)
 
 def aliquot(n):

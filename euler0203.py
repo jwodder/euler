@@ -1,3 +1,4 @@
+#!/usr/bin/python
 """Squarefree Binomial Coefficients
 
    The binomial coefficients ${}^nC_k$ can be arranged in triangular form,

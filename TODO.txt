@@ -15,3 +15,5 @@ Code to focus on improving:
  - euler0096.py
  - euler0205.py?
  - euler0206.py
+
+- Organize all of the solutions into subfolders based on problem types
