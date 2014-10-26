@@ -23,6 +23,7 @@
    divisors?"""
 
 import itertools
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 import eulerlib
 
 prevQty = 1

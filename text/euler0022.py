@@ -15,7 +15,7 @@ r"""Names scores
 
 from __future__ import with_statement
 
-with open('data/names.txt') as fp:
+with open('../data/names.txt') as fp:
     names = fp.read().strip('"').split('","')
 names.sort()
 print sum((i+1)*sum(ord(c) - 64 for c in name) for (i,name) in enumerate(names))

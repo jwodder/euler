@@ -18,7 +18,7 @@ r"""Coded triangle numbers
 
 from __future__ import with_statement
 
-with open('data/words.txt') as fp:
+with open('../data/words.txt') as fp:
     words = fp.read().strip('"').split('","')
 
 triangles = set([1, 3, 6, 10, 15]);

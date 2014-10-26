@@ -6,6 +6,7 @@
 
    What is the 10 001st prime number?"""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 import eulerlib
 
 p = eulerlib.primeIter()

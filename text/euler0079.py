@@ -22,7 +22,7 @@ befores = defaultdict(set)
 afters  = defaultdict(set)
 allvals = set()
 
-with open('data/keylog.txt') as fp:
+with open('../data/keylog.txt') as fp:
     for line in fp:
 	a,b,c = line.strip()
 	allvals.update([a,b,c])

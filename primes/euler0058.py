@@ -22,6 +22,7 @@ r"""Spiral primes
     what is the side length of the square spiral for which the ratio of primes
     along both diagonals first falls below $10%$?"""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import isPrime
 
 primeQty = 0

@@ -11,5 +11,6 @@ r"""Lattice paths
 # identified by which 20 of the 40 steps you use to move down (or,
 # equivalently, right)
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import nCr
 print nCr(40, 20)

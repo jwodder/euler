@@ -19,9 +19,10 @@
    top left to the bottom right by moving left, right, up, and down."""
 
 from __future__ import with_statement
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib   import dijkstraLength
 
-with open('data/matrix.txt') as fp:
+with open('../data/matrix.txt') as fp:
     matrix = map(lambda s: map(int, s.split(',')), fp)
 
 width  = len(matrix[0])

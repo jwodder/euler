@@ -28,6 +28,7 @@ r"""Quadratic primes
 
 from itertools import dropwhile
 from math      import sqrt
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib  import primeIter, isPrime
 
 maxPrimes = 40

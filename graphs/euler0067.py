@@ -23,7 +23,7 @@ r"""Maximum path sum II
 
 from __future__ import with_statement
 
-with open('data/triangle.txt') as fp:
+with open('../data/triangle.txt') as fp:
     triangle = map(lambda s: map(int, s.split()), fp)
 
 accums = triangle[0]

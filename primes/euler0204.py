@@ -17,6 +17,7 @@
    exceed $10^9$?"""
 
 from collections import deque
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib    import primeIter
 
 limit = 1000000000

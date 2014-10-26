@@ -32,7 +32,7 @@ from __future__ import with_statement
 from itertools  import cycle
 from string     import ascii_letters, digits
 
-with open('data/cipher1.txt') as fp:
+with open('../data/cipher1.txt') as fp:
     bytes = map(int, fp.read().split(','))
 
 acceptable = map(ord, ascii_letters + digits + " .,();!'")

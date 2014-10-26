@@ -16,6 +16,7 @@ r"""Digit canceling fractions
     If the product of these four fractions is given in its lowest common terms,
     find the value of the denominator."""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import product, gcd
 
 fractions = []
