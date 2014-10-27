@@ -6,9 +6,20 @@ P_{n+1} - P_n = (n+1)(3n+2)/2 - n(3n-1)/2
 P_{n+k} - P_n = \sum_{i=0}^{k-1} 3(n+i)+1
 	      = (3n+1)k + 3k(k-1)/2
 	      = k(6n + 3k - 1)/2
-	      = P_{k} + 3nk
+	      = P_k + 3nk
+
+P_k + 3nk = P_x
+    <=> P_x - P_k = 3nk
+    <=> P_{x-k} + 3k(x-k) = 3nk
 
 P_{n+k} + P_n = 2P_n + P_k + 3nk
+
+P_{n+k} + P_n = P_x
+    <=> P_n = P_x - P_{n+k}
+    <=>     = P_{x-n-k} + 3(n+k)(x-n-k)
+
+    <=> P_{n+k} = P_x - P_n
+    <=>         = P_{x-n} + 3n(x-n)
 
 p = P_n <=> p = n(3n-1)/2
 	<=> 2p = 3n^2 - n
