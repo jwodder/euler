@@ -12,6 +12,7 @@ Code to focus on improving:
   - The code could stand to be more correct rather than only working because
     the answer isn't one of the possibilities it skips.
  - euler0076.c
+ - euler0092.py (RUNTIME IS OVER TWO MINUTES)
  - euler0096.py
  - euler0145.c
  - euler0205.py?
