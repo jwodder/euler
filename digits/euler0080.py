@@ -25,7 +25,7 @@ def sqrtStr(n, digits=100):
     p = 0
     c = 0
     pointed = False
-    for i in xrange(digits):
+    for _ in xrange(digits):
 	if dpairs:
 	    leading = dpairs.pop(0)
 	else:
