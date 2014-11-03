@@ -1,0 +1,8 @@
+Values of $n$ satisfying one or more of the following can be skipped:
+ - $n$ is odd.
+ - $n$ is a multiple of 3, 7, or 13.
+ - $n\equiv 3,4 \pmod{7}$ (as this would imply $7\mid n^2+19$)
+
+In order to ensure the "consecutive" part, $n$ must be such that $n^2 +
+{15,19,21,25}$ are not prime.  (Note that $n^2+3$ being prime means that $n^2 +
+{5,11,17,23}$ are not prime.)
