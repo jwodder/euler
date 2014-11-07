@@ -6,6 +6,7 @@ Code to focus on improving:
  - euler0021.py
   - Make `calculated` a list of bools (or a long bitmask?) instead of a set?
  - euler0023.py
+ - euler0035.py
  - euler0039.py
  - euler0046.py
  - euler0052.py
