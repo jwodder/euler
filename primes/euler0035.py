@@ -10,28 +10,13 @@
    How many circular primes are there below one million?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter
+from eulerlib import isPrime2
 
-potentials = set()
-qty = 0
-
-for p in primeIter(bound=1000000):
+qty = 2  # 2 and 5
+for p in xrange(3, 1000000, 2):
     pstr = str(p)
-    if len(pstr) == 1 or pstr == '11':
+    if all(c in '1379' for c in pstr) and isPrime2(p) \
+        and all(isPrime2(int(pstr[i:] + pstr[:i]))
+		for i in range(1, len(pstr))):
 	qty += 1
-    elif not ('2' in pstr or '5' in pstr or '0' in pstr):
-	ismax = True
-	for i in range(1, len(pstr)):
-	    p2 = pstr[i:] + pstr[:i]
-	    if p2 < pstr and p2 not in potentials:
-		break
-	    elif p2 > pstr:
-		ismax = False
-	else:
-	    if ismax:
-		qty += len(pstr)
-		for i in range(1, len(pstr)):
-		    potentials.remove(pstr[i:] + pstr[:i])
-	    else:
-		potentials.add(pstr)
 print qty
