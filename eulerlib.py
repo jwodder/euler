@@ -1,4 +1,5 @@
-from   bisect import bisect_left
+from   bisect      import bisect_left
+from   collections import deque
 import itertools
 import math
 import operator
@@ -29,6 +30,14 @@ def primeIter(amount=None, bound=None):
 	else:
 	    return
 	i += 1
+
+def precalPrimes(amount=None, bound=None):
+    """Precalculates the first `amount` prime numbers less than or equal to
+       `bound`"""
+    if amount is None and bound is None:
+        raise ValueError('At least one argument must be non-None')
+    # based on the `consume` recipe in the itertools documentation
+    deque(primeIter(amount=amount, bound=bound), maxlen=0)
 
 def factor(n, primal=None):
     if n == 0:

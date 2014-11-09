@@ -10,7 +10,8 @@
    How many circular primes are there below one million?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import isPrime2
+from eulerlib import precalPrimes, isPrime2
+precalPrimes(bound=1000)
 
 qty = 2  # 2 and 5
 for p in xrange(3, 1000000, 2):
