@@ -9,7 +9,11 @@ def primeIter(amount=None, bound=None):
     """Returns an iterator over the first `amount` prime numbers less than or
        equal to `bound`, or over all primes if both parameters are `None`"""
     def _isPrime(n):
-	for k in primeCache[1:]:
+	for k in primeCache:
+	# I originally wrote `for k in primeCache[1:]:` here in order to skip
+	# the unnecessary check for oddness, thinking that Python would be
+	# smart about iterating over a slice.  It is not, and writing just `for
+	# k in primeCache:` gives a massive speedup.
 	    if k * k >  n: return True
 	    if n % k == 0: return False
     i=0
