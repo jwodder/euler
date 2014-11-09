@@ -7,12 +7,12 @@
    What is the smallest positive number that is evenly divisible by all of the
    numbers from 1 to 20?"""
 
-import eulerlib
+from eulerlib import factor
 
 factors = [0] * 20
 accum = 1
-for i in range(1, 21):
-    for p,k in eulerlib.factor(i, [2,3,5,7,11,13,17,19]):
+for i in xrange(1, 21):
+    for p,k in factor(i, [2,3,5,7,11,13,17,19]):
 	if k > factors[p-1]:
 	    accum *= p ** (k - factors[p-1])
 	    factors[p-1] = k

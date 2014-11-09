@@ -20,3 +20,8 @@ Code to focus on improving:
 
 - Organize all of the solutions into subfolders based on problem types
 - Add the MIT license to eulerlib.*? (and only eulerlib?)
+- See what programs in primes/ I can speed up by adding a call to
+  `precalPrimes`
+- Consider adding a variant of `primeIter` that uses the `primeIter` algorithm
+  up to a certain point (usually the square root of the upper bound) and then
+  afterwards foregoes adding new primes to `primeCache`, à la euler0035.py
