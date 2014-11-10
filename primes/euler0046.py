@@ -18,11 +18,11 @@ r"""Goldbach's other conjecture
     What is the smallest odd composite that cannot be written as the sum of a
     prime and twice a square?"""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, primeCache
 
 # <https://github.com/jwodder/bitvector.py>
 from os import environ
-import sys
 sys.path.insert(1, environ['HOME'] + '/work/GITHUB/bitvector')
 from bitvector import bitvector
 

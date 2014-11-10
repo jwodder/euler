@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 r"""Totient Chains
 
     Let $φ$ be Euler's totient function, i.e. for a natural number $n$, $φ(n)$
