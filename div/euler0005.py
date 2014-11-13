@@ -7,6 +7,7 @@
    What is the smallest positive number that is evenly divisible by all of the
    numbers from 1 to 20?"""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import factor
 
 factors = [0] * 20

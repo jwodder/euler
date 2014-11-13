@@ -32,6 +32,7 @@ r"""Totient maximum
 # be used no more than once.  Thus, we simply take the longest sequence of
 # consecutive primes starting at 2 whose product is less than 1000001.
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter
 
 n = 1

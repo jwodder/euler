@@ -20,6 +20,7 @@
    Find the sum of all the positive integers which cannot be written as the sum
    of two abundant numbers."""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import aliquot
 
 n = 28123

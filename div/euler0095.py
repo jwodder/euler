@@ -20,6 +20,7 @@ r"""Amicable chains
     Find the smallest member of the longest amicable chain with no element
     exceeding one million."""
 
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import aliquot
 
 longestLength = 0
