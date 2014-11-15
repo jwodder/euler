@@ -24,13 +24,17 @@
    formed?"""
 
 maxTiles = 1000000
-qty = 0
-for start in xrange(3, maxTiles//4 + 2):
-    tilesLeft = maxTiles - (start-1)*4
-    qty += 1
-    i = start+2
-    while tilesLeft >= (i-1)*4:
-	tilesLeft -= (i-1)*4
-	qty += 1
-	i += 2
-print qty
+
+def countParity(start):
+    used = start*4 + (start-2) * 4
+    outer = start
+    qty = 0
+    for i in xrange(start, maxTiles//4 + 1, 2):
+	used -= (i-2)*4
+	while used + (outer+2)*4 <= maxTiles:
+	    outer += 2
+	    used += outer*4
+	qty += (outer - i) // 2 + 1
+    return qty
+
+print countParity(2) + countParity(3)
