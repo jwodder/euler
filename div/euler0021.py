@@ -16,13 +16,12 @@ r"""Amicable numbers
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import aliquot
 
-calculated = set()
+cache = {}
 accum = 0
 for i in xrange(2, 10001):
-    if i in calculated: continue
-    calculated.add(i)
     j = aliquot(i)
-    if i != j and aliquot(j) == i:
-	calculated.add(j)
+    if j < i and cache.get(j) == i:
 	accum += i + j
+    elif j > i:
+	cache[i] = j
 print accum
