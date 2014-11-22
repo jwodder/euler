@@ -187,16 +187,16 @@ def partitions(n):
     else: return gen(n,n)
 
 def isPerfectSquare(n):
-    x = math.sqrt(n)
+    #x = math.sqrt(n)
     #return x == int(math.modf(x)[1])
-    return x == math.modf(x)[1]
+    #return x == math.modf(x)[1]
     #return math.modf(x)[0] == 0
     #return x == math.floor(x)
     #return x == math.trunc(x)  # Python v.2.6+
     #return x.is_integer()  # Python v.2.6+
     #y = int(x)
     #return n in ((y-1)**2, y**2, (y+1)**2)
-    #return perfectSqrt(n) is not None
+    return perfectSqrt(n) is not None
 
 def intSqrt(n):
     """Returns the floor of the square root of an integral value _exactly_.

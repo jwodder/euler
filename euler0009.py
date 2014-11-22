@@ -15,13 +15,12 @@
 # is), we only need to find one triplet whose sum divides 1000 and then
 # multiply each element by the quotient.
 
-import math
 import sys
+from   eulerlib import perfectSqrt
 
 for a in xrange(1, 1000):
     for b in range(a+1, (1000-a+1)//2):
-	c = math.sqrt(a*a + b*b)
-	c2 = int(math.modf(c)[1])
-	if c == c2 and 1000 % (a+b+c2) == 0:
-	    print a*b*c2 * (1000 // (a+b+c2))**3
+	c = perfectSqrt(a*a + b*b)
+	if c is not None and 1000 % (a+b+c) == 0:
+	    print a*b*c * (1000 // (a+b+c))**3
 	    sys.exit()
