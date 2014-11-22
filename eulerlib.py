@@ -35,7 +35,7 @@ def precalPrimes(amount=None, bound=None):
     """Precalculates the first `amount` prime numbers less than or equal to
        `bound`"""
     if amount is None and bound is None:
-        raise ValueError('At least one argument must be non-None')
+	raise ValueError('At least one argument must be non-None')
     # based on the `consume` recipe in the itertools documentation
     deque(primeIter(amount=amount, bound=bound), maxlen=0)
 
@@ -187,17 +187,11 @@ def partitions(n):
     else: return gen(n,n)
 
 def isPerfectSquare(n):
-    #x = math.sqrt(n)
-    # These are inaccurate for large values of n:
-    ##return x == int(math.modf(x)[1])
-    ##return x == math.modf(x)[1]
-    ##return math.modf(x)[0] == 0
-    ##return x == math.floor(x)
-    ##return x == math.trunc(x)  # Python v.2.6+
-    ##return x.is_integer()  # Python v.2.6+
-    #y = int(x)
-    #return n in ((y-1)**2, y**2, (y+1)**2)
-    return perfectSqrt(n) is not None
+    #return perfectSqrt(n) is not None
+    x = math.sqrt(n)
+    # Testing whether `x` is integral won't work for large values of `n`.
+    y = int(x)
+    return n in ((y-1)**2, y**2, (y+1)**2)
 
 def intSqrt(n):
     """Returns the floor of the square root of an integral value _exactly_.
@@ -207,7 +201,7 @@ def intSqrt(n):
     elif n == 0: return 0
     elif n == 1: return 1
     else:
-        (a,b) = (1,2)
+	(a,b) = (1,2)
 	while n >= b*b:
 	    (a,b) = (b, b*b)
 	x = intSqrt(n // b) * a
