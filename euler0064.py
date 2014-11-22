@@ -66,8 +66,7 @@ r"""Odd period square roots
     How many continued fractions for $N\leq 10000$ have an odd period?"""
 
 from __future__ import division
-from math       import sqrt, floor
-from eulerlib   import isPerfectSquare
+from math       import sqrt, floor, ceil
 
 def sqrtCF_PQ(d):
     """Returns the P and Q values used in the calculation of the simple
@@ -81,9 +80,11 @@ def sqrtCF_PQ(d):
 	P = a * Q - P
 	Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
 
+squares = set(i*i for i in xrange(1, int(ceil(sqrt(10000)))))
+
 qty = 0
 for n in xrange(2, 10000):
-    if isPerfectSquare(n): continue
+    if n in squares: continue
     pqs = sqrtCF_PQ(n)
     pqs.next()
     start = pqs.next()

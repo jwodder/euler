@@ -18,14 +18,13 @@ r"""Pentagon numbers
 
 import heapq
 import itertools
-from   math import sqrt, modf
+from   eulerlib import perfectSqrt
 
 def pent(n): return n*(3*n-1) // 2
 
 def isPent(n):
-    x = sqrt(1 + 24*n)
-    x2 = int(modf(x)[1])
-    return x == x2 and (1 + x2) % 6 == 0
+    x = perfectSqrt(1 + 24*n)
+    return x is not None and (1 + x) % 6 == 0
 
 queue = [(4, 1, 1, 1)]
 
