@@ -196,6 +196,29 @@ def isPerfectSquare(n):
     #return x.is_integer()  # Python v.2.6+
     #y = int(x)
     #return n in ((y-1)**2, y**2, (y+1)**2)
+    #return perfectSqrt(n) is not None
+
+def intSqrt(n):
+    """Returns the floor of the square root of an integral value _exactly_.
+       Based on
+       <http://www.haskell.org/haskellwiki/Generic_number_type#squareRoot>."""
+    if n < 0: raise ValueError('negative argument')
+    elif n == 0: return 0
+    elif n == 1: return 1
+    else:
+        (a,b) = (1,2)
+	while n >= b*b:
+	    (a,b) = (b, b*b)
+	x = intSqrt(n // b) * a
+	while not (x*x <= n < (x+1)*(x+1)):
+	    x = (x + n // x) // 2
+	return x
+
+def perfectSqrt(n):
+    """If the integer `n` is a perfect square, its square root is returned;
+       otherwise, `None` is returned."""
+    x = intSqrt(n)
+    return x if x*x == n else None
 
 def dijkstraLength(start, end, neighbors, length):
     """Returns the length of the shortest path from `start` to `end`.
