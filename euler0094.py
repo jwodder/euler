@@ -53,7 +53,7 @@ for m in xrange(2, int(ceil(5000 * sqrt(10)))):
 # is an integer less than m, and this latter requirement restricts us to only
 # considering n = 2m - √(3m^2+d).  Moreover, as 3m^2+d must be a perfect
 # square, modular arithmetic tells us that d must be 1.  It can be shown that
-# any positive integer m>1 such that n = 2m - √(3m^2+d) is an integer is
+# any positive integer m>1 such that n = 2m - √(3m^2+1) is an integer is
 # sufficient to produce an integral almost equilateral triangle; this is left
 # as an exercise for the reader.  The triangle will have perimeter 12mn + 2,
 # and so only the values of m less than or equal to √((1e9+2)/(23 - 12√3)) will
