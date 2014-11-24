@@ -18,13 +18,22 @@ r"""Pentagon numbers
 
 import heapq
 import itertools
-from   eulerlib import perfectSqrt
 
 def pent(n): return n*(3*n-1) // 2
 
+def pentagons(): return itertools.imap(pent, itertools.count(1))
+
+pentCache = set()
+maxCache = 0
+(pents, caches) = itertools.tee(pentagons(), 2)
+pents.next()
+
 def isPent(n):
-    x = perfectSqrt(1 + 24*n)
-    return x is not None and (1 + x) % 6 == 0
+    global maxCache
+    while n > maxCache:
+	maxCache = caches.next()
+	pentCache.add(maxCache)
+    return n in pentCache
 
 queue = [(4, 1, 1, 1)]
 
@@ -35,5 +44,5 @@ while True:
 	break
     heapq.heappush(queue, (Pk + 3*(n+1)*k, Pk, k, n+1))
     if n == 1:
-	Pk_1 = pent(k+1)
+	Pk_1 = pents.next()
 	heapq.heappush(queue, (Pk_1 + 3*(k+1), Pk_1, k+1, 1))
