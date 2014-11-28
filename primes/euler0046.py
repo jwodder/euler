@@ -58,6 +58,7 @@ while True:
     for i in xrange(1, lastPrime+1):
 	writable.setBit(pnext + 2*i*i)
     for j in primeCache:
+	if j == 2: continue
 	for i in xrange(lastPrime+1, pnext+1):
 	    writable.setBit(j + 2*i*i)
     i = writable.findFalse(lastPrime, pnext)
