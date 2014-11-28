@@ -61,6 +61,7 @@ int main() {
   }
   deque<int>::const_iterator iter;
   for (iter = primeCache.begin(); iter != primeCache.end(); iter++) {
+   if (*iter == 2) continue;
    for (int i = lastPrime+1; i < pnext+1; i++) {
     writable.setBit(*iter + 2*i*i);
    }
