@@ -18,50 +18,41 @@ r"""Goldbach's other conjecture
     What is the smallest odd composite that cannot be written as the sum of a
     prime and twice a square?"""
 
+import heapq
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter, primeCache
+from   eulerlib import primeIter
 
-# <https://github.com/jwodder/bitvector.py>
-from os import environ
-sys.path.insert(1, environ['HOME'] + '/work/GITHUB/bitvector')
-from bitvector import bitvector
+queue = []
 
-class OddVecBool(object):
-    """A compressed list of bools that only stores values at odd indices"""
+class Node(object):
+    def __init__(self, prime, n=None):
+	self.prime = prime
+	self.n = n
+	if self.n is None:
+	    self.val = next(self.prime)
+	else:
+	    self.val = self.prime + 2 * self.n * self.n
 
-    def __init__(self): self.data = bitvector()
+    def next(self):
+	if self.n is None:
+	    heapq.heappush(queue, Node(self.prime))
+	    self.prime = self.val
+	    self.n = 0
+	return Node(self.prime, self.n+1)
 
-    def resizeForMax(self, n): self.data.setWidth((n-1) // 2 + 1)
-
-    def setBit(self, i): self.data[(i-1) // 2] = True
-
-    def findFalse(self, start, stop):
-	x = self.data.find(False, (start-1)//2, (stop-1)//2)
-	return 2*x + 1 if x != -1 else x
+    def __cmp__(self, other):
+	return cmp(type(self), type(other)) or cmp(self.val, other.val)
 
 
 piter = primeIter()
 piter.next()
-piter.next()
-writable = OddVecBool()
-writable.resizeForMax(3 + 2*9)
-writable.setBit(3)
-writable.setBit(3 + 2*1)
-writable.setBit(3 + 2*4)
-writable.setBit(3 + 2*9)
-
+queue.append(Node(piter))
+i = 3
 while True:
-    lastPrime = primeCache[-1]
-    pnext = piter.next()
-    writable.resizeForMax(pnext + 2*pnext*pnext)
-    writable.setBit(pnext)
-    for i in xrange(1, lastPrime+1):
-	writable.setBit(pnext + 2*i*i)
-    for j in primeCache:
-	if j == 2: continue
-	for i in xrange(lastPrime+1, pnext+1):
-	    writable.setBit(j + 2*i*i)
-    i = writable.findFalse(lastPrime, pnext)
-    if i != -1:
+    node = heapq.heappop(queue)
+    if node.val > i:
 	print i
 	break
+    elif node.val == i:
+	i += 2
+    heapq.heappush(queue, node.next())
