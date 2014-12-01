@@ -3,18 +3,19 @@
 
 #include <deque>
 #include <functional>  /* multiplies */
+#include <list>
 #include <numeric>  /* accumulate */
 #include <utility>
 #include <vector>
 
 typedef std::pair<int,int> intpair;
 
-extern std::deque<int> primeCache;
+extern std::list<int> primeCache;
 bool _isPrime(int);
 int nextPrime();
 
 struct PrimeIter {
- std::deque<int>::const_iterator iter;
+ std::list<int>::const_iterator iter;
  PrimeIter();
  int next();
 };

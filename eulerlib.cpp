@@ -1,14 +1,17 @@
 #include <cstdlib>  /* abs */
 #include <deque>
+#include <list>
 #include <stdexcept>
 #include <utility>  /* pair */
 #include "eulerlib.hpp"
 using namespace std;
 
-deque<int> primeCache;
+list<int> primeCache;
+/* `primeCache` has to be a `list` (rather than a `deque`) so that iterators in
+ * PrimeIter objects won't be invalidated whenever `nextPrime` is called. */
 
 bool _isPrime(int n) {
- deque<int>::const_iterator iter;
+ list<int>::const_iterator iter;
  for (iter = primeCache.begin(); iter != primeCache.end(); iter++) {
   int k = *iter;
   if (k*k > n) return true;
