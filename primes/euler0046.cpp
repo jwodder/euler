@@ -18,59 +18,48 @@
  * prime and twice a square?
  */
 
+// TODO: Use priority_queue (or whatever it's called) instead of set.
+
 #include <iostream>
-#include <deque>
-#include <vector>
+#include <set>
 #include "eulerlib.hpp"
-using namespace std;
+using std::set;
 
-/** A compressed vector<bool> that only stores values at odd indices */
-struct OddVecBool {
- vector<bool> data;
- OddVecBool() : data() { }
- void resizeForMax(int n) {data.resize((n-1)/2+1); }
- void setBit(int i) {data[(i-1)/2] = true; }
+struct Node {
+ PrimeIter* piter;
+ int prime, n, val;
 
- int findFalse(int start, int stop) const {
-  start = (start-1)/2;
-  stop = (stop-1)/2;
-  vector<bool>::const_iterator iter = data.begin() + start;
-  for (; start<stop; start++) {
-   if (!*iter++) return 2*start+1;
-  }
-  return -1;
+ Node(PrimeIter* p) : piter(p), n(0) {val = prime = piter->next(); }
+
+ Node(int p, int m) : piter(NULL), prime(p), n(m), val(p + 2*m*m) { }
+
+ void addNext(set<Node>& queue) const {
+  if (piter != NULL) queue.insert(Node(piter));
+  queue.insert(Node(prime, n+1));
+ }
+
+ bool operator<(const Node& other) const {
+  return val < other.val || (val == other.val && (prime < other.prime
+   || (prime == other.prime && n < other.n)));
  }
 };
 
 int main() {
- (void) nextPrime();
- (void) nextPrime();
- OddVecBool writable;
- writable.resizeForMax(3 + 2*9);
- writable.setBit(3);
- writable.setBit(3 + 2*1);
- writable.setBit(3 + 2*4);
- writable.setBit(3 + 2*9);
+ PrimeIter piter;
+ (void) piter.next();
+ set<Node> queue{Node(&piter)};
+ int i = 3;
  for (;;) {
-  int lastPrime = primeCache.back();
-  int pnext = nextPrime();
-  writable.resizeForMax(pnext + 2*pnext*pnext);
-  writable.setBit(pnext);
-  for (int i = 1; i < lastPrime+1; i++) {
-   writable.setBit(pnext + 2*i*i);
-  }
-  deque<int>::const_iterator iter;
-  for (iter = primeCache.begin(); iter != primeCache.end(); iter++) {
-   if (*iter == 2) continue;
-   for (int i = lastPrime+1; i < pnext+1; i++) {
-    writable.setBit(*iter + 2*i*i);
-   }
-  }
-  int i = writable.findFalse(lastPrime, pnext);
-  if (i != -1) {
-   cout << i << endl;
+  set<Node>::iterator siter = queue.begin();
+  Node node = *siter;
+  queue.erase(siter);
+  if (node.val > i) {
+   std::cout << i << std::endl;
    break;
+  } else if (node.val == i) {
+   i += 2;
   }
+  node.addNext(queue);
  }
  return 0;
 }
