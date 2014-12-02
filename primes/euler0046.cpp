@@ -18,8 +18,6 @@
  * prime and twice a square?
  */
 
-// TODO: Use priority_queue (or whatever it's called) instead of set.
-
 #include <iostream>
 #include <set>
 #include "eulerlib.hpp"

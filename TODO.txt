@@ -1,8 +1,5 @@
 Code to focus on improving:
- - primeIter and factor in eulerlib.py
- - euler0004.cpp
-  - Look for a way to iterate over pairs of integers ordered by their product
-    without getting sets/heaps involved
+ - primeIter in eulerlib.py
  - euler0023.py
  - euler0039.py
  - euler0044.py
