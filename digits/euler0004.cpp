@@ -10,9 +10,9 @@
  * be shown to be a multiple of 11, and thus at least one of its factors must
  * be a multiple of 11. */
 
-#include <cstdio>
-#include <cstring>
+#include <iostream>
 #include <set>
+#include <string>
 #include <utility>
 using namespace std;
 
@@ -25,9 +25,8 @@ struct PairCmp {
 };
 
 bool isPalindrome(int n) {
- static char buf[7];
- snprintf(buf, 7, "%d", n);
- size_t len = strlen(buf);
+ const string buf = to_string(n);
+ size_t len = buf.length();
  for (size_t i=0; i<len/2; i++) {
   if (buf[i] != buf[len-i-1]) return false;
  }
@@ -45,7 +44,7 @@ int main(void) {
   if (x.first < 100 || x.second < 100) continue;
   int n = x.first * x.second;
   if (isPalindrome(n)) {
-   printf("%d\n", n);
+   cout << n << endl;
    break;
   }
   nextHeap.insert(make_pair(x.first - 11, x.second));
