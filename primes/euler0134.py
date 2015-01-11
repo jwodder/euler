@@ -26,7 +26,7 @@ nextMag = 10
 accum = 0
 while p1 <= 1000000:
     while nextMag < p1:
-	nextMag *= 10
+        nextMag *= 10
     accum += p1 + nextMag * ((p2 - p1) * modInverse(nextMag, p2) % p2)
     (p1, p2) = (p2, piter.next())
 print accum

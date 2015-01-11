@@ -35,10 +35,10 @@ qty = 0
 for i in xrange(1, 10000):
     istr = str(i)
     for _ in xrange(49):
-	i += int(istr[::-1])
-	istr = str(i)
-	if istr == istr[::-1]:
-	    break
+        i += int(istr[::-1])
+        istr = str(i)
+        if istr == istr[::-1]:
+            break
     else:
-	qty += 1
+        qty += 1
 print qty

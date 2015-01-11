@@ -17,7 +17,7 @@ for base in range(1, 10):
     x = base
     i = 1
     while len(str(x)) == i:
-	qty += 1
-	x *= base
-	i += 1
+        qty += 1
+        x *= base
+        i += 1
 print qty

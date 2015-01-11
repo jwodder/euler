@@ -31,13 +31,13 @@ height = len(matrix)
 def neighbors(node):
     (y,x) = node
     if y > 0:
-	yield (y-1, x)
+        yield (y-1, x)
     if x > 0:
-	yield (y, x-1)
+        yield (y, x-1)
     if y+1 < height:
-	yield (y+1, x)
+        yield (y+1, x)
     if x+1 < width:
-	yield (y, x+1)
+        yield (y, x+1)
 
 def length(_, node): return matrix[node[0]][node[1]]
 

@@ -15,14 +15,14 @@ offsets = (1,3,7,9,13,27)
 
 piter = primeIter()
 consecutive = (piter.next(), piter.next(), piter.next(),
-	       piter.next(), piter.next(), piter.next())
+               piter.next(), piter.next(), piter.next())
 
 accum = 0
 for n in xrange(10, supN, 2):
     if n % 3 == 0 or n % 7 in (0,3,4) or n % 13 == 0: continue
     sq = n*n
     while sq+1 > consecutive[0]:
-	consecutive = consecutive[1:] + (piter.next(),)
+        consecutive = consecutive[1:] + (piter.next(),)
     if tuple(sq+o for o in offsets) == consecutive:
-	accum += n
+        accum += n
 print accum

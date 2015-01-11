@@ -43,21 +43,21 @@ lengths[89] = len('ninety')
 
 def numberLength(n):
     if lengths[n-1] == 0:
-	lastTwo = n % 100
-	if lastTwo != 0:
-	    if lengths[lastTwo-1] == 0:
-		lengths[lastTwo-1] = lengths[lastTwo - lastTwo%10 - 1] \
-				   + lengths[lastTwo%10 - 1]
-	    lengths[n-1] = lengths[lastTwo-1]
-	firstTwo = n // 100
-	if firstTwo != 0:
-	    if lastTwo != 0: lengths[n-1] += len('and')
-	    hundreds = firstTwo % 10
-	    if hundreds != 0:
-		lengths[n-1] += lengths[hundreds-1] + len('hundred')
-	    thousands = firstTwo // 10
-	    if thousands != 0:
-		lengths[n-1] += lengths[thousands-1] + len('thousand')
+        lastTwo = n % 100
+        if lastTwo != 0:
+            if lengths[lastTwo-1] == 0:
+                lengths[lastTwo-1] = lengths[lastTwo - lastTwo%10 - 1] \
+                                   + lengths[lastTwo%10 - 1]
+            lengths[n-1] = lengths[lastTwo-1]
+        firstTwo = n // 100
+        if firstTwo != 0:
+            if lastTwo != 0: lengths[n-1] += len('and')
+            hundreds = firstTwo % 10
+            if hundreds != 0:
+                lengths[n-1] += lengths[hundreds-1] + len('hundred')
+            thousands = firstTwo // 10
+            if thousands != 0:
+                lengths[n-1] += lengths[thousands-1] + len('thousand')
     return lengths[n-1]
 
 print sum(numberLength(i) for i in xrange(1, 1001))

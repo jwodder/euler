@@ -17,8 +17,8 @@ mapping = []
 for i in range(1, degree+1):
     c = lehmer % i
     for (j,y) in enumerate(mapping):
-	if y >= c:
-	    mapping[j] += 1
+        if y >= c:
+            mapping[j] += 1
     mapping.insert(0,c)
     lehmer //= i
 print ''.join(str(c) for c in mapping)

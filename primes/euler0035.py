@@ -17,7 +17,7 @@ qty = 2  # 2 and 5
 for p in xrange(3, 1000000, 2):
     pstr = str(p)
     if all(c in '1379' for c in pstr) and isPrime2(p) \
-	and all(isPrime2(int(pstr[i:] + pstr[:i]))
-		for i in range(1, len(pstr))):
-	qty += 1
+        and all(isPrime2(int(pstr[i:] + pstr[:i]))
+                for i in range(1, len(pstr))):
+        qty += 1
 print qty

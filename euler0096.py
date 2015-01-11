@@ -44,71 +44,71 @@ from __future__ import with_statement
 def solveSudoku(puzzle):   # `puzzle` must be a 9x9 2D list of ints.
     obstruct = [[0] * 9 for _ in xrange(9)]
     def addObs(obst, y, x):
-	def obstructIf(y,x):
-	    if obstruct[y][x] != -1:
-		obstruct[y][x] += obst
-	for i in xrange(9):
-	    if i != x: obstructIf(y,i)
-	    if i != y: obstructIf(i,x)
-	t1 = y % 3
-	t2 = x % 3
-	x0 = x - t2
-	y0 = y - t1
-	obstructIf(y0 + (t1 + 1) % 3, x0 + (t2 + 1) % 3)
-	obstructIf(y0 + (t1 + 1) % 3, x0 + (t2 + 2) % 3)
-	obstructIf(y0 + (t1 + 2) % 3, x0 + (t2 + 1) % 3)
-	obstructIf(y0 + (t1 + 2) % 3, x0 + (t2 + 2) % 3)
+        def obstructIf(y,x):
+            if obstruct[y][x] != -1:
+                obstruct[y][x] += obst
+        for i in xrange(9):
+            if i != x: obstructIf(y,i)
+            if i != y: obstructIf(i,x)
+        t1 = y % 3
+        t2 = x % 3
+        x0 = x - t2
+        y0 = y - t1
+        obstructIf(y0 + (t1 + 1) % 3, x0 + (t2 + 1) % 3)
+        obstructIf(y0 + (t1 + 1) % 3, x0 + (t2 + 2) % 3)
+        obstructIf(y0 + (t1 + 2) % 3, x0 + (t2 + 1) % 3)
+        obstructIf(y0 + (t1 + 2) % 3, x0 + (t2 + 2) % 3)
     for i in xrange(9):
-	for j in xrange(9):
-	    if puzzle[i][j] != 0:
-		obstruct[i][j] = -1
-		addObs(1 << ((puzzle[i][j] - 1) * 2), i, j)
+        for j in xrange(9):
+            if puzzle[i][j] != 0:
+                obstruct[i][j] = -1
+                addObs(1 << ((puzzle[i][j] - 1) * 2), i, j)
     i = 0
     while i < 9:
         j = 0
-	while j < 9:
-	    if obstruct[i][j] != -1:
-		nextTest = puzzle[i][j]
-		testMask = 3 << (nextTest * 2)
-		if puzzle[i][j] != 0:
-		    addObs(-(1 << ((puzzle[i][j] - 1) * 2)), i, j)
-		    puzzle[i][j] = 0
-		nextTest += 1
-		while nextTest <= 9:
-		    if (testMask & obstruct[i][j]) == 0:
-			puzzle[i][j] = nextTest
-			addObs(1 << ((nextTest - 1) * 2), i, j)
-			break
-		    nextTest += 1
-		    testMask <<= 2
-		if nextTest > 9:
-		    # Backtrack
-		    while True:
-			j -= 1
-			if j < 0:
-			    j = 8
-			    i -= 1
-			    if i < 0: raise ValueError('no solution')
-			if obstruct[i][j] != -1:
-			    if obstruct[i][j] != 0x3FFFF:
-				j -= 1
-				if j < 0:
-				    j = 8
-				    i -= 1
-				break
-			    addObs(-(1 << ((puzzle[i][j] - 1) * 2)), i, j)
-			    puzzle[i][j] = 0
-	    j += 1
-	i += 1
+        while j < 9:
+            if obstruct[i][j] != -1:
+                nextTest = puzzle[i][j]
+                testMask = 3 << (nextTest * 2)
+                if puzzle[i][j] != 0:
+                    addObs(-(1 << ((puzzle[i][j] - 1) * 2)), i, j)
+                    puzzle[i][j] = 0
+                nextTest += 1
+                while nextTest <= 9:
+                    if (testMask & obstruct[i][j]) == 0:
+                        puzzle[i][j] = nextTest
+                        addObs(1 << ((nextTest - 1) * 2), i, j)
+                        break
+                    nextTest += 1
+                    testMask <<= 2
+                if nextTest > 9:
+                    # Backtrack
+                    while True:
+                        j -= 1
+                        if j < 0:
+                            j = 8
+                            i -= 1
+                            if i < 0: raise ValueError('no solution')
+                        if obstruct[i][j] != -1:
+                            if obstruct[i][j] != 0x3FFFF:
+                                j -= 1
+                                if j < 0:
+                                    j = 8
+                                    i -= 1
+                                break
+                            addObs(-(1 << ((puzzle[i][j] - 1) * 2)), i, j)
+                            puzzle[i][j] = 0
+            j += 1
+        i += 1
 
 accum = 0
 with open('data/sudoku.txt') as fp:
     for _ in xrange(50):
-	print fp.readline().strip()
-	grid = [map(int, fp.readline().strip()) for _ in xrange(9)]
-	solveSudoku(grid)
-	for row in grid:
-	    print ''.join(str(i) for i in row)
-	print
-	accum += grid[0][0] * 100 + grid[0][1] * 10 + grid[0][2]
+        print fp.readline().strip()
+        grid = [map(int, fp.readline().strip()) for _ in xrange(9)]
+        solveSudoku(grid)
+        for row in grid:
+            print ''.join(str(i) for i in row)
+        print
+        accum += grid[0][0] * 100 + grid[0][1] * 10 + grid[0][2]
 print accum

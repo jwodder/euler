@@ -18,15 +18,15 @@ def coinings(amount, coins):
     """Returns the number of ways to make `amount` pence using only the
        denominations in the (descending) list `coins`"""
     if amount == 0:
-	return 1
+        return 1
     elif not coins:
-	return 0
+        return 0
     elif coins == [2,1]:
     # This optimization alone is enough to reduce the runtime from 3.5s to 0.7s
     # on my machine.
-	return amount // 2 + 1
+        return amount // 2 + 1
     else:
-	return sum(coinings(amount-x, coins[1:])
-		   for x in range(0, amount+1, coins[0]))
+        return sum(coinings(amount-x, coins[1:])
+                   for x in range(0, amount+1, coins[0]))
 
 print coinings(200, [200, 100, 50, 20, 10, 5, 2, 1])

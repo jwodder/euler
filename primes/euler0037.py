@@ -23,17 +23,17 @@ while len(bothTruncate) < 11:
     magnitude *= 10
     lt2 = set()
     for p in leftTruncate:
-	for d in xrange(1,10):
-	    x = d * magnitude + p
-	    if isPrime(x):
-		lt2.add(x)
+        for d in xrange(1,10):
+            x = d * magnitude + p
+            if isPrime(x):
+                lt2.add(x)
     leftTruncate = lt2
     rt2 = set()
     for p in rightTruncate:
-	for d in (1,3,7,9):
-	    x = p * 10 + d
-	    if isPrime(x):
-		rt2.add(x)
+        for d in (1,3,7,9):
+            x = p * 10 + d
+            if isPrime(x):
+                rt2.add(x)
     rightTruncate = rt2
     bothTruncate.update(leftTruncate & rightTruncate)
 print sum(bothTruncate)

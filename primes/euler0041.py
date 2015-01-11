@@ -17,5 +17,5 @@ from eulerlib  import isPrime
 for pd in chain(permutations('7654321'), permutations('4321')):
     pd = int(''.join(pd))
     if isPrime(pd):
-	print pd
-	break
+        print pd
+        break

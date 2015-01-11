@@ -24,10 +24,10 @@ h = H.next()
 
 while not (t == p == h):
     while t < p or t < h:
-	t = T.next()
+        t = T.next()
     while p < t or p < h:
-	p = P.next()
+        p = P.next()
     while h < t or h < p:
-	h = H.next()
+        h = H.next()
 
 print t

@@ -31,8 +31,8 @@ pents.next()
 def isPent(n):
     global maxCache
     while n > maxCache:
-	maxCache = caches.next()
-	pentCache.add(maxCache)
+        maxCache = caches.next()
+        pentCache.add(maxCache)
     return n in pentCache
 
 queue = [(4, 1, 1, 1)]
@@ -40,9 +40,9 @@ queue = [(4, 1, 1, 1)]
 while True:
     (D, Pk, k, n) = heapq.heappop(queue)
     if isPent(D) and isPent(2*pent(n) + D):
-	print D
-	break
+        print D
+        break
     heapq.heappush(queue, (Pk + 3*(n+1)*k, Pk, k, n+1))
     if n == 1:
-	Pk_1 = pents.next()
-	heapq.heappush(queue, (Pk_1 + 3*(k+1), Pk_1, k+1, 1))
+        Pk_1 = pents.next()
+        heapq.heappush(queue, (Pk_1 + 3*(k+1), Pk_1, k+1, 1))

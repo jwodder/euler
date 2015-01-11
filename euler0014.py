@@ -29,13 +29,13 @@ for i in xrange(2, 1000001):
     chain = []
     j = i
     while j not in lengths:
-	chain.append(j)
-	if j % 2: j = 3*j + 1
-	else: j //= 2
+        chain.append(j)
+        if j % 2: j = 3*j + 1
+        else: j //= 2
     l = lengths[j]
     for k in reversed(chain):
-	l += 1
-	lengths[k] = l
+        l += 1
+        lengths[k] = l
     if l > lengths[longest]:
-	longest = i
+        longest = i
 print longest

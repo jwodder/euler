@@ -25,14 +25,14 @@ def nonconsec(n):
     """Returns the number of binary strings of length `n` in which there are no
        occurrences of three consecutive ones"""
     if cache[n] is None:
-	if n < 3: cache[n] = 1 << n
-	elif n == 3: cache[n] = 7
-	else: cache[n] = 2 * nonconsec(n-1) - nonconsec(n-4)
-	    # 2 * nonconsec(n-1) - [number of "tripleless" strings of length
-	    #                       n-1 that end in two ones = number of
-	    #                       tripleless strings of length n-3 that end
-	    #                       in a zero = number of tripleless strings of
-	    #                       length n-4]
+        if n < 3: cache[n] = 1 << n
+        elif n == 3: cache[n] = 7
+        else: cache[n] = 2 * nonconsec(n-1) - nonconsec(n-4)
+            # 2 * nonconsec(n-1) - [number of "tripleless" strings of length
+            #                       n-1 that end in two ones = number of
+            #                       tripleless strings of length n-3 that end
+            #                       in a zero = number of tripleless strings of
+            #                       length n-4]
     return cache[n]
 
 print nonconsec(30) + sum(nonconsec(i) * nonconsec(29-i) for i in xrange(30))

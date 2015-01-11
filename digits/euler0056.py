@@ -9,4 +9,4 @@
    the maximum digital sum?"""
 
 print max(sum(int(c) for c in str(a**b)) for a in xrange(2,100)
-					 for b in xrange(1,100))
+                                         for b in xrange(1,100))

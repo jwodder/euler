@@ -26,22 +26,22 @@ queue = []
 
 class Node(object):
     def __init__(self, prime, n=None):
-	self.prime = prime
-	self.n = n
-	if self.n is None:
-	    self.val = next(self.prime)
-	else:
-	    self.val = self.prime + 2 * self.n * self.n
+        self.prime = prime
+        self.n = n
+        if self.n is None:
+            self.val = next(self.prime)
+        else:
+            self.val = self.prime + 2 * self.n * self.n
 
     def next(self):
-	if self.n is None:
-	    heapq.heappush(queue, Node(self.prime))
-	    self.prime = self.val
-	    self.n = 0
-	return Node(self.prime, self.n+1)
+        if self.n is None:
+            heapq.heappush(queue, Node(self.prime))
+            self.prime = self.val
+            self.n = 0
+        return Node(self.prime, self.n+1)
 
     def __cmp__(self, other):
-	return cmp(type(self), type(other)) or cmp(self.val, other.val)
+        return cmp(type(self), type(other)) or cmp(self.val, other.val)
 
 
 piter = primeIter()
@@ -51,8 +51,8 @@ i = 3
 while True:
     node = heapq.heappop(queue)
     if node.val > i:
-	print i
-	break
+        print i
+        break
     elif node.val == i:
-	i += 2
+        i += 2
     heapq.heappush(queue, node.next())

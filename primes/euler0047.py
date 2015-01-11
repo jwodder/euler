@@ -24,8 +24,8 @@ streak = 0
 while streak != 4:
     fctrs = len(list(factor(n)))
     if fctrs == 4:
-	streak += 1
+        streak += 1
     else:
-	streak = 0
+        streak = 0
     n += 1
 print n-4

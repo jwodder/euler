@@ -24,13 +24,13 @@ allvals = set()
 
 with open('../data/keylog.txt') as fp:
     for line in fp:
-	a,b,c = line.strip()
-	allvals.update([a,b,c])
-	for x,y in ((a,b), (a,c), (b,c)):
-	    afters[x].add(y)
-	    for w in befores[x]:
-		afters[w].add(y)
-	    befores[y].add(x)
-	    for z in afters[y]:
-		befores[z].add(x)
+        a,b,c = line.strip()
+        allvals.update([a,b,c])
+        for x,y in ((a,b), (a,c), (b,c)):
+            afters[x].add(y)
+            for w in befores[x]:
+                afters[w].add(y)
+            befores[y].add(x)
+            for z in afters[y]:
+                befores[z].add(x)
 print ''.join(sorted(allvals, key=lambda c: befores[c]))

@@ -31,5 +31,5 @@ allRed = Fraction(1, turns+1)
 probability = Fraction(0)
 for blueQty in range(turns//2 + 1, turns+1):
     for combo in combinations(range(1, turns+1), blueQty):
-	probability += allRed / product(combo)
+        probability += allRed / product(combo)
 print int((1 - probability) / probability) + 1

@@ -20,10 +20,10 @@ bound=50000000
 expressible = set()
 for p1 in primeIter(bound = bound**0.5):
     for p2 in primeIter(bound = bound**(1.0/3.0)):
-	for p3 in primeIter(bound = bound**(1.0/4.0)):
-	    n = p1*p1 + p2*p2*p2 + p3*p3*p3*p3
-	    if n < bound:
-		expressible.add(n)
-	    else:
-		break
+        for p3 in primeIter(bound = bound**(1.0/4.0)):
+            n = p1*p1 + p2*p2*p2 + p3*p3*p3*p3
+            if n < bound:
+                expressible.add(n)
+            else:
+                break
 print len(expressible)

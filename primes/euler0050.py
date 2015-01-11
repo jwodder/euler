@@ -25,10 +25,10 @@ for i,p in enumerate(primeIter()):
     for _ in xrange(i+1): piter2.next()
     accum = p
     for j,q in enumerate(piter2):
-	accum += q
-	if accum >= 1000000: break
-	if j < maxTerms: continue
-	if isPrime(accum):
-	    maxPrime = accum
-	    maxTerms = j+1
+        accum += q
+        if accum >= 1000000: break
+        if j < maxTerms: continue
+        if isPrime(accum):
+            maxPrime = accum
+            maxTerms = j+1
 print maxPrime

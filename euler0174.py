@@ -9,15 +9,15 @@ r"""Counting the number of "hollow" square laminae that can form one, two,
     square with a 1x1 hole in the middle.  However, using thirty-two tiles it
     is possible to form two distinct laminae.
 
-			      ######  #########
-			      ######  #       #
-			      ##  ##  #       #
-			      ##  ##  #       #
-			      ######  #       #
-			      ######  #       #
-				      #       #
-				      #       #
-				      #########
+                              ######  #########
+                              ######  #       #
+                              ##  ##  #       #
+                              ##  ##  #       #
+                              ######  #       #
+                              ######  #       #
+                                      #       #
+                                      #       #
+                                      #########
 
     If $t$ represents the number of tiles used, we shall say that $t = 8$ is
     type $L(1)$ and $t = 32$ is type $L(2)$.
@@ -34,7 +34,7 @@ for i in xrange(2, maxTiles//4 + 1):
     outer = i
     qtys[used] += 1
     while used + (outer+2)*4 <= maxTiles:
-	outer += 2
-	used += outer*4
-	qtys[used] += 1
+        outer += 2
+        used += outer*4
+        qtys[used] += 1
 print sum(1 for x in qtys if 1 <= x <= 10)

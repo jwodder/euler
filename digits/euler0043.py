@@ -24,29 +24,29 @@ def insert(tup, i, d): return tup[:i] + (d,) + tup[i:]
 
 def potentials():
     for digits in permutations('12346789'):
-	yield ''.join(insert(insert(digits, 3, '0'), 5, '5'))
-	if digits[3] in '2468':
-	    for i in xrange(4,9):
-		digits2 = insert(digits, i, '0')
-		yield ''.join(insert(digits2, 5, '5'))
-		digits2 = insert(digits, i, '5')
-		yield ''.join(insert(digits2, 5, '0'))
-	if digits[2] in '2468':
-	    for i in xrange(0,3):
-		if i != 0:
-		    digits2 = insert(digits, i, '0')
-		    yield ''.join(insert(digits2, 5, '5'))
-		digits2 = insert(digits, i, '5')
-		yield ''.join(insert(digits2, 5, '0'))
+        yield ''.join(insert(insert(digits, 3, '0'), 5, '5'))
+        if digits[3] in '2468':
+            for i in xrange(4,9):
+                digits2 = insert(digits, i, '0')
+                yield ''.join(insert(digits2, 5, '5'))
+                digits2 = insert(digits, i, '5')
+                yield ''.join(insert(digits2, 5, '0'))
+        if digits[2] in '2468':
+            for i in xrange(0,3):
+                if i != 0:
+                    digits2 = insert(digits, i, '0')
+                    yield ''.join(insert(digits2, 5, '5'))
+                digits2 = insert(digits, i, '5')
+                yield ''.join(insert(digits2, 5, '0'))
 
 accum = 0
 for pandigital in potentials():
     #if pandigital[0] == '0': continue
     #if pandigital[3] not in '02468' or pandigital[5] not in '05': continue
     if int(pandigital[2:5]) % 3 == 0 \
-	and int(pandigital[4:7]) % 7 == 0 \
-	and int(pandigital[5:8]) % 11 == 0 \
-	and int(pandigital[6:9]) % 13 == 0 \
-	and int(pandigital[7:10]) % 17 == 0:
-	accum += int(pandigital)
+        and int(pandigital[4:7]) % 7 == 0 \
+        and int(pandigital[5:8]) % 11 == 0 \
+        and int(pandigital[6:9]) % 13 == 0 \
+        and int(pandigital[7:10]) % 17 == 0:
+        accum += int(pandigital)
 print accum

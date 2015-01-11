@@ -39,7 +39,7 @@ n = 1
 for p in primeIter():
     np = n * p
     if np <= 1000000:
-	n = np
+        n = np
     else:
-	break
+        break
 print n

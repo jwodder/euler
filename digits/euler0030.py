@@ -27,5 +27,5 @@ for ndigs in combinations_with_replacement(digits, maxDigits):
     n = sum(digPowers)
     if n <= 1: continue
     if ''.join(sorted(str(n))).lstrip('0') == ''.join(digChars).lstrip('0'):
-	accum += n
+        accum += n
 print accum

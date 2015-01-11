@@ -35,8 +35,8 @@ def length25(p):
     x = p-1
     i = 2
     while x != 1:
-	x = totient(x)
-	i += 1
+        x = totient(x)
+        i += 1
     return i == 25
 
 print sum(itertools.ifilter(length25, primeIter(bound=40000000)))

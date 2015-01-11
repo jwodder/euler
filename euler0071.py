@@ -22,5 +22,5 @@ from eulerlib import gcd
 for d in xrange(2, 1000001):
     n = (3*d - 1) // 7
     if gcd(n,d) == 1 and n * maxD > maxN * d:
-	(maxN, maxD) = (n,d)
+        (maxN, maxD) = (n,d)
 print maxN

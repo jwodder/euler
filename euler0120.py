@@ -19,4 +19,4 @@ r"""Square remainders
 #    need to be inspected are those in $[0,a)$.
 
 print sum(max((2*q*a) % (a*a) for q in xrange(1, a, 1 if a%2 else 2))
-	  for a in xrange(3, 1001))
+          for a in xrange(3, 1001))

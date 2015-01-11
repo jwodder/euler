@@ -30,21 +30,21 @@
        Hand    Player 1                Player 2                Winner
 
        1       5H 5C 6S 7S KD          2C 3S 8S 8D TD          Player 2
-	       Pair of Fives           Pair of Eights
+               Pair of Fives           Pair of Eights
 
        2       5D 8C 9S JS AC          2C 5C 7D 8S QH          Player 1
-	       Highest card Ace        Highest card Queen
+               Highest card Ace        Highest card Queen
 
        3       2D 9C AS AH AC          3D 6D 7D TD QD          Player 2        
-	       Three Aces              Flush with Diamonds
+               Three Aces              Flush with Diamonds
 
        4       4D 6S 9H QH QC          3D 6D 7H QD QS          Player 1        
-	       Pair of Queens          Pair of Queens
-	       Highest card Nine       Highest card Seven
+               Pair of Queens          Pair of Queens
+               Highest card Nine       Highest card Seven
 
        5       2H 2D 4C 4D 4S          3C 3D 3S 9S 9D          Player 1        
-	       Full House              Full House
-	       With Three Fours        with Three Threes
+               Full House              Full House
+               With Three Fours        with Three Threes
 
    The file, `poker.txt`, contains one-thousand random hands dealt to two
    players.  Each line of the file contains ten cards (separated by a single
@@ -67,32 +67,32 @@ def rankHand(hand):
     flush = all(hand[0][1] == c[1] for c in hand)
     qtys = defaultdict(int)
     for c in hand:
-	qtys[c[0]] += 1
+        qtys[c[0]] += 1
     byQty = sorted(qtys, key=lambda c: (qtys[c], cardRanks[c]), reverse=True)
     byQtyRanks = tuple(cardRanks[c] for c in byQty)
     if consecutive > -1 and flush:
-	return (8, consecutive)
+        return (8, consecutive)
     elif qtys[byQty[0]] == 4:
-	return (7,) + byQtyRanks
+        return (7,) + byQtyRanks
     elif qtys[byQty[0]] == 3 and qtys[byQty[1]] == 2:
-	return (6,) + byQtyRanks
+        return (6,) + byQtyRanks
     elif flush:
-	return (5,) + tuple(cardRanks[c[0]] for c in hand[::-1])
+        return (5,) + tuple(cardRanks[c[0]] for c in hand[::-1])
     elif consecutive > -1:
-	return (4, consecutive)
+        return (4, consecutive)
     elif qtys[byQty[0]] == 3:
-	return (3,) + byQtyRanks
+        return (3,) + byQtyRanks
     elif qtys[byQty[0]] == 2 and qtys[byQty[1]] == 2:
-	return (2,) + byQtyRanks
+        return (2,) + byQtyRanks
     elif qtys[byQty[0]] == 2:
-	return (1,) + byQtyRanks
+        return (1,) + byQtyRanks
     else:
-	return (0,) + byQtyRanks
+        return (0,) + byQtyRanks
 
 wins = 0
 with open('data/poker.txt') as fp:
     for line in fp:
-	cards = line.split()
-	if rankHand(cards[:5]) > rankHand(cards[5:]):
-	    wins += 1
+        cards = line.split()
+        if rankHand(cards[:5]) > rankHand(cards[5:]):
+            wins += 1
 print wins

@@ -28,8 +28,8 @@ queue = deque([(1,0)])
 while queue:
     (n, pi) = queue.popleft()
     for j in xrange(pi, len(primes)):
-	m = n * primes[j]
-	if m <= limit:
-	    queue.append((m,j))
-	    qty += 1
+        m = n * primes[j]
+        if m <= limit:
+            queue.append((m,j))
+            qty += 1
 print qty

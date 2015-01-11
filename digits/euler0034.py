@@ -18,5 +18,5 @@ for i in xrange(9):
 accum = 0
 for i in xrange(10, 1000000):
     if i == sum(facs[int(c)] for c in str(i)):
-	accum += i
+        accum += i
 print accum

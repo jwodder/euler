@@ -44,9 +44,9 @@ accum = 0
 for m in xrange(2, int(ceil(5000 * sqrt(10)))):
     n = m*m - 1
     if n % 3 == 0:
-	n = perfectSqrt(n // 3)
-	if n is not None:
-	    accum += 4 * m * m
+        n = perfectSqrt(n // 3)
+        if n is not None:
+            accum += 4 * m * m
 
 # When y/2 = 2mn and h = m^2-n^2, substituting into x = y+d and rearranging
 # yields n^2 - 4mn + m^2 - d = 0; it is thus necessary that n = 2m ± √(3m^2+d)
@@ -62,7 +62,7 @@ for m in xrange(2, int(ceil(5000 * sqrt(10)))):
 for m in xrange(2, int(ceil(sqrt(1000000002/(24 - 12 * sqrt(3)))))):
     n = perfectSqrt(3*m*m + 1)
     if n is not None:
-	n = 2 * m - n
-	accum += 12 * m * n + 2
+        n = 2 * m - n
+        accum += 12 * m * n + 2
 
 print accum

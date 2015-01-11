@@ -22,14 +22,14 @@ def partit(n,g):
     """Returns the number of possible partitions of `n` unlabelled objects into
        `g` (empty or non-empty) labelled groups"""
     if cache[n][g-1] is None:
-	if n == 0:
-	    cache[n][g-1] = 1
-	elif g == 1:
-	    cache[n][g-1] = 1
-	elif g == 2:
-	    cache[n][g-1] = n+1
-	else:
-	    cache[n][g-1] = sum(partit(n-i, g-1) for i in xrange(n+1))
+        if n == 0:
+            cache[n][g-1] = 1
+        elif g == 1:
+            cache[n][g-1] = 1
+        elif g == 2:
+            cache[n][g-1] = n+1
+        else:
+            cache[n][g-1] = sum(partit(n-i, g-1) for i in xrange(n+1))
     return cache[n][g-1]
 
 qty = 0

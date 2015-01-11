@@ -46,9 +46,9 @@ from eulerlib  import convergents
 def eCF():
     yield 2
     for i in count(1):
-	yield 1
-	yield 2*i
-	yield 1
+        yield 1
+        yield 2*i
+        yield 1
 
 econv = convergents(eCF())
 num, _ = islice(econv, 99, None).next()

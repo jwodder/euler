@@ -26,26 +26,26 @@ def sqrtStr(n, digits=100):
     c = 0
     pointed = False
     for _ in xrange(digits):
-	if dpairs:
-	    leading = dpairs.pop(0)
-	else:
-	    if not pointed:
-		s += '.'
-		pointed = True
-	    leading = 0
-	c = c * 100 + leading
-	for x in xrange(9, -1, -1):
-	    y = x * (20 * p + x)
-	    if y <= c: break
-	p = p * 10 + x
-	s += str(x)
-	c -= y
-	if c == 0 and not dpairs: return s
+        if dpairs:
+            leading = dpairs.pop(0)
+        else:
+            if not pointed:
+                s += '.'
+                pointed = True
+            leading = 0
+        c = c * 100 + leading
+        for x in xrange(9, -1, -1):
+            y = x * (20 * p + x)
+            if y <= c: break
+        p = p * 10 + x
+        s += str(x)
+        c -= y
+        if c == 0 and not dpairs: return s
     return s
 
 accum = 0
 for n in xrange(1, 101):
     root = sqrtStr(n)
     if '.' in root:
-	accum += sum(int(c) for c in root if c != '.')
+        accum += sum(int(c) for c in root if c != '.')
 print accum

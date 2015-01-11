@@ -26,10 +26,10 @@ r"""Optimum polynomial
 
     Hence we obtain the following OPs for the cubic sequence:
 
-	$OP(1,n) = 1$               1, **1**, 1, 1, ...
-	$OP(2,n) = 7n-6$            1, 8, **15**, ...
-	$OP(3,n) = 6n^2-11n+6$      1, 8, 27, **58**, ...
-	$OP(4,n) = n^3$             1, 8, 27, 64, 125, ...
+        $OP(1,n) = 1$               1, **1**, 1, 1, ...
+        $OP(2,n) = 7n-6$            1, 8, **15**, ...
+        $OP(3,n) = 6n^2-11n+6$      1, 8, 27, **58**, ...
+        $OP(4,n) = n^3$             1, 8, 27, 64, 125, ...
 
     Clearly no BOPs exist for $k\geq 4$.
 
@@ -47,16 +47,16 @@ import operator
 
 def addPoly(p,q):
     if len(p) < len(q):
-	p += (0,) * (len(q) - len(p))
+        p += (0,) * (len(q) - len(p))
     elif len(q) < len(p):
-	q += (0,) * (len(p) - len(q))
+        q += (0,) * (len(p) - len(q))
     return map(operator.add, p, q)
 
 def sumPoly(xs): return reduce(addPoly, xs, ())
 
 def mulPoly(p,q):
     return sumPoly((0,) * i + tuple(map(lambda y: x*y, q))
-		   for i,x in enumerate(p) if x != 0)
+                   for i,x in enumerate(p) if x != 0)
 
 def evalPoly(p,x):
     return reduce(lambda ac, c: ac*x + c, p[::-1], 0)
@@ -69,13 +69,13 @@ accum = 0
 for (i, (xi, yi)) in enumerate(points):
     newTerm = (yi,)
     for (j, (xj, _)) in enumerate(points[:i]):
-	terms[j] = mulPoly(terms[j], (-xi/(xj-xi), 1/(xj-xi)))
-	newTerm = mulPoly(newTerm, (-xj/(xi-xj), 1/(xi-xj)))
+        terms[j] = mulPoly(terms[j], (-xi/(xj-xi), 1/(xj-xi)))
+        newTerm = mulPoly(newTerm, (-xj/(xi-xj), 1/(xi-xj)))
     terms.append(newTerm)
     op = sumPoly(terms)
     for (xk, yk) in points[i+1:]:
-	guess = evalPoly(op, xk)
-	if guess != yk:
-	    accum += guess
-	    break
+        guess = evalPoly(op, xk)
+        if guess != yk:
+            accum += guess
+            break
 print int(accum)

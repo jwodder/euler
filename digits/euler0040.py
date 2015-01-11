@@ -25,10 +25,10 @@ consumed = 0
 while landmarks:
     nextSectionLen = digits * (shorter(digits+1) - shorter(digits))
     if consumed + nextSectionLen > landmarks[0]:
-	offset = landmarks[0] - consumed
-	product *= int(str(shorter(digits) + offset//digits)[offset % digits])
-	landmarks.pop(0)
+        offset = landmarks[0] - consumed
+        product *= int(str(shorter(digits) + offset//digits)[offset % digits])
+        landmarks.pop(0)
     else:
-	consumed += nextSectionLen
-	digits += 1
+        consumed += nextSectionLen
+        digits += 1
 print product

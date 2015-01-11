@@ -21,8 +21,8 @@ from collections import defaultdict
 def digits(n):
     ds = []
     while n > 0:
-	ds.append(n % 10)
-	n //= 10
+        ds.append(n % 10)
+        n //= 10
     ds.sort()
     return tuple(ds)
 
@@ -36,12 +36,12 @@ for i in xrange(2,10000000):
     j = digits(i)
     chain = [(j,i)]
     while j not in ones and j not in eightyNines:
-	i = sum(d*d for d in j)
-	j = digits(i)
-	chain.append((j,i))
+        i = sum(d*d for d in j)
+        j = digits(i)
+        chain.append((j,i))
     if j in ones:
-	ones.update(x for x,_ in chain)
+        ones.update(x for x,_ in chain)
     else:
-	for x,y in chain:
-	    eightyNines[x].add(y)
+        for x,y in chain:
+            eightyNines[x].add(y)
 print sum(len(s) for s in eightyNines.itervalues())

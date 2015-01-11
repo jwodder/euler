@@ -17,10 +17,10 @@ r"""Quadratic primes
 
     Considering quadratics of the form:
 
-	$n^2 + an + b$, where $|a| < 1000$ and $|b| < 1000$
+        $n^2 + an + b$, where $|a| < 1000$ and $|b| < 1000$
 
-	where $|n|$ is the modulus/absolute value of $n$
-	e.g. $|11| = 11$ and $|-4| = 4$
+        where $|n|$ is the modulus/absolute value of $n$
+        e.g. $|11| = 11$ and $|-4| = 4$
 
     Find the product of the coefficients, $a$ and $b$, for the quadratic
     expression that produces the maximum number of primes for consecutive
@@ -42,23 +42,23 @@ maxCoefProd = 41
 
 for b in dropwhile(lambda p: p<=41, primeIter(bound=1000)):
     for a in xrange(-999, 1000):
-	if a == b+1 or a == b-1:
-	    # The quadratic can be factored into (n ± b)(n ± 1) and so will
-	    # produce no more than 2 consecutive primes.
-	    continue
-	if a*a >= 4*b:
-	    bound = b
-	    d = sqrt(a*a - 4*b)
-	    x1 = (-a+d)/2
-	    x2 = (-a-d)/2
-	    if 0 < x1 < bound: bound = x1
-	    if 0 < x2 < bound: bound = x2
-	    if bound <= maxPrimes:
-		continue
-	n = 1
-	while isPrime(n*n + a*n + b):
-	   n += 1
-	if n > maxPrimes:
-	    maxPrimes = n
-	    maxCoefProd = a*b
+        if a == b+1 or a == b-1:
+            # The quadratic can be factored into (n ± b)(n ± 1) and so will
+            # produce no more than 2 consecutive primes.
+            continue
+        if a*a >= 4*b:
+            bound = b
+            d = sqrt(a*a - 4*b)
+            x1 = (-a+d)/2
+            x2 = (-a-d)/2
+            if 0 < x1 < bound: bound = x1
+            if 0 < x2 < bound: bound = x2
+            if bound <= maxPrimes:
+                continue
+        n = 1
+        while isPrime(n*n + a*n + b):
+           n += 1
+        if n > maxPrimes:
+            maxPrimes = n
+            maxCoefProd = a*b
 print maxCoefProd

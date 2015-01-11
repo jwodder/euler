@@ -32,22 +32,22 @@ for n in xrange(2, 1000001):
     chainIndices = {n: 0}
     i = 0
     while n > 1:
-	n = aliquot(n)
-	i += 1
-	if n > 1000000: break
-	# This ^^ technically doesn't comply with a _prima facie_
-	# interpretation of the problem, but it makes the program terminate in
-	# under a minute with the correct answer, so...
-	if n in chainIndices:
-	    i2 = chainIndices[n]
-	    if i - i2 > longestLength:
-		chain = [m for m,j in chainIndices.iteritems() if j >= i2]
-		if all(m <= 1000000 for m in chain):
-		    longestLength = i - i2
-		    smallestMember = min(chain)
-	    break
-	elif n in seen:
-	    break
-	seen.add(n)
-	chainIndices[n] = i
+        n = aliquot(n)
+        i += 1
+        if n > 1000000: break
+        # This ^^ technically doesn't comply with a _prima facie_
+        # interpretation of the problem, but it makes the program terminate in
+        # under a minute with the correct answer, so...
+        if n in chainIndices:
+            i2 = chainIndices[n]
+            if i - i2 > longestLength:
+                chain = [m for m,j in chainIndices.iteritems() if j >= i2]
+                if all(m <= 1000000 for m in chain):
+                    longestLength = i - i2
+                    smallestMember = min(chain)
+            break
+        elif n in seen:
+            break
+        seen.add(n)
+        chainIndices[n] = i
 print smallestMember

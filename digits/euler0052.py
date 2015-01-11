@@ -21,9 +21,9 @@ def digitset(n): return ''.join(sorted(str(n)))
 digits = 6
 while True:
     for n in xrange(10**(digits-1), 2 * 10**(digits-1)):
-	if n % 10 == 0: continue
-	if digitset(2*n) == digitset(3*n) == digitset(4*n) == digitset(5*n) \
-	    == digitset(6*n):
-	    print n
-	    sys.exit()
+        if n % 10 == 0: continue
+        if digitset(2*n) == digitset(3*n) == digitset(4*n) == digitset(5*n) \
+            == digitset(6*n):
+            print n
+            sys.exit()
     digits += 1

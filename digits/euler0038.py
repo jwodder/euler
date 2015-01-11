@@ -28,7 +28,7 @@ def initials(n):
 maxPD = '000000000'
 for n in range(2,10):
     for coef in initials(10//n - 1):
-	product = ''.join(str(coef*i) for i in range(1,n+1))
-	if ''.join(sorted(product)) == '123456789' and product > maxPD:
-	    maxPD = product
+        product = ''.join(str(coef*i) for i in range(1,n+1))
+        if ''.join(sorted(product)) == '123456789' and product > maxPD:
+            maxPD = product
 print maxPD

@@ -55,13 +55,13 @@ seqlen = 13
 
 def uphill(start):
     while start+seqlen < len(s) and ('0' in s[start:start+seqlen]
-				     or s[start] < s[start+seqlen]):
-	start += 1
+                                     or s[start] < s[start+seqlen]):
+        start += 1
     return start
 
 def downhill(start):
     while start+seqlen < len(s) and s[start] >= s[start+seqlen]:
-	start += 1
+        start += 1
     return start
 
 def seqprod(start): return product(int(c) for c in s[start:start+seqlen])

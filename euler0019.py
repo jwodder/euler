@@ -28,5 +28,5 @@ qty = 0
 for mlen in (common * 3 + leap) * 25:
     offset = (offset + mlen) % 7
     if offset == 0:
-	qty += 1
+        qty += 1
 print qty

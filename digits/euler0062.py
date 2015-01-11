@@ -15,13 +15,13 @@ cubelen = 1
 while True:
     cubestr = ''.join(sorted(str(i**3))).lstrip('0')
     if len(cubestr) > cubelen:
-	try:
-	    match = min(j for q,j in cubeQtys.values() if q == 5)
-	except ValueError:  # empty list
-	    cubelen = len(cubestr)
-	    cubeQtys = {}
-	else:
-	    print match**3
-	    break
+        try:
+            match = min(j for q,j in cubeQtys.values() if q == 5)
+        except ValueError:  # empty list
+            cubelen = len(cubestr)
+            cubeQtys = {}
+        else:
+            print match**3
+            break
     cubeQtys.setdefault(cubestr, [0,i])[0] += 1
     i += 1

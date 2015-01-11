@@ -26,4 +26,4 @@ from eulerlib  import convergents
 
 cf = chain([1], repeat(2))
 print sum(1 for (n,d) in islice(convergents(cf), 1, 1001)
-	    if floor(log10(n)) > floor(log10(d)))
+            if floor(log10(n)) > floor(log10(d)))

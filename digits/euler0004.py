@@ -14,18 +14,18 @@ from bisect import bisect_left
 
 class Node(object):
     def __init__(self, x, y):
-	self.x = x
-	self.y = y
+        self.x = x
+        self.y = y
 
     def __cmp__(self, other):
-	return cmp(type(self), type(other)) \
-	    or cmp(other.x * other.y, self.x * self.y)
+        return cmp(type(self), type(other)) \
+            or cmp(other.x * other.y, self.x * self.y)
 
 
 def insert_uniq(queue, x):
     i = bisect_left(queue, x)
     if not (i < len(queue) and queue[i] == x):
-	queue.insert(i,x)
+        queue.insert(i,x)
 
 nextHeap = [Node(990, 999)]
 while True:
@@ -33,7 +33,7 @@ while True:
     if node.x < 100 or node.y < 100: continue
     ns = str(node.x * node.y)
     if ns == ns[::-1]:
-	print ns
-	break
+        print ns
+        break
     insert_uniq(nextHeap, Node(node.x - 11, node.y))
     insert_uniq(nextHeap, Node(node.x, node.y - 1))

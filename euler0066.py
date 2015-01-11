@@ -36,10 +36,10 @@ def sqrtCF(d):
     P = 0
     Q = 1
     while True:
-	a = int(floor((P + sqrtD) / Q))
-	yield a
-	P = a * Q - P
-	Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
+        a = int(floor((P + sqrtD) / Q))
+        yield a
+        P = a * Q - P
+        Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
 
 squares = set(i*i for i in range(32))  # all perfect squares <= 1000
 
@@ -47,11 +47,11 @@ maxX = 0
 maxD = 0
 for d in xrange(2, 1001):
     if d in squares:
-	continue
+        continue
     for (x,y) in convergents(sqrtCF(d)):
-	if x*x - d * y * y == 1:
-	    if x > maxX:
-		maxX = x
-		maxD = d
-	    break
+        if x*x - d * y * y == 1:
+            if x > maxX:
+                maxX = x
+                maxD = d
+            break
 print maxD

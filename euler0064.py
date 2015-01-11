@@ -50,16 +50,16 @@ r"""Odd period square roots
     The first ten continued fraction representations of (irrational) square
     roots are:
 
-	$\sqrt{2}=[1;(2)]$, period=1
-	$\sqrt{3}=[1;(1,2)]$, period=2
-	$\sqrt{5}=[2;(4)]$, period=1
-	$\sqrt{6}=[2;(2,4)]$, period=2
-	$\sqrt{7}=[2;(1,1,1,4)]$, period=4
-	$\sqrt{8}=[2;(1,4)]$, period=2
-	$\sqrt{10}=[3;(6)]$, period=1
-	$\sqrt{11}=[3;(3,6)]$, period=2
-	$\sqrt{12}=[3;(2,6)]$, period=2
-	$\sqrt{13}=[3;(1,1,1,1,6)]$, period=5
+        $\sqrt{2}=[1;(2)]$, period=1
+        $\sqrt{3}=[1;(1,2)]$, period=2
+        $\sqrt{5}=[2;(4)]$, period=1
+        $\sqrt{6}=[2;(2,4)]$, period=2
+        $\sqrt{7}=[2;(1,1,1,4)]$, period=4
+        $\sqrt{8}=[2;(1,4)]$, period=2
+        $\sqrt{10}=[3;(6)]$, period=1
+        $\sqrt{11}=[3;(3,6)]$, period=2
+        $\sqrt{12}=[3;(2,6)]$, period=2
+        $\sqrt{13}=[3;(1,1,1,1,6)]$, period=5
 
     Exactly four continued fractions, for $N\leq 13$, have an odd period.
 
@@ -75,10 +75,10 @@ def sqrtCF_PQ(d):
     P = 0
     Q = 1
     while True:
-	yield (P,Q)
-	a = int(floor((P + sqrtD) / Q))
-	P = a * Q - P
-	Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
+        yield (P,Q)
+        a = int(floor((P + sqrtD) / Q))
+        P = a * Q - P
+        Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
 
 squares = set(i*i for i in xrange(1, int(ceil(sqrt(10000)))))
 
@@ -90,7 +90,7 @@ for n in xrange(2, 10000):
     start = pqs.next()
     i = 1
     while start != pqs.next():
-	i += 1
+        i += 1
     if i % 2 == 1:
-	qty += 1
+        qty += 1
 print qty

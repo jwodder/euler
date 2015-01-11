@@ -22,8 +22,8 @@ products = set()
 for pandigital in permutations('123456789'):
     (a,b,c) = map(fromDigits, (pandigital[:1], pandigital[1:5], pandigital[5:]))
     if a * b == c:
-	products.add(c)
+        products.add(c)
     (a,b,c) = map(fromDigits, (pandigital[:2], pandigital[2:5], pandigital[5:]))
     if a * b == c:
-	products.add(c)
+        products.add(c)
 print sum(products)

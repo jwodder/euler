@@ -34,21 +34,21 @@ for i in xrange(9):
     facs += (facs[-1] * (i+1),)
 
 lengths = {1: 1, 2: 1, 145: 1, 40585: 1,
-	   169: 3, 363601: 3, 1454: 3,
-	   871: 2, 45361: 2,
-	   872: 2, 45362: 2}
+           169: 3, 363601: 3, 1454: 3,
+           871: 2, 45361: 2,
+           872: 2, 45362: 2}
 
 qty = 0
 for i in xrange(3, 1000000):
     chain = []
     j = i
     while j not in lengths:
-	chain.append(j)
-	j = sum(facs[int(c)] for c in str(j))
+        chain.append(j)
+        j = sum(facs[int(c)] for c in str(j))
     l = lengths[j]
     for k in reversed(chain):
-	l += 1
-	lengths[k] = l
-	if l == 60 and k < 1000000:
-	    qty += 1
+        l += 1
+        lengths[k] = l
+        if l == 60 and k < 1000000:
+            qty += 1
 print qty

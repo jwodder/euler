@@ -21,7 +21,7 @@ accum = 0
 for i in xrange(2, 10001):
     j = aliquot(i)
     if j < i and cache.get(j) == i:
-	accum += i + j
+        accum += i + j
     elif j > i:
-	cache[i] = j
+        cache[i] = j
 print accum

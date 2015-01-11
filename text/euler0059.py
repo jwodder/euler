@@ -47,26 +47,26 @@ while True:
     abc = tuple(arg[i] for (arg, i) in zip(passchars, indices))
     accum = 0
     for (i, (byte, passc)) in enumerate(zip(bytes, cycle(abc))):
-	byte ^= passc
-	#if 0x20 <= byte <= 0x7E: accum += byte
-	if byte in acceptable: accum += byte
-	else:
-	    i %= 3
-	    passchars[i].remove(passc)
-	    for j in range(i+1, 3):
-		indices[j] = len(passchars[j])
-	    indices[i] -= 1
-	    break
+        byte ^= passc
+        #if 0x20 <= byte <= 0x7E: accum += byte
+        if byte in acceptable: accum += byte
+        else:
+            i %= 3
+            passchars[i].remove(passc)
+            for j in range(i+1, 3):
+                indices[j] = len(passchars[j])
+            indices[i] -= 1
+            break
     else:
-	#print ''.join(map(chr, abc))
-	#print ''.join(chr(b^p) for (b,p) in zip(bytes, cycle(abc)))
-	print accum
-	break
+        #print ''.join(map(chr, abc))
+        #print ''.join(chr(b^p) for (b,p) in zip(bytes, cycle(abc)))
+        print accum
+        break
     for i in range(len(indices)-1, -1, -1):
-	indices[i] += 1
-	if indices[i] >= len(passchars[i]):
-	    indices[i] = 0
-	else:
-	    break
+        indices[i] += 1
+        if indices[i] >= len(passchars[i]):
+            indices[i] = 0
+        else:
+            break
     else:
-	break
+        break

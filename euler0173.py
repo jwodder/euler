@@ -7,15 +7,15 @@
    using exactly thirty-two square tiles we can form two different square
    laminae:
 
-			     ######  #########
-			     ######  #       #
-			     ##  ##  #       #
-			     ##  ##  #       #
-			     ######  #       #
-			     ######  #       #
-				     #       #
-				     #       #
-				     #########
+                             ######  #########
+                             ######  #       #
+                             ##  ##  #       #
+                             ##  ##  #       #
+                             ######  #       #
+                             ######  #       #
+                                     #       #
+                                     #       #
+                                     #########
 
    With one-hundred tiles, and not necessarily using all of the tiles at one
    time, it is possible to form forty-one different square laminae.
@@ -30,11 +30,11 @@ def countParity(start):
     outer = start
     qty = 0
     for i in xrange(start, maxTiles//4 + 1, 2):
-	used -= (i-2)*4
-	while used + (outer+2)*4 <= maxTiles:
-	    outer += 2
-	    used += outer*4
-	qty += (outer - i) // 2 + 1
+        used -= (i-2)*4
+        while used + (outer+2)*4 <= maxTiles:
+            outer += 2
+            used += outer*4
+        qty += (outer - i) // 2 + 1
     return qty
 
 print countParity(2) + countParity(3)

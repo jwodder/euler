@@ -29,9 +29,9 @@ for i in xrange(3, 1000, 2):
     x = 10 % i
     n = 1
     while x != 1:
-	x = (x * 10) % i
-	n += 1
+        x = (x * 10) % i
+        n += 1
     if n > maxCycle:
-	maxD = i
-	maxCycle = n
+        maxD = i
+        maxCycle = n
 print maxD

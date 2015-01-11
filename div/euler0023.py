@@ -28,6 +28,6 @@ summable = set()
 abundant = []
 for i in xrange(1, n+1):
     if aliquot(i) > i:
-	abundant.append(i)
-	summable.update(i+j for j in abundant if i+j <= n)
+        abundant.append(i)
+        summable.update(i+j for j in abundant if i+j <= n)
 print n*(n+1) // 2 - sum(summable)

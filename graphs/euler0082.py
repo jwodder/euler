@@ -36,18 +36,18 @@ matrix.append([0] * (width+1))
 
 def neighbors(node):
     if node == start:
-	for y in xrange(height):
-	    yield (y,0)
+        for y in xrange(height):
+            yield (y,0)
     elif node != destination:
-	(y,x) = node
-	if y > 0:
-	    yield (y-1, x)
-	if y+1 < height:
-	    yield (y+1, x)
-	if x+1 < width:
-	    yield (y, x+1)
-	if x == width-1:
-	    yield destination
+        (y,x) = node
+        if y > 0:
+            yield (y-1, x)
+        if y+1 < height:
+            yield (y+1, x)
+        if x+1 < width:
+            yield (y, x+1)
+        if x == width-1:
+            yield destination
 
 def length(_, node): return matrix[node[0]][node[1]]
 

@@ -24,6 +24,6 @@ qty = 0
 r = 11  # smallest `r` such that `nCr(n,r) > 1000000`
 for n in xrange(23, 101):
     while nCr(n, r-1) > 1000000:
-	r -= 1
+        r -= 1
     qty += n + 1 - 2*r
 print qty

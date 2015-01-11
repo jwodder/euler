@@ -25,9 +25,9 @@ for p in dropwhile(lambda n: n<1000, primeIter(bound=10000)):
 
 for perms in primePerms.itervalues():
     if len(perms) >= 3 and 1487 not in perms:
-	for i,p1 in enumerate(perms[:-2]):
-	    for j,p2 in enumerate(perms[i+1:-1]):
-		p3 = p2 + p2 - p1
-		if p3 in perms[j+i+2:]:
-		    print '%d%d%d' % (p1, p2, p3)
-		    sys.exit()
+        for i,p1 in enumerate(perms[:-2]):
+            for j,p2 in enumerate(perms[i+1:-1]):
+                p3 = p2 + p2 - p1
+                if p3 in perms[j+i+2:]:
+                    print '%d%d%d' % (p1, p2, p3)
+                    sys.exit()

@@ -13,7 +13,7 @@ n = 600851475143
 
 for p in eulerlib.primeIter():
     while n % p == 0:
-	n //= p
-	if n == 1:
-	    print p
-	    sys.exit()
+        n //= p
+        if n == 1:
+            print p
+            sys.exit()

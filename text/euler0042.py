@@ -27,8 +27,8 @@ qty = 0
 for word in words:
     val = sum(ord(c) - 64 for c in word)
     while val > maxTri:
-	maxTri += len(triangles) + 1
-	triangles.add(maxTri)
+        maxTri += len(triangles) + 1
+        triangles.add(maxTri)
     if val in triangles:
-	qty += 1
+        qty += 1
 print qty
