@@ -13,7 +13,5 @@ accum = 0
 (a,b) = (1,2)
 while b <= 4000000:
     accum += b
-    (a,b) = (b, a+b)
-    (a,b) = (b, a+b)
-    (a,b) = (b, a+b)
+    (a,b) = (2*b+a, 3*b+2*a)
 print accum
