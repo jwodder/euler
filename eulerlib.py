@@ -188,8 +188,10 @@ def partitions(n):
             for i in range(min(qty,mx), 0, -1):
                 for xs in gen(qty-i, i):
                     yield (i,) + xs
-    if n < 1: raise ValueError
-    else: return gen(n,n)
+    if n < 1:
+        raise ValueError
+    else:
+        return gen(n,n)
 
 def isPerfectSquare(n):
     #return perfectSqrt(n) is not None
@@ -244,3 +246,20 @@ def dijkstraLength(start, end, neighbors, length):
             current = min(visitable, key=lambda p: distances[p])
         else:
             raise ValueError('No route to endpoint')
+
+def subsets(xs, nonempty=False, proper=False):
+    """Returns an iterator over all subsets of the iterable `xs` as tuples.  If
+       `nonempty` is `True`, only nonempty subsets are returned; if `proper` is
+       `True`, only proper subsets are returned."""
+    xs = tuple(xs)
+    selectors = [False] * len(xs)
+    while True:
+        if not (nonempty and not any(selectors)) and \
+           not (proper and all(selectors)):
+            yield tuple(itertools.compress(xs, selectors))
+        for i in xrange(len(selectors)):
+            selectors[i] = not selectors[i]
+            if selectors[i]:
+                break
+        else:
+            break

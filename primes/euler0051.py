@@ -14,25 +14,23 @@
    necessarily adjacent digits) with the same digit, is part of an eight prime
    value family."""
 
-from   itertools import combinations
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib  import primeIter, isPrime
+from   eulerlib import primeIter, isPrime, subsets
 
 for p in primeIter():
     pstr = str(p)
     for d in '012':
         indices = [i for i,c in enumerate(pstr) if c == d]
         if indices:
-            for sz in range(1, len(indices)+1):
-                for subdex in combinations(indices, sz):
-                    qty = 1
-                    for d2 in range(int(d)+1, 10):
-                        s2 = pstr
-                        for i in subdex:
-                            s2 = s2[:i] + str(d2) + s2[i+1:]
-                        if isPrime(int(s2)):
-                            qty += 1
-                            if qty == 8:
-                                print p
-                                sys.exit()
+            for subdex in subsets(indices, nonempty=True):
+                qty = 1
+                for d2 in range(int(d)+1, 10):
+                    s2 = pstr
+                    for i in subdex:
+                        s2 = s2[:i] + str(d2) + s2[i+1:]
+                    if isPrime(int(s2)):
+                        qty += 1
+                        if qty == 8:
+                            print p
+                            sys.exit()
