@@ -62,6 +62,9 @@ def factor(n, primal=None):
             yield (n, 1)
 
 def isPrime(n):
+    """Returns `True` iff the given integer is prime.  After returning, all
+       primes less than or equal to the square root of the argument will have
+       been added to the prime cache if they were not already present."""
     if n < 2:
         return False
     elif n <= primeCache[-1]:
@@ -72,6 +75,8 @@ def isPrime(n):
             if n % p == 0: return n == p
 
 def isPrime2(n):
+    """Like `isPrime`, except that no new primes are added to the prime cache.
+       This may be faster in some situations."""
     if n < 2:
         return False
     elif n <= primeCache[-1]:
