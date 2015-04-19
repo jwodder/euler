@@ -56,10 +56,10 @@ def factor(n, primal=None):
                 k += 1
             if k > 0: yield (p,k)
             if p*p > n and n != 1:
-                yield (n, 1)
+                yield (n,1)
                 break
         else:
-            yield (n, 1)
+            yield (n,1)
 
 def isPrime(n):
     """Returns `True` iff the given integer is prime.  After returning, all
