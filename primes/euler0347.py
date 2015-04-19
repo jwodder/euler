@@ -18,7 +18,7 @@ r"""Largest integer divisible by two primes
     Find $S(10 000 000)$."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter, cross
+from eulerlib import primeIter
 
 n = 10000000
 
@@ -28,10 +28,15 @@ def powers(p,n):
         yield pk
         pk *= p
 
+def last(seq):
+    lastval = None
+    for x in seq:
+        lastval = x
+    return x
+
 accum = 0
 for p in primeIter(bound=n//2):
     ppows = list(powers(p,n))
     for q in primeIter(bound=min(p-1,n//p)):
-        accum += max(pk * qk for (pk,qk) in cross(ppows, powers(q,n))
-                             if pk * qk <= n)
+        accum += max(pk * last(powers(q, n//pk)) for pk in ppows if q <= n//pk)
 print accum
