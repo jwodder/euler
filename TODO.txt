@@ -7,7 +7,6 @@ Code to focus on improving:
   - The code could stand to be more correct rather than only working because
     the answer isn't one of the possibilities it skips.
  - euler0072.py
- - euler0076.c
  - euler0092.py
  - euler0095.py
  - euler0096.py

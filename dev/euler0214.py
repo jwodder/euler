@@ -34,7 +34,7 @@ from eulerlib import primeIter, totient
 def length25(p):
     x = p-1
     i = 2
-    while x != 1:
+    while x != 1 and i <= 25:
         x = totient(x)
         i += 1
     return i == 25
