@@ -14,7 +14,7 @@
    answer rounded to seven decimal places in the form 0.abcdefg"""
 
 from collections import defaultdict
-from eulerlib    import cross
+from eulerlib    import cross, sprintFFraction
 
 # 9d4 > 6d6
 
@@ -33,5 +33,4 @@ for c in xrange(6, 37):
     peteProb = sum(peteRolls[p] for p in xrange(c+1, 37))
     prob += colinProb * peteProb
 
-probDec = (prob * 10**8) // denom
-print '0.%07d' % (probDec // 10 + (probDec % 10 >= 5),)
+print sprintFFraction(7, prob, denom)

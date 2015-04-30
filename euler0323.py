@@ -19,6 +19,7 @@ r"""Bitwise-OR operations on random integers
     Give your answer rounded to 10 digits after the decimal point."""
 
 from fractions import Fraction
+from eulerlib  import sprintFFraction
 
 def pascalRow(n):
     c = 1
@@ -32,6 +33,4 @@ for n in xrange(1, 33):
     E[n] = (1 + sum(nCi * (1+E[i]) for i,nCi in zip(range(n), pascalRow(n)))) \
             / ((1 << n) - 1)
 
-charac, mantiss = divmod(E[32].numerator, E[32].denominator)
-quot = (mantiss * 10**11) // E[32].denominator
-print '%d.%010d' % (charac, quot // 10 + (quot % 10 >= 5))
+print sprintFFraction(10, E[32].numerator, E[32].denominator)

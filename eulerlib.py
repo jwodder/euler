@@ -263,3 +263,26 @@ def subsets(xs, nonempty=False, proper=False):
                 break
         else:
             break
+
+def sprintFFraction(d, num, denom):
+    """Converts ``num / denom`` to a string of the form ``[-]d.dddd``
+       containing exactly `n` digits after the decimal place, rounded to the
+       nearest ``10**-n``"""
+    if d < 0:
+        raise ValueError('d must be nonnegative')
+    sign = ''
+    if num == 0:
+        return '0' + ('.' + '0'*d if d > 0 else '')
+    elif num < 0 and denom < 0:
+        num *= -1
+        denom *= -1
+    elif num < 0 or denom < 0:
+        num = abs(num)
+        denom = abs(denom)
+        sign = '-'
+    if d == 0:
+        return sign + str(num // denom + (num * 2 >= denom))
+    else:
+        charac, mantis = divmod(num, denom)
+        mantis = (mantis * 10**(d+1)) // denom
+        return sign + '%d.%0*d' % (charac, d, mantis // 10 + (mantis % 10 >= 5))
