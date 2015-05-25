@@ -29,6 +29,5 @@ for n in xrange(51):
     if n < 3:
         placements.append(1)
     else:
-        placements.append(placements[-1] + sum(placements[i-bool(i)]
-                                               for i in xrange(n-2)))
+        placements.append(placements[-1] + 1 + sum(placements[:n-3]))
 print placements[50]
