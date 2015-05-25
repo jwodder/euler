@@ -18,11 +18,7 @@
 
    NOTE: This is related to Problem 116."""
 
-cache = [None] * 51
-
-def repl(i):
-    if cache[i] is None:
-        cache[i] = 1 + sum(repl(j) for sz in [2,3,4] for j in xrange(i-sz+1))
-    return cache[i]
-
-print repl(50)
+repl = []
+for n in xrange(51):
+    repl.append(1 + sum(sum(repl[:max(n-sz+1,0)]) for sz in [2,3,4]))
+print repl[-1]
