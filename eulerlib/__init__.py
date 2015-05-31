@@ -91,18 +91,6 @@ def isPrime2(n):
             if n % p == 0: return n == p
             p += 2
 
-def sieve(bound):
-    """Returns a list `xs` of length `bound` in which ``xs[i]`` is `True` iff
-       `i` is prime"""
-    if bound < 2:
-        return [False] * bound
-    primes = [False, False] + [True] * (bound - 2)
-    for i in xrange(bound):
-        if primes[i]:
-            for j in xrange(2*i, bound, i):
-                primes[j] = False
-    return primes
-
 def product(xs): return reduce(operator.mul, xs, 1)
 
 def divisors(n=None, factors=None):
