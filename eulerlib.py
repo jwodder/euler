@@ -93,9 +93,14 @@ def isPrime2(n):
 
 def product(xs): return reduce(operator.mul, xs, 1)
 
-def divisors(n):
-    if n < 1: raise ValueError('argument must be positive')
-    primals = [[p**i for i in range(k+1)] for (p,k) in factor(n)]
+def divisors(n=None, factors=None):
+    if factors is None:
+        if n is None:
+            raise ValueError('You must supply a non-None argument')
+        elif n < 1:
+            raise ValueError('`n` argument must be positive')
+        factors = factor(n)
+    primals = [[p**i for i in range(k+1)] for (p,k) in factors]
     divs = [1]
     for ps in primals:
         divs = [x*y for x in divs for y in ps]
