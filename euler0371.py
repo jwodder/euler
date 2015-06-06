@@ -43,19 +43,19 @@
 #
 # from which we can determine the "base cases":
 #
-#    E_{500}' = 2
 #    E_{499}  = 501 / 250
+#    E_{500}' = 2
 #
 # Now find $E_0$.
 
 from fractions import Fraction
 from eulerlib  import sprintFFraction
 
-E1prime = Fraction(1000 + 2 * (1000 - 2*499), 1000 - 499)
 E = Fraction(501, 250)
+Eprime = Fraction(1000 + 2 * (1000 - 2*499), 1000 - 499)
 
 for n in xrange(498, -1, -1):
-    (E, E1prime) = ((1000 + E1prime + E * (1000 - 2*n - 2)) / (1000 - n - 1),
-                    (1000 + E1prime * (1000 - 2*n)) / (1000 - n))
+    (E, Eprime) = ((1000 + Eprime + E * (1000 - 2*n - 2)) / (1000 - n - 1),
+                   (1000 + Eprime * (1000 - 2*n)) / (1000 - n))
 
 print sprintFFraction(8, E.numerator, E.denominator)

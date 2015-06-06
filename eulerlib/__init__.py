@@ -1,121 +1,116 @@
-from   bisect      import bisect_left
-from   collections import deque
 import itertools
 import math
 import operator
 
-primeCache = [2,3]
+thesieve = []
+
+def sieve(bound):
+    global thesieve
+    if not thesieve:
+        thesieve = [False, False] + [True] * (bound - 2)
+        for i in xrange(bound):
+            if thesieve[i]:
+                for j in xrange(2*i, bound, i):
+                    thesieve[j] = False
+    elif bound > len(thesieve):
+        oldbound = len(thesieve)
+        thesieve.extend([True] * (bound - oldbound))
+        for i in xrange(bound):
+            if thesieve[i]:
+                for j in xrange(max(2*i, oldbound - oldbound % i), bound, i):
+                    thesieve[j] = False
 
 def primeIter(amount=None, bound=None):
-    """Returns an iterator over the first `amount` prime numbers less than or
-       equal to `bound`, or over all primes if both parameters are `None`"""
-    def _isPrime(n):
-        for k in primeCache:
-        # I originally wrote `for k in primeCache[1:]:` here in order to skip
-        # the unnecessary check for oddness, thinking that Python would be
-        # smart about iterating over a slice.  It is not, and writing just `for
-        # k in primeCache:` gives a massive speedup.
-            if k * k >  n: return True
-            if n % k == 0: return False
-    i=0
-    while amount is None or i < amount:
-        if i < len(primeCache):
-            p = primeCache[i]
-        else:
-            p = primeCache[-1] + 2
-            while not _isPrime(p): p += 2
-            primeCache.append(p)
-        if bound is None or p <= bound:
-            yield p
-        else:
-            return
-        i += 1
+    if bound is not None:
+        sieve(bound)
+    primes = (i for i,p in enumerate(thesieve) if p)
+    if bound is not None:
+        primes = itertools.takewhile(lambda p: p<=bound, primes)
+    if amount is not None:
+        primes = itertools.islice(primes, amount)
+    return primes
 
-def precalPrimes(amount=None, bound=None):
-    """Precalculates the first `amount` prime numbers less than or equal to
-       `bound`"""
-    if amount is None and bound is None:
-        raise ValueError('At least one argument must be non-None')
-    # based on the `consume` recipe in the itertools documentation
-    deque(primeIter(amount=amount, bound=bound), maxlen=0)
+class PrimeMode(object):
+    PRESIEVE    = 0
+    LIGHT_BRUTE = 1
+    HARD_BRUTE  = 2
 
-def factor(n, primal=None):
+def isPrime(n, mode=PrimeMode.PRESIEVE):
+    if n < 2:
+        return False
+    elif n < len(thesieve):
+        return thesieve[n]
+    elif mode == PrimeMode.PRESIEVE:
+        sieve(n+1)
+        return thesieve[n]
+    elif n < len(thesieve)**2:
+        return all(n % p for p in itertools.takewhile(lambda q: q*q <= n,
+                                                      primeIter()))
+    elif mode == PrimeMode.HARD_BRUTE:
+        if any(n % p == 0 for p in primeIter()):
+            return False
+        x = len(thesieve) - 1
+        x = x + 1 - x % 2
+        while True:
+            if x * x >  n: return True
+            if n % x == 0: return False
+            x += 2
+    else:
+        raise ValueError('%d too large to be efficiently tested for primality'
+                         % (n,))
+
+def factor(n, mode=PrimeMode.PRESIEVE):
     if n == 0:
         yield (0,1)
     else:
-        if primal is None:
-            primal = primeIter()
         if n < 0:
             yield (-1, 1)
             n *= -1
-        for p in primal:
-            if n == 1: break
+        for p in primeIter():
+            if n == 1:
+                break
             k=0
             while n % p == 0:
                 n //= p
                 k += 1
-            if k > 0: yield (p,k)
-            if (p*p > n or (n <= primeCache[-1] and isPrime(n))) and n != 1:
+            if k > 0:
+                yield (p,k)
+            if (p*p > n or isPrime(n,mode)) and n != 1:
                 yield (n,1)
                 break
         else:
             yield (n,1)
 
-def isPrime(n):
-    """Returns `True` iff the given integer is prime.  After returning, all
-       primes less than or equal to the square root of the argument will have
-       been added to the prime cache if they were not already present."""
-    if n < 2:
-        return False
-    elif n <= primeCache[-1]:
-        return primeCache[bisect_left(primeCache, n)] == n
-    else:
-        for p in primeIter():
-            if p * p >  n: return True
-            if n % p == 0: return n == p
-
-def isPrime2(n):
-    """Like `isPrime`, except that no new primes are added to the prime cache.
-       This may be faster in some situations."""
-    if n < 2:
-        return False
-    elif n <= primeCache[-1]:
-        return primeCache[bisect_left(primeCache, n)] == n
-    else:
-        for p in primeCache:
-            if p * p >  n: return True
-            if n % p == 0: return False
-        p = primeCache[-1] + 2
-        while True:
-            if p * p >  n: return True
-            if n % p == 0: return n == p
-            p += 2
-
-def product(xs): return reduce(operator.mul, xs, 1)
-
-def divisors(n=None, factors=None):
+def divisors(n=None, factors=None, mode=PrimeMode.PRESIEVE):
     if factors is None:
         if n is None:
             raise ValueError('You must supply a non-None argument')
         elif n < 1:
             raise ValueError('`n` argument must be positive')
-        factors = factor(n)
+        factors = factor(n, mode=mode)
+#   return map(product, itertools.product(*[[p**i for i in range(k+1)]
+#                                                 for (p,k) in factors]))
     primals = [[p**i for i in range(k+1)] for (p,k) in factors]
     divs = [1]
     for ps in primals:
         divs = [x*y for x in divs for y in ps]
     return divs
 
+def aliquot(n):
+    """Sum of proper divisors of `n`"""
+    if n < 1: raise ValueError('argument must be positive')
+    return product(itertools.starmap(sumPowers, factor(n))) - n
+
+def totient(n):
+    if n <= 0: raise ValueError('n must be positive')
+    return product(p**(k-1) * (p-1) for (p,k) in factor(n))
+
+def product(xs): return reduce(operator.mul, xs, 1)
+
 def sumPowers(n,k):
     """Like ``sum(n**i for i in range(k+1))``, but more efficient.  `n` must be
        an integer greater than 1."""
     return (n ** (k+1) - 1) // (n-1)
-
-def aliquot(n):
-    """Sum of proper divisors of `n`"""
-    if n < 1: raise ValueError('argument must be positive')
-    #return product(sumPowers(*pk) for pk in factor(n)) - n
-    return product(itertools.starmap(sumPowers, factor(n))) - n
 
 cross = itertools.product  # Python v.2.6+
 #def cross(*args):
@@ -142,10 +137,6 @@ def modInverse(a,n):
         return lc % abs(n)
     else:
         raise ValueError('%d has no multiplicative inverse modulo %d' % (a,n))
-
-def totient(n):
-    if n <= 0: raise ValueError('n must be positive')
-    return product(p**(k-1) * (p-1) for (p,k) in factor(n))
 
 def gcd(x,y):
     (a,b) = (abs(x), abs(y))

@@ -8,7 +8,9 @@
    Find the sum of all positive integers $n$ not exceeding 100 000 000 such
    that for every divisor $d$ of $n$, $d+n/d$ is prime."""
 
-from eulerlib import primeIter, factor, isPrime, subsets, product
+import sys; sys.path.insert(1, sys.path[0] + '/..')
+from eulerlib.primes import primeIter, factor, isPrime
+from eulerlib import subsets, product
 
 accum = 1
 for n1 in primeIter(bound=100000000):

@@ -19,3 +19,8 @@ Code to focus on improving:
 
 - Organize all of the solutions into subfolders based on problem types
 - Add the MIT license to eulerlib.*? (and only eulerlib?)
+- Give aliquot and totient `mode` arguments and the option to take a
+  pre-computed factorization of `n` as an argument in addition to/instead of
+  `n` itself
+- Give primeIter a `mode` argument
+- Use the new sieve algorithm in Primes.hs and eulerlib.cpp
