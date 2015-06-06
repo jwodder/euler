@@ -23,7 +23,7 @@ r"""Spiral primes
     along both diagonals first falls below $10%$?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import isPrime
+from   eulerlib.oldprimes import isPrime
 
 primeQty = 0
 compositeQty = 1

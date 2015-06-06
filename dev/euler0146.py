@@ -13,7 +13,7 @@ from eulerlib import primeIter
 supN = 1000000
 offsets = (1,3,7,9,13,27)
 
-piter = primeIter()
+piter = primeIter(bound = VERY VERY BAD IDEA: supN**2 + 28)
 consecutive = (piter.next(), piter.next(), piter.next(),
                piter.next(), piter.next(), piter.next())
 

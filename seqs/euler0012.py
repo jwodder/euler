@@ -24,11 +24,12 @@
 
 import itertools
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-import eulerlib
+from   eulerlib           import product
+from   eulerlib.oldprimes import factor
 
 prevQty = 1
 for i in itertools.count(2):
-    qty = eulerlib.product((k if p==2 else k+1) for p,k in eulerlib.factor(i+1))
+    qty = product((k if p==2 else k+1) for p,k in factor(i+1))
     # qty == number of divisors of i+1 (or of (i+1)//2 when i+1 is even)
     if qty * prevQty > 500:
         print i*(i+1)//2

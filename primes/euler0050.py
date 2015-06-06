@@ -15,7 +15,7 @@
    consecutive primes?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter, isPrime
+from eulerlib.oldprimes import primeIter, isPrime
 
 maxPrime = 0
 maxTerms = 0

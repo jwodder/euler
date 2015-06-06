@@ -6,6 +6,7 @@ thesieve = []
 
 def sieve(bound):
     global thesieve
+    bound = int(bound)  # Sometimes a float sneaks through
     if not thesieve:
         thesieve = [False, False] + [True] * (bound - 2)
         for i in xrange(bound):

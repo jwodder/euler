@@ -15,13 +15,14 @@ r"""Counting fractions in a range
     How many fractions lie between 1/3 and 1/2 in the sorted set of reduced
     proper fractions for $d\leq 12,000$?"""
 
-from eulerlib import divisors
+from eulerlib import divisors, sieve
 
 def twixtQty(d):
     """Returns the number of (not necessarily reduced) fractions with a
        denominator of `d` between 1/3 and 1/2"""
     return (d+1) // 2 - (d // 3 + 1)
 
+sieve(12000)
 cache = [0,0,0,0] + [None] * 12001
 qty = 0
 for d in xrange(4, 12001):

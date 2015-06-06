@@ -14,8 +14,9 @@ r"""Amicable numbers
     Evaluate the sum of all the amicable numbers under 10000."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import aliquot
+from eulerlib import aliquot, sieve
 
+sieve(10000)
 cache = {}
 accum = 0
 for i in xrange(2, 10001):

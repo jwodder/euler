@@ -18,7 +18,7 @@ r"""Prime square remainders
 # p_n$ at the values of $n$ under consideration, $2np_n < p_n^2$, and so the
 # remainder actually equals $2np_n$.
 
-from eulerlib import primeIter
+from eulerlib.oldprimes import primeIter
 
 piter = primeIter()
 p = piter.next()

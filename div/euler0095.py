@@ -21,12 +21,13 @@ r"""Amicable chains
     exceeding one million."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import aliquot
+from eulerlib import aliquot, sieve
 
 longestLength = 0
 smallestMember = None
 seen = set()
 
+sieve(10**6)
 for n in xrange(2, 1000001):
     if n in seen: continue
     chainIndices = {n: 0}

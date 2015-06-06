@@ -21,9 +21,10 @@
    of two abundant numbers."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import aliquot
+from eulerlib import aliquot, sieve
 
 n = 28123
+sieve(n+1)
 summable = set()
 abundant = []
 for i in xrange(1, n+1):

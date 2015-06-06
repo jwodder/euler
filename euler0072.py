@@ -15,5 +15,6 @@ r"""Counting fractions
     How many elements would be contained in the set of reduced proper fractions
     for $d\leq 1,000,000$?"""
 
-from eulerlib import totient
+from eulerlib import totient, sieve
+sieve(1000000)
 print sum(totient(n) for n in xrange(2, 1000001))

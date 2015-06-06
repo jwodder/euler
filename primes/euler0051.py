@@ -16,7 +16,8 @@
 
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib import primeIter, isPrime, subsets
+from   eulerlib           import subsets
+from   eulerlib.oldprimes import primeIter, isPrime
 
 for p in primeIter():
     pstr = str(p)

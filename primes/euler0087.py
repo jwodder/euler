@@ -13,14 +13,15 @@
    How many numbers below fifty million can be expressed as the sum of a prime
    square, prime cube, and prime fourth power?"""
 
+from __future__ import division
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter
+from eulerlib   import primeIter
 
 bound=50000000
 expressible = set()
 for p1 in primeIter(bound = bound**0.5):
-    for p2 in primeIter(bound = bound**(1.0/3.0)):
-        for p3 in primeIter(bound = bound**(1.0/4.0)):
+    for p2 in primeIter(bound = bound**(1/3)):
+        for p3 in primeIter(bound = bound**(1/4)):
             n = p1*p1 + p2*p2*p2 + p3*p3*p3*p3
             if n < bound:
                 expressible.add(n)

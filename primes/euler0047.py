@@ -17,7 +17,7 @@ r"""Distinct primes factors
     factors.  What is the first of these numbers?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import factor
+from eulerlib.oldprimes import factor
 
 n = 1
 streak = 0

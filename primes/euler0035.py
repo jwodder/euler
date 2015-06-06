@@ -10,14 +10,15 @@
    How many circular primes are there below one million?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import precalPrimes, isPrime2
-precalPrimes(bound=1000)
+from eulerlib import sieve, isPrime, PrimeMode
+
+sieve(1000)
 
 qty = 2  # 2 and 5
 for p in xrange(3, 1000000, 2):
     pstr = str(p)
-    if all(c in '1379' for c in pstr) and isPrime2(p) \
-        and all(isPrime2(int(pstr[i:] + pstr[:i]))
+    if all(c in '1379' for c in pstr) and isPrime(p, PrimeMode.HARD_BRUTE) \
+        and all(isPrime(int(pstr[i:] + pstr[:i]), PrimeMode.HARD_BRUTE)
                 for i in range(1, len(pstr))):
         qty += 1
 print qty

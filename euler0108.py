@@ -25,7 +25,8 @@ r"""Diophantine reciprocals I
 # $x-n$ divides $xn$, and so the possible values of $x$ in $1/x + 1/y = 1/n$
 # are precisely the positive integers that divide $n^2$.
 
-from eulerlib import factor, product
+from eulerlib           import product
+from eulerlib.oldprimes import factor
 
 n = 1
 while product(k*2+1 for _,k in factor(n)) // 2 + 1 <= 1000:

@@ -20,7 +20,7 @@ r"""Goldbach's other conjecture
 
 import heapq
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib import primeIter
+from   eulerlib.oldprimes import primeIter
 
 queue = []
 

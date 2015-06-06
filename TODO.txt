@@ -24,3 +24,4 @@ Code to focus on improving:
   `n` itself
 - Give primeIter a `mode` argument
 - Use the new sieve algorithm in Primes.hs and eulerlib.cpp
+- euler0035.py: Test whether using sieve(10**6) would be faster than sieve(1000)

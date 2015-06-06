@@ -14,7 +14,8 @@ r"""Prime pair connection
     1000000$."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter, modInverse
+from eulerlib           import modInverse
+from eulerlib.oldprimes import primeIter
 
 piter = primeIter()
 piter.next()

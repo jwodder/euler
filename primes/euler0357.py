@@ -9,8 +9,7 @@
    that for every divisor $d$ of $n$, $d+n/d$ is prime."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib.primes import primeIter, factor, isPrime
-from eulerlib import subsets, product
+from eulerlib import primeIter, factor, isPrime, subsets, product
 
 accum = 1
 for n1 in primeIter(bound=100000000):

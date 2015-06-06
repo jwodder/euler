@@ -7,8 +7,8 @@
    What is the 10 001st prime number?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-import eulerlib
+from   eulerlib.oldprimes import primeIter
 
-p = eulerlib.primeIter()
+p = primeIter()
 for _ in xrange(10000): p.next()
 print p.next()

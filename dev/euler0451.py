@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import factor, modInverse, cross
+from eulerlib import factor, modInverse, cross, sieve
 
 def I(n):
     terms = []
@@ -14,6 +14,7 @@ def I(n):
         terms.append(map(lambda x: x*coef, residues))
     return max(filter(lambda x: x != n-1, (sum(res) % n for res in cross(*terms))))
 
+sieve(2 * 10**7)
 #print sum(I(i) for i in xrange(3, 20000001))
 for i in xrange(3, 20000001):
     print '%d\t%d' % (i, I(i))
