@@ -12,7 +12,7 @@
    NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import isPrime
+from eulerlib.oldprimes import isPrime
 
 leftTruncate  = set([2,3,5,7])
 rightTruncate = set([2,3,5,7])

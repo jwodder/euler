@@ -1,5 +1,4 @@
 Code to focus on improving:
- - primeIter in eulerlib.py
  - euler0023.py
  - euler0039.py
  - euler0044.py
@@ -12,6 +11,7 @@ Code to focus on improving:
  - euler0096.py
  - euler0112.py (cf. euler0113.py)
  - euler0145.c
+ - euler0204.py?
  - euler0205.py?
  - euler0206.py
  - euler0347.py
@@ -24,4 +24,4 @@ Code to focus on improving:
   `n` itself
 - Give primeIter a `mode` argument
 - Use the new sieve algorithm in Primes.hs and eulerlib.cpp
-- euler0035.py: Test whether using sieve(10**6) would be faster than sieve(1000)
+- Stop using eulerlib/oldprimes.py
