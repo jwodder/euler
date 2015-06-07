@@ -11,13 +11,10 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, factor, isPrime, subsets, product
 
-accum = 1
+accum = 0
 for n1 in primeIter(bound=100000000):
-    if n1 == 2:
-        continue
     n = n1 - 1
     fctrs = list(factor(n))
-    assert fctrs[0][0] == 2
     if all(k == 1 for p,k in fctrs):
         primes = [p for p,k in fctrs]
         for subprimes in subsets(primes[1:]):

@@ -31,23 +31,18 @@ def primeIter(amount=None, bound=None):
         primes = itertools.islice(primes, amount)
     return primes
 
-class PrimeMode(object):
-    PRESIEVE    = 0
-    LIGHT_BRUTE = 1
-    HARD_BRUTE  = 2
-
-def isPrime(n, mode=PrimeMode.PRESIEVE):
+def isPrime(n, presieve=True):
     if n < 2:
         return False
     elif n < len(thesieve):
         return thesieve[n]
-    elif mode == PrimeMode.PRESIEVE:
+    elif presieve:
         sieve(n+1)
         return thesieve[n]
     elif n < len(thesieve)**2:
         return all(n % p for p in itertools.takewhile(lambda q: q*q <= n,
                                                       primeIter()))
-    elif mode == PrimeMode.HARD_BRUTE:
+    else:
         if any(n % p == 0 for p in primeIter()):
             return False
         x = len(thesieve) - 1
@@ -56,11 +51,8 @@ def isPrime(n, mode=PrimeMode.PRESIEVE):
             if x * x >  n: return True
             if n % x == 0: return False
             x += 2
-    else:
-        raise ValueError('%d too large to be efficiently tested for primality'
-                         % (n,))
 
-def factor(n, mode=PrimeMode.PRESIEVE):
+def factor(n, presieve=True):
     if n == 0:
         yield (0,1)
     else:
@@ -76,19 +68,19 @@ def factor(n, mode=PrimeMode.PRESIEVE):
                 k += 1
             if k > 0:
                 yield (p,k)
-            if (p*p > n or isPrime(n,mode)) and n != 1:
+            if (p*p > n or isPrime(n, presieve)) and n != 1:
                 yield (n,1)
                 break
         else:
             yield (n,1)
 
-def divisors(n=None, factors=None, mode=PrimeMode.PRESIEVE):
+def divisors(n=None, factors=None, presieve=True):
     if factors is None:
         if n is None:
             raise ValueError('You must supply a non-None argument')
         elif n < 1:
             raise ValueError('`n` argument must be positive')
-        factors = factor(n, mode=mode)
+        factors = factor(n, presieve=presieve)
 #   return map(product, itertools.product(*[[p**i for i in range(k+1)]
 #                                                 for (p,k) in factors]))
     primals = [[p**i for i in range(k+1)] for (p,k) in factors]
