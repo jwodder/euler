@@ -9,19 +9,14 @@
    that for every divisor $d$ of $n$, $d+n/d$ is prime."""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import primeIter, factor, isPrime, subsets, product
+from eulerlib import primeIter, isPrime
 
 accum = 0
 for n1 in primeIter(bound=100000000):
     n = n1 - 1
-    fctrs = list(factor(n))
-    if all(k == 1 for p,k in fctrs):
-        primes = [p for p,k in fctrs]
-        for subprimes in subsets(primes[1:]):
-            n_2 = product(subprimes)
-            if not isPrime(n_2 + n // n_2):
-                break
-        else:
-            #print '%d\t%s' % (n, ','.join(map(str, primes)))
-            accum += n
+    for d in xrange(2, int(n**0.5)+1):
+        if n % d == 0 and not isPrime(d + n // d):
+            break
+    else:
+        accum += n
 print accum

@@ -2,24 +2,25 @@ import itertools
 import math
 import operator
 
-thesieve = []
+thesieve = None
 
 def sieve(bound):
     global thesieve
-    bound = int(bound)  # Sometimes a float sneaks through
+    bound = max(int(bound), 100)
     if not thesieve:
-        thesieve = [False, False] + [True] * (bound - 2)
-        for i in xrange(bound):
+        thesieve = [False, False] + [True] * (bound-2)
+        thesieve[4::2] = [False] * mulsInRange(2, 4, bound)
+        for i in xrange(3, int(bound**0.5)+1, 2):
             if thesieve[i]:
-                for j in xrange(2*i, bound, i):
-                    thesieve[j] = False
+                thesieve[i*i::i] = [False] * mulsInRange(i, i*i, bound)
     elif bound > len(thesieve):
         oldbound = len(thesieve)
         thesieve.extend([True] * (bound - oldbound))
-        for i in xrange(bound):
+        thesieve[4::2] = [False] * mulsInRange(2, 4, bound)
+        for i in xrange(3, int(bound**0.5)+1, 2):
             if thesieve[i]:
-                for j in xrange(max(2*i, oldbound - oldbound % i), bound, i):
-                    thesieve[j] = False
+                start = max(i*i, oldbound - oldbound % i)
+                thesieve[start::i] = [False] * mulsInRange(i, start, bound)
 
 def primeIter(amount=None, bound=None):
     if bound is not None:
@@ -275,3 +276,18 @@ def sprintFFraction(d, num, denom):
         charac, mantis = divmod(num, denom)
         mantis = (mantis * 10**(d+1)) // denom
         return sign + '%d.%0*d' % (charac, d, mantis // 10 + (mantis % 10 >= 5))
+
+def mulsInRange(n, a, b):
+    """Returns the number of multiples of `n` in `range(a,b)`.  All arguments
+       must be nonnegative integers with ``n>0`` and `b>=a`."""
+    return (b - a + (a-1) % n) // n
+
+def nextMul(a,b):
+    """Returns the next multiple of `a` greater than `b`.  Both arguments must
+       be positive integers."""
+    return a + b - b % a
+
+def nextEqMul(a,b):
+    """Returns the smallest multiple of `a` greater than or equal to `b`.  Both
+       arguments must be positive integers."""
+    return a + b - (b % a or a)

@@ -15,13 +15,15 @@ Code to focus on improving:
  - euler0205.py?
  - euler0206.py
  - euler0347.py
- - euler0357.py
 
 - Organize all of the solutions into subfolders based on problem types
 - Add the MIT license to eulerlib.*? (and only eulerlib?)
-- Give aliquot and totient `presieve` arguments and the option to take a
+- Give aliquot() and totient() `presieve` arguments and the option to take a
   pre-computed factorization of `n` as an argument in addition to/instead of
   `n` itself
-- Give primeIter a `presieve` argument
+- Give primeIter() a `presieve` argument
 - Use the new sieve algorithm in Primes.hs and eulerlib.cpp
 - Stop using eulerlib/oldprimes.py
+- Make factor() able to work without calling sieve() beforehand?
+- Write a variant of/rewrite primeIter() so that primes are yielded as soon as
+  sieve() finds them rather than waiting for sieve() to finish
