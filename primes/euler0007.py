@@ -6,9 +6,13 @@
 
    What is the 10 001st prime number?"""
 
+from   math     import ceil, log
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib.oldprimes import primeIter
+from   eulerlib import sieve, primeIter
+
+n = 10001
+sieve(ceil(n*log(n) + n*log(log(n))))
 
 p = primeIter()
-for _ in xrange(10000): p.next()
+for _ in xrange(n-1): p.next()
 print p.next()
