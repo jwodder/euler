@@ -7,6 +7,7 @@ Code to focus on improving:
     the answer isn't one of the possibilities it skips.
  - euler0072.py
  - euler0092.py
+ - euler0093.py
  - euler0095.py
  - euler0096.py
  - euler0112.py (cf. euler0113.py)
