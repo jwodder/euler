@@ -19,7 +19,7 @@ r = 15000000
 
 def facdiv(n,p):
     """Returns the largest natural number $k$ such that $p^k$ divides $n!$ ($p$
-       prime).  (I believe this algorithm is called "Legendre's Result.")"""
+       prime) using Legendre's formula"""
     k = 0
     pexp = p
     while pexp <= n:
