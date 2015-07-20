@@ -30,3 +30,4 @@ Code to focus on improving:
 - Make factor() able to work without calling sieve() beforehand?
 - Write a variant of/rewrite primeIter() so that primes are yielded as soon as
   sieve() finds them rather than waiting for sieve() to finish
+- Make `thesieve` an instance of <https://pypi.python.org/pypi/bitarray/>?

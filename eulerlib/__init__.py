@@ -12,7 +12,7 @@ def sieve(bound):
         thesieve[4::2] = [False] * mulsInRange(2, 4, bound)
         for i in xrange(3, int(bound**0.5)+1, 2):
             if thesieve[i]:
-                thesieve[i*i::i] = [False] * mulsInRange(i, i*i, bound)
+                thesieve[i*i::2*i] = [False] * ((mulsInRange(i, i*i, bound)+1) // 2)
     elif bound > len(thesieve):
         oldbound = len(thesieve)
         thesieve.extend([True] * (bound - oldbound))
@@ -278,9 +278,10 @@ def sprintFFraction(d, num, denom):
         return sign + '%d.%0*d' % (charac, d, mantis // 10 + (mantis % 10 >= 5))
 
 def mulsInRange(n, a, b):
-    """Returns the number of multiples of `n` in `range(a,b)`.  All arguments
-       must be nonnegative integers with ``n>0`` and `b>=a`."""
+    """Returns the number of multiples of `n` in ``range(a,b)``.  All arguments
+       must be nonnegative integers with ``n>0`` and ``b>=a``."""
     return (b - a + (a-1) % n) // n
+    #return (b-1)//n - (a-1)//n
 
 def nextMul(a,b):
     """Returns the next multiple of `a` greater than `b`.  Both arguments must
