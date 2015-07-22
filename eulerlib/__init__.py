@@ -1,6 +1,7 @@
 import itertools
 import math
 import operator
+from   bitarray import bitarray
 
 thesieve = None
 
@@ -8,19 +9,19 @@ def sieve(bound):
     global thesieve
     bound = max(int(bound), 100)
     if not thesieve:
-        thesieve = [False, False] + [True] * (bound-2)
-        thesieve[4::2] = [False] * mulsInRange(2, 4, bound)
+        thesieve = bitarray('00' + '1' * (bound-2))
+        thesieve[4::2] = False
         for i in xrange(3, int(bound**0.5)+1, 2):
             if thesieve[i]:
-                thesieve[i*i::2*i] = [False] * ((mulsInRange(i, i*i, bound)+1) // 2)
+                thesieve[i*i::2*i] = False
     elif bound > len(thesieve):
         oldbound = len(thesieve)
-        thesieve.extend([True] * (bound - oldbound))
-        thesieve[4::2] = [False] * mulsInRange(2, 4, bound)
+        thesieve.extend('1' * (bound - oldbound))
+        thesieve[4::2] = False
         for i in xrange(3, int(bound**0.5)+1, 2):
             if thesieve[i]:
                 start = max(i*i, oldbound - oldbound % i)
-                thesieve[start::i] = [False] * mulsInRange(i, start, bound)
+                thesieve[start::i] = False
 
 def primeIter(amount=None, bound=None):
     if bound is not None:
