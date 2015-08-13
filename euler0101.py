@@ -42,39 +42,22 @@ r"""Optimum polynomial
 
     Find the sum of FITs for the BOPs."""
 
-from   __future__ import division
-import operator
-
-def addPoly(p,q):
-    if len(p) < len(q):
-        p += (0,) * (len(q) - len(p))
-    elif len(q) < len(p):
-        q += (0,) * (len(p) - len(q))
-    return map(operator.add, p, q)
-
-def sumPoly(xs): return reduce(addPoly, xs, ())
-
-def mulPoly(p,q):
-    return sumPoly((0,) * i + tuple(map(lambda y: x*y, q))
-                   for i,x in enumerate(p) if x != 0)
-
-def evalPoly(p,x):
-    return reduce(lambda ac, c: ac*x + c, p[::-1], 0)
+from __future__          import division
+from eulerlib.polynomial import Polynomial
 
 points = tuple((x, 1 - x + x**2 - x**3 + x**4 - x**5 + x**6 - x**7 + x**8 - x**9 + x**10) for x in xrange(1, 12))
 
 terms = []
-op = ()
 accum = 0
 for (i, (xi, yi)) in enumerate(points):
-    newTerm = (yi,)
+    newTerm = Polynomial(yi)
     for (j, (xj, _)) in enumerate(points[:i]):
-        terms[j] = mulPoly(terms[j], (-xi/(xj-xi), 1/(xj-xi)))
-        newTerm = mulPoly(newTerm, (-xj/(xi-xj), 1/(xi-xj)))
+        terms[j] *= Polynomial(-xi/(xj-xi), 1/(xj-xi))
+        newTerm *= Polynomial(-xj/(xi-xj), 1/(xi-xj))
     terms.append(newTerm)
-    op = sumPoly(terms)
+    op = sum(terms)
     for (xk, yk) in points[i+1:]:
-        guess = evalPoly(op, xk)
+        guess = op(xk)
         if guess != yk:
             accum += guess
             break
