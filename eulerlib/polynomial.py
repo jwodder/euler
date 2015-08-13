@@ -43,10 +43,10 @@ class Polynomial(object):
         for (xi, yi) in points:
             newTerm = (yi,)
             for (j, (xj, _)) in enumerate(terms):
-                terms[j] *= cls((-xi/(xj-xi), 1/(xj-xi)))
-                newTerm  *= cls((-xj/(xi-xj), 1/(xi-xj)))
+                terms[j] *= cls(-xi/(xj-xi), 1/(xj-xi))
+                newTerm  *= cls(-xj/(xi-xj), 1/(xi-xj))
             terms.append((xi, newTerm))
-        return sum((t for _,t in terms), Polynomial())
+        return sum((t for _,t in terms), cls())
 
     def __lshift__(self, n):  # Multiply by x^n (n>=0)
         if n < 0:
@@ -121,7 +121,7 @@ class Polynomial(object):
     def coefs(self): return self._coef
 
 
-Polynomial.X = Polynomial((0,1))  ### Should this be a module global instead?
+Polynomial.X = Polynomial(0,1)  ### Should this be a module global instead?
 
 def bezier(end1, cntrl1, cntrl2, end2):
     # takes four points (pairs of numbers) and returns a pair of Polynomials
@@ -135,7 +135,7 @@ def bezier(end1, cntrl1, cntrl2, end2):
     by = 3 * (y2 - y1)
     cy = 3 * (y3 - y2) - by
     dy = y4 - y1 - by - cy
-    return (Polynomial((x1, bx, cx, dx)), Polynomial((x2, by, cy, dy)))
+    return (Polynomial(x1, bx, cx, dx), Polynomial(x2, by, cy, dy))
 
 def unbezier(p,q):
     # takes two polynomials and returns a tuple of four points

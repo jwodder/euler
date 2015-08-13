@@ -38,9 +38,9 @@ from eulerlib            import modInverse
 from eulerlib.polynomial import Polynomial
 
 reverseOps = {
-    'D': Polynomial((0,3)),
-    'U': Polynomial((Fraction(-1,2), Fraction(3,4))),
-    'd': Polynomial((Fraction(1,2), Fraction(3,2))),
+    'D': Polynomial(0,3),
+    'U': Polynomial(Fraction(-1,2), Fraction(3,4)),
+    'd': Polynomial(Fraction(1,2), Fraction(3,2)),
 }
 
 seq = 'UDDDUdddDDUDDddDdDddDDUDDdUUDd'
