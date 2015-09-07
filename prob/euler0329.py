@@ -31,26 +31,22 @@ from eulerlib    import sieve, isPrime
 sieve(500)
 
 def jump(state):
-    # state: mapping from square to list of probabilities
-    state2 = defaultdict(list)
-    for sq, frogs in state.iteritems():
+    # state: mapping from square to probability of it having a frog that croaks
+    # as expected
+    state2 = defaultdict(Fraction)
+    for sq, p in state.iteritems():
         if sq == 1:
-            state2[2].extend(frogs*2)
+            state2[2] += p
         elif sq == 500:
-            state2[499].extend(frogs*2)
+            state2[499] += p
         else:
-            state2[sq-1].extend(frogs)
-            state2[sq+1].extend(frogs)
+            state2[sq-1] += p/2
+            state2[sq+1] += p/2
     return state2
 
-accum = Fraction(0)
-for start in xrange(1, 501):
-    state = {start: [1]}
-    for primal in [c == 'P' for c in 'PPPPNNPPPNPPNPN']:
-        for sq in state.keys():
-            coef = Fraction(2 if primal == bool(isPrime(sq)) else 1, 3)
-            state[sq] = [p * coef for p in state[sq]]
-        state = jump(state)
-    accum += sum(p for frogs in state.itervalues() for p in frogs) / \
-             sum(map(len, state.itervalues()))
-print accum / 500
+state = {i: Fraction(1, 500) for i in xrange(1, 501)}
+for primal in [c == 'P' for c in 'PPPPNNPPPNPPNPN']:
+    for sq in state:
+        state[sq] *= Fraction(2 if primal == isPrime(sq) else 1, 3)
+    state = jump(state)
+print sum(state.itervalues())
