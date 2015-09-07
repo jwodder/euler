@@ -24,29 +24,22 @@
 
    Give your answer as a fraction $p/q$ in reduced form."""
 
-from collections import defaultdict
-from fractions   import Fraction
-from eulerlib    import sieve, isPrime
+from   fractions import Fraction
+import operator
+from   eulerlib  import sieve, isPrime
 
 sieve(500)
+P = [Fraction(2 if isPrime(i) else 1, 3) for i in xrange(1, 501)]
+N = [1 - p for p in P]
 
 def jump(state):
-    # state: mapping from square to probability of it having a frog that croaks
-    # as expected
-    state2 = defaultdict(Fraction)
-    for sq, p in state.iteritems():
-        if sq == 1:
-            state2[2] += p
-        elif sq == 500:
-            state2[499] += p
-        else:
-            state2[sq-1] += p/2
-            state2[sq+1] += p/2
+    state2 = map(operator.add, [p/2 for p in state[1:]] + [0],
+                               [0] + [p/2 for p in state[:-1]])
+    state2[1] += state[0]/2
+    state2[-2] += state[-1]/2
     return state2
 
-state = {i: Fraction(1, 500) for i in xrange(1, 501)}
-for primal in [c == 'P' for c in 'PPPPNNPPPNPPNPN']:
-    for sq in state:
-        state[sq] *= Fraction(2 if primal == isPrime(sq) else 1, 3)
-    state = jump(state)
-print sum(state.itervalues())
+state = [Fraction(1, 500)] * 500
+for primal in [P if c == 'P' else N for c in 'PPPPNNPPPNPPNPN']:
+    state = jump(map(operator.mul, state, primal))
+print sum(state)
