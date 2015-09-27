@@ -16,21 +16,21 @@
 
    How many numbers below a googol ($10^{100}$) are not bouncy?"""
 
-cache = [[None] * 9 for _ in xrange(101)]
+import sys; sys.path.insert(1, sys.path[0] + '/..')
+from eulerlib import memoize
 
+@memoize
 def partit(n,g):
     """Returns the number of possible partitions of `n` unlabelled objects into
        `g` (empty or non-empty) labelled groups"""
-    if cache[n][g-1] is None:
-        if n == 0:
-            cache[n][g-1] = 1
-        elif g == 1:
-            cache[n][g-1] = 1
-        elif g == 2:
-            cache[n][g-1] = n+1
-        else:
-            cache[n][g-1] = sum(partit(n-i, g-1) for i in xrange(n+1))
-    return cache[n][g-1]
+    if n == 0:
+        return 1
+    elif g == 1:
+        return 1
+    elif g == 2:
+        return n+1
+    else:
+        return sum(partit(n-i, g-1) for i in xrange(n+1))
 
 qty = 0
 maxDigits = 100

@@ -1,7 +1,8 @@
+from   functools import wraps
 import itertools
 import math
 import operator
-from   bitarray import bitarray
+from   bitarray  import bitarray
 
 thesieve = None
 
@@ -293,3 +294,12 @@ def nextEqMul(a,b):
     """Returns the smallest multiple of `a` greater than or equal to `b`.  Both
        arguments must be positive integers."""
     return a + b - (b % a or a)
+
+def memoize(f):
+    f.cache = {}
+    @wraps(f)
+    def wrapper(*args):
+        if args not in f.cache:
+            f.cache[args] = f(*args)
+        return f.cache[args]
+    return wrapper
