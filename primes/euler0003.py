@@ -7,11 +7,11 @@
 
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib.oldprimes import primeIter
+from   eulerlib import allprimes
 
 n = 600851475143
 
-for p in primeIter():
+for p in allprimes():
     while n % p == 0:
         n //= p
         if n == 1:
