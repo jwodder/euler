@@ -34,6 +34,18 @@ def primeIter(amount=None, bound=None):
         primes = itertools.islice(primes, amount)
     return primes
 
+def allprimes(startsize=1000):
+    sieve(startsize)
+    start = 0
+    bound = len(thesieve)
+    while True:
+        for i in xrange(start, bound):
+            if thesieve[i]:
+                yield i
+        start = bound
+        bound *= 10
+        sieve(bound)
+
 def isPrime(n, presieve=True):
     if n < 2:
         return False
