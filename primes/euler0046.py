@@ -20,7 +20,7 @@ r"""Goldbach's other conjecture
 
 import heapq
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib.oldprimes import primeIter
+from   eulerlib import allprimes
 
 queue = []
 
@@ -44,7 +44,7 @@ class Node(object):
         return cmp(type(self), type(other)) or cmp(self.val, other.val)
 
 
-piter = primeIter()
+piter = allprimes()
 piter.next()
 queue.append(Node(piter))
 i = 3
