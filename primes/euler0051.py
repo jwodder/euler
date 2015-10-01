@@ -16,10 +16,9 @@
 
 import sys
 sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib           import subsets
-from   eulerlib.oldprimes import primeIter, isPrime
+from   eulerlib import subsets, allprimes, isPrime
 
-for p in primeIter():
+for p in allprimes():
     pstr = str(p)
     for d in '012':
         indices = [i for i,c in enumerate(pstr) if c == d]
