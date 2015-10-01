@@ -10,7 +10,6 @@ r"""Factorial digit sum
     Find the sum of the digits in the number 100!"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import product
+from eulerlib import factorial
 
-x = product(xrange(1, 101))
-print sum(int(c) for c in str(x))
+print sum(int(c) for c in str(factorial(100)))

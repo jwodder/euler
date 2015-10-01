@@ -18,13 +18,11 @@ r"""Prime square remainders
 # p_n$ at the values of $n$ under consideration, $2np_n < p_n^2$, and so the
 # remainder actually equals $2np_n$.
 
-from eulerlib.oldprimes import primeIter
+from   itertools import islice
+import sys; sys.path.insert(1, sys.path[0] + '/..')
+from   eulerlib  import allprimes
 
-piter = primeIter()
-p = piter.next()
-n = 1
-while 2 * n * p <= 10**10:
-    piter.next()
-    p = piter.next()
-    n += 2
+for n,p in islice(enumerate(allprimes(), start=1), 0, None, 2):
+    if 2 * n * p > 10**10:
+        break
 print n
