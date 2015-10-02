@@ -33,10 +33,10 @@ r"""Totient maximum
 # consecutive primes starting at 2 whose product is less than 1000001.
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib.oldprimes import primeIter
+from eulerlib import primeIter
 
 n = 1
-for p in primeIter():
+for p in primeIter(bound=1000):
     np = n * p
     if np <= 1000000:
         n = np
