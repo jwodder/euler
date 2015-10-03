@@ -13,15 +13,23 @@
    How many different ways can one hundred be written as a sum of at least two
    positive integers?"""
 
-from eulerlib import memoize
+# See <https://en.wikipedia.org/wiki/Partition_(number_theory)#Partition_function_formulas>
 
-@memoize
-def partitionQty(qty, mx):
-    """Returns the number of ways `qty` can be written as a sum of integers each
-       no greater than `mx`"""
-    if qty == 0:
-        return 1
-    else:
-        return sum(partitionQty(qty-i, i) for i in range(min(qty, mx), 0, -1))
+partitions = [1, 1, 2, 3, 5, 7]
 
-print partitionQty(100, 99)
+for n in xrange(len(partitions), 101):
+    pn = 0
+    k = 1
+    while True:
+        pentK = (3*k*k - k) // 2
+        pentNegK = (3*k*k + k) // 2
+        if n >= pentNegK:
+            pn += (-1)**((-k-1)%2) * partitions[n-pentNegK]
+        if n >= pentK:
+            pn += (-1)**((k-1)%2) * partitions[n-pentK]
+        else:
+            break
+        k += 1
+    partitions.append(pn)
+
+print partitions[-1]-1

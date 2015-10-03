@@ -32,7 +32,6 @@ Code to focus on improving:
 - Write a variant of/rewrite primeIter() so that primes are yielded as soon as
   sieve() finds them rather than waiting for sieve() to finish
 - Rewrite euler0493.py in the vein of <http://math.stackexchange.com/q/1409280/10655>
-- Rewrite euler0076.py using <https://en.wikipedia.org/wiki/Partition_(number_theory)#Partition_function_formulas>?
 - Write a function unifying the logic of the following:
  - euler0004.py
  - euler0044.py
