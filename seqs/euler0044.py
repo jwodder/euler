@@ -16,33 +16,36 @@ r"""Pentagon numbers
 # Find the smallest $D = P_k + 3nk$ that is pentagonal and such that $2P_n +
 # P_k + 3nk = 2P_n + D$ is pentagonal.
 
-import heapq
 import itertools
+import sys; sys.path.insert(1, sys.path[0] + '/..')
+from   eulerlib import generateAsc
 
-def pent(n): return n*(3*n-1) // 2
+def pent(n):
+    return n*(3*n-1) // 2
 
-def pentagons(): return itertools.imap(pent, itertools.count(1))
+def pentagons():
+    return itertools.imap(pent, itertools.count(1))
 
 pentCache = set()
 maxCache = 0
 (pents, caches) = itertools.tee(pentagons(), 2)
-pents.next()
+next(pents)
 
 def isPent(n):
     global maxCache
     while n > maxCache:
-        maxCache = caches.next()
+        maxCache = next(caches)
         pentCache.add(maxCache)
     return n in pentCache
 
-queue = [(4, 1, 1, 1)]
+def nextPents(x):
+    (D, Pk, k, n) = x
+    yield (Pk + 3*(n+1)*k, Pk, k, n+1)
+    if n == 1:
+        Pk_1 = next(pents)
+        yield (Pk_1 + 3*(k+1), Pk_1, k+1, 1)
 
-while True:
-    (D, Pk, k, n) = heapq.heappop(queue)
+for (D, _, _, n) in generateAsc([(4, 1, 1, 1)], nextPents):
     if isPent(D) and isPent(2*pent(n) + D):
         print D
         break
-    heapq.heappush(queue, (Pk + 3*(n+1)*k, Pk, k, n+1))
-    if n == 1:
-        Pk_1 = pents.next()
-        heapq.heappush(queue, (Pk_1 + 3*(k+1), Pk_1, k+1, 1))

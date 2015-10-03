@@ -26,21 +26,21 @@ r"""Ordered radicals
 
     If $rad(n)$ is sorted for $1\leq n\leq 100000$, find $E(10000)$."""
 
-import heapq
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib import primeIter, subsets, product
+from   eulerlib import primeIter, generateAsc
 
 bound = 100000
 index = 10000
 
 primes = tuple(primeIter(bound=bound))
-queue = [(1,[],0)]
 seen = 0
 
-while True:
-    rad, ps, nextI = heapq.heappop(queue)
+def nextNodes(x):
+    rad, ps, nextI = x
     for i in xrange(nextI, len(primes)):
-        heapq.heappush(queue, (rad*primes[i], ps+[primes[i]], i+1))
+        yield (rad*primes[i], ps+[primes[i]], i+1)
+
+for (rad, ps, nextI) in generateAsc([(1,[],0)], nextNodes):
     expses = [rad]
     for p in ps:
         for x in expses[:]:

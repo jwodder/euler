@@ -1,4 +1,5 @@
 from   functools import wraps
+import heapq
 import itertools
 import math
 import operator
@@ -343,3 +344,12 @@ def memoize(f):
 def nth(iterable, n, default=None):
     # From <https://docs.python.org/2.7/library/itertools.html#recipes>
     return next(itertools.islice(iterable, n, None), default)
+
+def generateAsc(init, mknext):
+    queue = list(init)
+    queue.sort()
+    while queue:
+        node = heapq.heappop(queue)
+        yield node
+        for n in mknext(node):
+            heapq.heappush(queue, n)

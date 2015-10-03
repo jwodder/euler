@@ -18,11 +18,8 @@ r"""Goldbach's other conjecture
     What is the smallest odd composite that cannot be written as the sum of a
     prime and twice a square?"""
 
-import heapq
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib import allprimes
-
-queue = []
+from   eulerlib import allprimes, generateAsc
 
 class Node(object):
     def __init__(self, prime, n=None):
@@ -35,24 +32,21 @@ class Node(object):
 
     def next(self):
         if self.n is None:
-            heapq.heappush(queue, Node(self.prime))
+            yield Node(self.prime)
             self.prime = self.val
             self.n = 0
-        return Node(self.prime, self.n+1)
+        yield Node(self.prime, self.n+1)
 
     def __cmp__(self, other):
         return cmp(type(self), type(other)) or cmp(self.val, other.val)
 
 
 piter = allprimes()
-piter.next()
-queue.append(Node(piter))
+next(piter)
 i = 3
-while True:
-    node = heapq.heappop(queue)
+for node in generateAsc([Node(piter)], Node.next):
     if node.val > i:
         print i
         break
     elif node.val == i:
         i += 2
-    heapq.heappush(queue, node.next())
