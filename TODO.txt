@@ -34,3 +34,5 @@ Code to focus on improving:
 - Rewrite euler0493.py in the vein of <http://math.stackexchange.com/q/1409280/10655>
 - Make generateAsc() support iterating only over unique values so that it can
   be used for euler0004.py
+- Write Python versions of all non-Python solutions so that the latter can be
+  deleted
