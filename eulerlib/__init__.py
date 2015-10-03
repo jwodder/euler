@@ -197,6 +197,30 @@ def partitions(n):
     else:
         return gen(n,n)
 
+_partitionNums = [1, 1, 2, 3, 5, 7]
+
+def partitionNums():
+    # Formula taken from <https://en.wikipedia.org/wiki/Partition_(number_theory)#Partition_function_formulas>
+    for pn in _partitionNums:
+        yield pn
+    n = len(_partitionNums)
+    while True:
+        pn = 0
+        k = 1
+        while True:
+            pentK = (3*k*k - k) // 2
+            pentNegK = (3*k*k + k) // 2
+            if n >= pentNegK:
+                pn += (-1)**((-k-1)%2) * _partitionNums[n-pentNegK]
+            if n >= pentK:
+                pn += (-1)**((k-1)%2) * _partitionNums[n-pentK]
+            else:
+                break
+            k += 1
+        _partitionNums.append(pn)
+        yield pn
+        n += 1
+
 def isPerfectSquare(n):
     #return perfectSqrt(n) is not None
     x = math.sqrt(n)

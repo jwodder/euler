@@ -13,23 +13,7 @@
    How many different ways can one hundred be written as a sum of at least two
    positive integers?"""
 
-# See <https://en.wikipedia.org/wiki/Partition_(number_theory)#Partition_function_formulas>
+from itertools import islice
+from eulerlib  import partitionNums
 
-partitions = [1, 1, 2, 3, 5, 7]
-
-for n in xrange(len(partitions), 101):
-    pn = 0
-    k = 1
-    while True:
-        pentK = (3*k*k - k) // 2
-        pentNegK = (3*k*k + k) // 2
-        if n >= pentNegK:
-            pn += (-1)**((-k-1)%2) * partitions[n-pentNegK]
-        if n >= pentK:
-            pn += (-1)**((k-1)%2) * partitions[n-pentK]
-        else:
-            break
-        k += 1
-    partitions.append(pn)
-
-print partitions[-1]-1
+print next(islice(partitionNums(), 100, None)) - 1
