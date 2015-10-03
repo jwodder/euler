@@ -13,7 +13,5 @@
    How many different ways can one hundred be written as a sum of at least two
    positive integers?"""
 
-from itertools import islice
-from eulerlib  import partitionNums
-
-print next(islice(partitionNums(), 100, None)) - 1
+from eulerlib import partitionNums, nth
+print nth(partitionNums(), 100) - 1

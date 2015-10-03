@@ -40,8 +40,8 @@ r"""Convergents of e
     Find the sum of digits in the numerator of the 100^{th} convergent of the
     continued fraction for $e$."""
 
-from itertools import count, islice
-from eulerlib  import convergents
+from itertools import count
+from eulerlib  import convergents, nth
 
 def eCF():
     yield 2
@@ -50,6 +50,4 @@ def eCF():
         yield 2*i
         yield 1
 
-econv = convergents(eCF())
-num, _ = islice(econv, 99, None).next()
-print sum(int(c) for c in str(num))
+print sum(int(c) for c in str(nth(convergents(eCF()), 99)[0]))

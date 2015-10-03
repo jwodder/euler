@@ -339,3 +339,7 @@ def memoize(f):
             f.cache[args] = f(*args)
         return f.cache[args]
     return wrapper
+
+def nth(iterable, n, default=None):
+    # From <https://docs.python.org/2.7/library/itertools.html#recipes>
+    return next(itertools.islice(iterable, n, None), default)
