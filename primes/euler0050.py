@@ -15,19 +15,19 @@
    consecutive primes?"""
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib.oldprimes import primeIter, isPrime
+from eulerlib import primeIter, isPrime
 
 maxPrime = 0
 maxTerms = 0
-for i,p in enumerate(primeIter()):
-    if p*maxTerms >= 1000000: break
-    piter2 = primeIter()
-    for _ in xrange(i+1): piter2.next()
-    accum = p
-    for j,q in enumerate(piter2):
-        accum += q
-        if accum >= 1000000: break
-        if j < maxTerms: continue
+primes = list(primeIter(bound=10**6))
+for i,p in enumerate(primes):
+    accum = sum(primes[i+j] for j in xrange(maxTerms))
+    if accum >= 1000000:
+        break
+    for j in xrange(maxTerms, len(primes)-i):
+        accum += primes[i+j]
+        if accum >= 1000000:
+            break
         if isPrime(accum):
             maxPrime = accum
             maxTerms = j+1
