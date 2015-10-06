@@ -20,8 +20,6 @@ Code to focus on improving:
  - euler0206.py
  - euler0347.py
 
-- Organize all of the solutions into subfolders based on problem types
-- Add the MIT license to eulerlib.*? (and only eulerlib?)
 - Give aliquot() and totient() `presieve` arguments and the option to take a
   pre-computed factorization of `n` as an argument in addition to/instead of
   `n` itself
@@ -31,8 +29,17 @@ Code to focus on improving:
 - Make factor() able to work without calling sieve() beforehand?
 - Write a variant of/rewrite primeIter() so that primes are yielded as soon as
   sieve() finds them rather than waiting for sieve() to finish
-- Rewrite euler0493.py in the vein of <http://math.stackexchange.com/q/1409280/10655>
+- Rewrite euler0493.py in the vein of
+  <http://math.stackexchange.com/q/1409280/10655> and/or using multivariate
+  hypergeometric distributions
 - Make generateAsc() support iterating only over unique values so that it can
   be used for euler0004.py
 - Write Python versions of all non-Python solutions so that the latter can be
   deleted
+- Write a generalized version of generateAsc() that takes a function $f$ and
+  (finitely many) infinite sequences $\{a_i\}, \{b_j\}, \{c_k\}, \ldots$ such
+  that increasing any of the indices in $f(a_i, b_j, c_k, \ldots)$ does not
+  decrease the value of the expression and returns all values of $f(a_i, b_j,
+  c_k, \ldots)$ in ascending order
+ - Also add a keyword argument for the other direction
+ - Write a similar version for the likes of euler0124.py
