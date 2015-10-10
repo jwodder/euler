@@ -20,6 +20,7 @@ Code to focus on improving:
  - euler0205.py?
  - euler0206.py
  - euler0347.py
+ - euler0348.py
 
 - Give aliquot() and totient() `presieve` arguments and the option to take a
   pre-computed factorization of `n` as an argument in addition to/instead of
