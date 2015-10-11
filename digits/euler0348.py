@@ -5,7 +5,7 @@
    them in more than one way.
 
    Consider the palindromic numbers that can be expressed as the sum of a
-   square and a cube, both greater than 1, in *exactly* 4 different ways.
+   square and a cube, both greater than 1, in **exactly** 4 different ways.
 
    For example, 5229225 is a palindromic number and it can be expressed in
    exactly 4 different ways:

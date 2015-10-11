@@ -12,7 +12,6 @@ Code to focus on improving:
  - euler0095.py
  - euler0096.py
  - euler0112.py (cf. euler0113.py)
- - euler0124.py
  - euler0130.py
  - euler0145.c
  - euler0179.py

@@ -37,8 +37,11 @@ seen = 0
 
 def nextNodes(x):
     rad, ps, nextI = x
-    for i in xrange(nextI, len(primes)):
-        yield (rad*primes[i], ps+[primes[i]], i+1)
+    if nextI < len(primes):
+        nextP = primes[nextI]
+        yield (rad*nextP, ps+[nextP], nextI+1)
+        if ps:
+            yield (rad//ps[-1] * nextP, ps[:-1]+[nextP], nextI+1)
 
 for (rad, ps, nextI) in generateAsc([(1,[],0)], nextNodes):
     expses = [rad]
