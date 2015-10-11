@@ -10,7 +10,8 @@
 # be shown to be a multiple of 11, and thus at least one of its factors must be
 # a multiple of 11.
 
-from bisect import bisect_left
+import sys; sys.path.insert(1, sys.path[0] + '/..')
+from eulerlib import generateAsc
 
 class Node(object):
     def __init__(self, x, y):
@@ -21,19 +22,15 @@ class Node(object):
         return cmp(type(self), type(other)) \
             or cmp(other.x * other.y, self.x * self.y)
 
+    def mknext(self):
+        if self.x - 11 >= 100:
+            yield Node(self.x-11, self.y)
+        if self.x == 990 and self.y - 1 >= 100:
+            yield Node(self.x, self.y-1)
 
-def insert_uniq(queue, x):
-    i = bisect_left(queue, x)
-    if not (i < len(queue) and queue[i] == x):
-        queue.insert(i,x)
 
-nextHeap = [Node(990, 999)]
-while True:
-    node = nextHeap.pop(0)
-    if node.x < 100 or node.y < 100: continue
+for node in generateAsc([Node(990, 999)], Node.mknext):
     ns = str(node.x * node.y)
     if ns == ns[::-1]:
         print ns
         break
-    insert_uniq(nextHeap, Node(node.x - 11, node.y))
-    insert_uniq(nextHeap, Node(node.x, node.y - 1))
