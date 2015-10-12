@@ -8,7 +8,7 @@
 
    Give your answer with nine digits after the decimal point (a.bcdefghij)."""
 
-from eulerlib import sprintFFraction, nCr, nPr
+from eulerlib import sprintFFraction, nCr, product
 
 def combinations():
     for r in xrange(11):
@@ -21,19 +21,11 @@ def combinations():
                             if v <= 10:
                                 yield (r,o,y,g,b,i,v)
 
-def arrangements(qtys):
-    n = 20
-    p = 1
-    for r in qtys:
-        p *= nCr(n,r) * nPr(10,r)
-        n -= r
-    return p
-
 colorsum = 0
 qty = 0
 for spectrum in combinations():
-    coef = arrangements(spectrum)
-    colorsum += sum(1 for c in spectrum if c>0) * coef
-    qty += coef
+    weight = product(nCr(10, c) for c in spectrum)
+    colorsum += sum(1 for c in spectrum if c>0) * weight
+    qty += weight
 
 print sprintFFraction(9, colorsum, qty)
