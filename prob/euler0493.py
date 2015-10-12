@@ -8,23 +8,28 @@
 
    Give your answer with nine digits after the decimal point (a.bcdefghij)."""
 
-from eulerlib import sprintFFraction, nCr, product
+from itertools import groupby
+from eulerlib  import sprintFFraction, nCr, product, factorial
 
-def combinations():
-    for r in xrange(11):
-        for o in xrange(min(10, 20-r)+1):
-            for y in xrange(min(10, 20-r-o)+1):
-                for g in xrange(min(10, 20-r-o-y)+1):
-                    for b in xrange(min(10, 20-r-o-y-g)+1):
-                        for i in xrange(min(10, 20-r-o-y-g-b)+1):
-                            v = 20-r-o-y-g-b-i
-                            if v <= 10:
-                                yield (r,o,y,g,b,i,v)
+def partitions():
+    def gen(left, bound, slots):
+        """Returns an iterable of the ways to divide `left` unlabeled items
+           into `slots` unsorted slots with no slot having more than `bound`
+           items"""
+        if left == 0:
+            yield (0,) * slots
+        elif slots != 0:
+            for i in xrange(min(bound, left)+1):
+                for uc in gen(left-i, i, slots-1):
+                    yield (i,) + uc
+    return gen(20, 10, 7)
 
 colorsum = 0
 qty = 0
-for spectrum in combinations():
-    weight = product(nCr(10, c) for c in spectrum)
+fac7 = factorial(7)
+for spectrum in partitions():
+    weight = product(nCr(10, c) for c in spectrum) * fac7 // \
+        product(factorial(len(list(gr))) for _, gr in groupby(spectrum))
     colorsum += sum(1 for c in spectrum if c>0) * weight
     qty += weight
 
