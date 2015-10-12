@@ -21,7 +21,10 @@ maxPrime = 0
 maxTerms = 0
 primes = list(primeIter(bound=10**6))
 for i,p in enumerate(primes):
-    accum = sum(primes[i+j] for j in xrange(maxTerms))
+    try:
+        accum = sum(primes[i+j] for j in xrange(maxTerms))
+    except IndexError:
+        break
     if accum >= 1000000:
         break
     for j in xrange(maxTerms, len(primes)-i):
