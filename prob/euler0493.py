@@ -8,6 +8,9 @@
 
    Give your answer with nine digits after the decimal point (a.bcdefghij)."""
 
+# The balls are labeled, and the selection is done at once (i.e., not one ball
+# at a time) without replacement.
+
 from itertools import groupby
 from eulerlib  import sprintFFraction, nCr, product, factorial
 
@@ -28,9 +31,10 @@ colorsum = 0
 qty = 0
 fac7 = factorial(7)
 for spectrum in partitions():
-    weight = product(nCr(10, c) for c in spectrum) * fac7 // \
+    weight = product(nCr(10,c) for c in spectrum) * fac7 // \
         product(factorial(len(list(gr))) for _, gr in groupby(spectrum))
     colorsum += sum(1 for c in spectrum if c>0) * weight
     qty += weight
 
+#assert qty == nCr(70,20)
 print sprintFFraction(9, colorsum, qty)

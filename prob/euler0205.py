@@ -14,16 +14,17 @@
    answer rounded to seven decimal places in the form 0.abcdefg"""
 
 from collections import defaultdict
-from eulerlib    import cross, sprintFFraction
+from itertools   import product
+from eulerlib    import sprintFFraction
 
 # 9d4 > 6d6
 
 peteRolls = defaultdict(int)
-for roll in cross(*[range(1,5)]*9):
+for roll in product(range(1,5), repeat=9):
     peteRolls[sum(roll)] += 1
 
 colinRolls = defaultdict(int)
-for roll in cross(*[range(1,7)]*6):
+for roll in product(range(1,7), repeat=6):
     colinRolls[sum(roll)] += 1
 
 prob = 0

@@ -35,7 +35,7 @@ def primeIter(amount=None, bound=None):
         primes = itertools.islice(primes, amount)
     return primes
 
-def allprimes(startsize=1000):
+def allprimes(startsize=1000, multiplier=10):
     sieve(startsize)
     start = 0
     bound = len(thesieve)
@@ -44,7 +44,7 @@ def allprimes(startsize=1000):
             if thesieve[i]:
                 yield i
         start = bound
-        bound *= 10
+        bound *= multiplier
         sieve(bound)
 
 def isPrime(n, presieve=True):
@@ -167,9 +167,17 @@ def reduceFrac(x,y):
 
 def factorial(n): return product(xrange(2,n+1))
 
-def nPr(n,r): return product(xrange(n-r+1, n+1))
+def nPr(n,r):
+    if 0 <= r <= n:
+        return product(xrange(n-r+1, n+1))
+    else:
+        return 0
 
-def nCr(n,r): return nPr(n,r) // factorial(r)
+def nCr(n,r):
+    if 0 <= r <= n:
+        return nPr(n,r) // factorial(r)
+    else:
+        return 0
 
 def convergents(cfiter):
     """Returns the successive convergents of a given simple continued fraction
