@@ -19,13 +19,19 @@ r"""Distinct primes factors
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib.oldprimes import factor
 
-n = 1
-streak = 0
-while streak != 4:
-    fctrs = len(list(factor(n)))
-    if fctrs == 4:
-        streak += 1
-    else:
-        streak = 0
-    n += 1
-print n-4
+__tags__ = ['prime numbers', 'factorization']
+
+def solve():
+    n = 1
+    streak = 0
+    while streak != 4:
+        fctrs = len(list(factor(n)))
+        if fctrs == 4:
+            streak += 1
+        else:
+            streak = 0
+        n += 1
+    return n-4
+
+if __name__ == '__main__':
+    print solve()

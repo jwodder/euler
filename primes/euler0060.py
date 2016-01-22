@@ -13,9 +13,10 @@
 # This assumes that the set with the lowest sum is also the set with the lowest
 # maximum element, which turns out to be true.  Hooray for dumb luck!
 
-import sys
-sys.path.insert(1, sys.path[0] + '/..')
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib.oldprimes import primeIter, isPrime
+
+__tags__ = ['minimization', 'prime numbers', 'digits']
 
 piter = primeIter()
 concatable = dict()
@@ -31,19 +32,21 @@ def addPrime():
     concatable[p] = conc
     return (p, conc)
 
-subgraphs = set()
+def solve():
+    subgraphs = set()
+    while True:
+        p, conc = addPrime()
+        new = []
+        for kn in subgraphs:
+            if all(q in conc for q in kn):
+                kn1 = kn + (p,)
+                if len(kn1) == 5:
+                    return sum(kn1)
+                new.append(kn1)
+        subgraphs.update(new)
+        for q in conc:
+            for r in conc & concatable[q]:
+                subgraphs.add((r,q,p))
 
-while True:
-    p, conc = addPrime()
-    new = []
-    for kn in subgraphs:
-        if all(q in conc for q in kn):
-            kn1 = kn + (p,)
-            if len(kn1) == 5:
-                print sum(kn1)
-                sys.exit()
-            new.append(kn1)
-    subgraphs.update(new)
-    for q in conc:
-        for r in conc & concatable[q]:
-            subgraphs.add((r,q,p))
+if __name__ == '__main__':
+    print solve()

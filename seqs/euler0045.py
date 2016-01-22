@@ -14,20 +14,26 @@
 
 from itertools import imap, count
 
-T = imap(lambda n: n*(n+1) // 2, count(286))
-P = imap(lambda n: n*(3*n-1) // 2, count(166))
-H = imap(lambda n: n*(2*n-1), count(144))
+__tags__ = ['integer sequences', 'triangle numbers', 'pentagonal numbers',
+            'hexagonal numbers']
 
-t = T.next()
-p = P.next()
-h = H.next()
+def solve():
+    T = imap(lambda n: n*(n+1) // 2, count(286))
+    P = imap(lambda n: n*(3*n-1) // 2, count(166))
+    H = imap(lambda n: n*(2*n-1), count(144))
 
-while not (t == p == h):
-    while t < p or t < h:
-        t = T.next()
-    while p < t or p < h:
-        p = P.next()
-    while h < t or h < p:
-        h = H.next()
+    t = next(T)
+    p = next(P)
+    h = next(H)
 
-print t
+    while not (t == p == h):
+        while t < p or t < h:
+            t = next(T)
+        while p < t or p < h:
+            p = next(P)
+        while h < t or h < p:
+            h = next(H)
+    return t
+
+if __name__ == '__main__':
+    print solve()

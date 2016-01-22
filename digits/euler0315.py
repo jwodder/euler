@@ -77,6 +77,8 @@ from itertools import dropwhile
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib  import primeIter
 
+__tags__ = ['prime numbers', 'digits']
+
 segments = [
     (0, 1, 2, 3, 4, 5),
     (1, 2),
@@ -90,20 +92,24 @@ segments = [
     (0, 1, 2, 3, 5, 6)
 ]
 
-samTotal = 0
-maxTotal = 0
-for n in dropwhile(lambda x: x <= 10**7, primeIter(bound=2*10**7)):
-    prev = set()
-    while True:
-        digits = map(int, str(n))
-        screen = set((i,s) for (i,d) in enumerate(reversed(digits))
-                           for s in segments[d])
-        samTotal += 2 * len(screen)
-        maxTotal += len(prev ^ screen)
-        prev = screen
-        if n < 10:
-            break
-        else:
-            n = sum(digits)
-    maxTotal += len(prev)
-print samTotal - maxTotal
+def solve():
+    samTotal = 0
+    maxTotal = 0
+    for n in dropwhile(lambda x: x <= 10**7, primeIter(bound=2*10**7)):
+        prev = set()
+        while True:
+            digits = map(int, str(n))
+            screen = set((i,s) for (i,d) in enumerate(reversed(digits))
+                               for s in segments[d])
+            samTotal += 2 * len(screen)
+            maxTotal += len(prev ^ screen)
+            prev = screen
+            if n < 10:
+                break
+            else:
+                n = sum(digits)
+        maxTotal += len(prev)
+    return samTotal - maxTotal
+
+if __name__ == '__main__':
+    print solve()

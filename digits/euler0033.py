@@ -19,23 +19,28 @@ r"""Digit canceling fractions
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import product, gcd
 
+__tags__ = ['fractions', 'digits']
+
 fractions = []
 
-def checkFrac(ab,c,d, a2, b2):
+def checkFrac(ab, c, d, a2, b2):
     cd = c*10 + d
     if ab < cd and ab * b2 == cd * a2:
         fractions.append((a2, b2))
 
-for a in range(1, 10):
-    for b in range(1, 10):
-        ab = a*10 + b
-        for c in range(1, 10):
-            checkFrac(ab,b,c, a,c)  # ab/bc = a/c
-            checkFrac(ab,c,b, a,c)  # ab/cb = a/c
-            checkFrac(ab,a,c, b,c)  # ab/ac = b/c
-            checkFrac(ab,c,a, b,c)  # ab/ca = b/c
+def solve():
+    for a in range(1, 10):
+        for b in range(1, 10):
+            ab = a*10 + b
+            for c in range(1, 10):
+                checkFrac(ab,b,c, a,c)  # ab/bc = a/c
+                checkFrac(ab,c,b, a,c)  # ab/cb = a/c
+                checkFrac(ab,a,c, b,c)  # ab/ac = b/c
+                checkFrac(ab,c,a, b,c)  # ab/ca = b/c
+    (nums, denoms) = zip(*fractions)
+    num = product(nums)
+    denom = product(denoms)
+    return denom // gcd(num, denom)
 
-(nums, denoms) = zip(*fractions)
-num = product(nums)
-denom = product(denoms)
-print denom // gcd(num, denom)
+if __name__ == '__main__':
+    print solve()

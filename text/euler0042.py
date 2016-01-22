@@ -16,19 +16,22 @@ r"""Coded triangle numbers
     file containing nearly two-thousand common English words, how many are
     triangle words?"""
 
-from __future__ import with_statement
+__tags__ = ['text', 'isopsephy', 'triangle numbers']
 
-with open('../data/words.txt') as fp:
-    words = fp.read().strip('"').split('","')
+def solve():
+    with open('../data/words.txt') as fp:
+        words = fp.read().strip('"').split('","')
+    triangles = set([1, 3, 6, 10, 15]);
+    maxTri = 15
+    qty = 0
+    for word in words:
+        val = sum(ord(c) - 64 for c in word)
+        while val > maxTri:
+            maxTri += len(triangles) + 1
+            triangles.add(maxTri)
+        if val in triangles:
+            qty += 1
+    return qty
 
-triangles = set([1, 3, 6, 10, 15]);
-maxTri = 15
-qty = 0
-for word in words:
-    val = sum(ord(c) - 64 for c in word)
-    while val > maxTri:
-        maxTri += len(triangles) + 1
-        triangles.add(maxTri)
-    if val in triangles:
-        qty += 1
-print qty
+if __name__ == '__main__':
+    print solve()

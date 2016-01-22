@@ -24,6 +24,13 @@ from itertools import chain, repeat, islice
 from math      import floor, log10
 from eulerlib  import convergents
 
-cf = chain([1], repeat(2))
-print sum(1 for (n,d) in islice(convergents(cf), 1, 1001)
-            if floor(log10(n)) > floor(log10(d)))
+__tags__ = ['fractions', 'continued fractions', 'digits', 'number of digits',
+            'square root']
+
+def solve():
+    cf = chain([1], repeat(2))
+    return sum(1 for (n,d) in islice(convergents(cf), 1, 1001)
+                 if floor(log10(n)) > floor(log10(d)))
+
+if __name__ == '__main__':
+    print solve()

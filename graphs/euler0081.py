@@ -15,23 +15,30 @@
    Link/Target As...'), a 31K text file containing a 80 by 80 matrix, from the
    top left to the bottom right by only moving right and down."""
 
-from __future__ import with_statement
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib   import dijkstraLength
+from eulerlib import dijkstraLength
 
-with open('../data/matrix.txt') as fp:
-    matrix = map(lambda s: map(int, s.split(',')), fp)
+__tags__ = ['graph theory', 'graph traversal', 'shortest path']
 
-width  = len(matrix[0])
-height = len(matrix)
+def solve():
+    with open('../data/matrix.txt') as fp:
+        matrix = map(lambda s: map(int, s.split(',')), fp)
 
-def neighbors(node):
-    (y,x) = node
-    if y+1 < height:
-        yield (y+1, x)
-    if x+1 < width:
-        yield (y, x+1)
+    width  = len(matrix[0])
+    height = len(matrix)
 
-def length(_, node): return matrix[node[0]][node[1]]
+    def neighbors(node):
+        (y,x) = node
+        if y+1 < height:
+            yield (y+1, x)
+        if x+1 < width:
+            yield (y, x+1)
 
-print dijkstraLength((0,0), (height-1, width-1), neighbors, length) + matrix[0][0]
+    def length(_, node):
+        return matrix[node[0]][node[1]]
+
+    return dijkstraLength((0,0), (height-1, width-1), neighbors, length) \
+            + matrix[0][0]
+
+if __name__ == '__main__':
+    print solve()

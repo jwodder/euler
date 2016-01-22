@@ -28,10 +28,17 @@
 
    NOTE: This is related to Problem 117."""
 
+__tags__ = ['combinatorics', 'partitions', 'partitions of labeled elements',
+            'partition of an interval']
+
 def replacements(n, size):
     repl = []
     for i in xrange(n+1):
         repl.append(1 + sum(repl[:max(i-size+1,0)]))
     return repl[-1] - 1
 
-print replacements(50,2) + replacements(50,3) + replacements(50,4)
+def solve():
+    return replacements(50,2) + replacements(50,3) + replacements(50,4)
+
+if __name__ == '__main__':
+    print solve()

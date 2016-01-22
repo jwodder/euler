@@ -17,21 +17,24 @@ from collections import defaultdict
 from itertools   import product
 from eulerlib    import sprintFFraction
 
+__tags__ = ['probability', 'dice']
+
 # 9d4 > 6d6
 
-peteRolls = defaultdict(int)
-for roll in product(range(1,5), repeat=9):
-    peteRolls[sum(roll)] += 1
+def solve():
+    peteRolls = defaultdict(int)
+    for roll in product(range(1,5), repeat=9):
+        peteRolls[sum(roll)] += 1
+    colinRolls = defaultdict(int)
+    for roll in product(range(1,7), repeat=6):
+        colinRolls[sum(roll)] += 1
+    prob = 0
+    denom = 6**6 * 4**9
+    for c in xrange(6, 37):
+        colinProb = colinRolls[c]
+        peteProb = sum(peteRolls[p] for p in xrange(c+1, 37))
+        prob += colinProb * peteProb
+    return sprintFFraction(7, prob, denom)
 
-colinRolls = defaultdict(int)
-for roll in product(range(1,7), repeat=6):
-    colinRolls[sum(roll)] += 1
-
-prob = 0
-denom = 6**6 * 4**9
-for c in xrange(6, 37):
-    colinProb = colinRolls[c]
-    peteProb = sum(peteRolls[p] for p in xrange(c+1, 37))
-    prob += colinProb * peteProb
-
-print sprintFFraction(7, prob, denom)
+if __name__ == '__main__':
+    print solve()

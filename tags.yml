@@ -1,0 +1,162 @@
+---
+number theory:
+    modular arithmetic: ~
+    divisibility:
+        divisor function:
+            __definition__: the number of divisors of an integer
+        aliquot sum:
+            __definition__: sum of proper divisors
+            amicable pair:
+                __definition__: >-
+                    pair of integers whose aliquot sums are each other
+                __synonyms__: [amicable numbers]
+            perfect number:
+                __definition__: number whose aliquot sum is itself
+            deficient number:
+                __definition__: number whose aliquot sum is less than itself
+            abundant number:
+                __definition__: number whose aliquot sum is greater than itself
+        sum of squares of divisors: ~
+        squarefree numbers: ~
+        GCD:
+            coprimality:
+                totient function: ~
+        LCM: ~
+    prime numbers:
+        factorization:
+            radical:
+                __definition__: product of distinct prime factors
+            generalized Hamming number:
+                Hamming number:
+                    __definition__: >-
+                        a positive integer with no prime factor greater than 5
+    Diophantine equation:
+        linear Diophantine equation: ~
+        optic equation:
+            __synonyms__: [Diophantine reciprocal]
+            __definition__: a Diophantine equation of the form $1/a + 1/b = 1/c$
+        Pell's equation:
+            __definition__: a Diophantine equation of the form $x^2 - ny^2 = 1$
+
+digits:
+    binary: ~
+    bouncy number: ~
+    digit permutation: ~
+    first n digits: ~
+    last n digits: ~
+    pandigital: ~
+    repunit: ~
+    sum of function of digits:
+        sum of digits:
+            digital root:
+                __definition__: >-
+                    the sum of the digits of the sum of the digits of the sum
+                    of the digits ... etc. of a given integer
+        #sum of factorial of digits/digit factorial: ~  ???
+    palindromic number: ~
+    number of digits: ~
+
+combinatorics:
+    partitions:
+        partitions of unlabeled elements:
+            partitions of unlabeled elements into unlabeled bins:
+                integer partition: ~
+            partitions of unlabeled elements into labeled bins: ~
+        partitions of labeled elements:
+            partitions of labeled elements into unlabeled bins:
+                Stirling numbers of the second kind:
+                    __definition__: >-
+                        number of ways to partition a number of labeled objects
+                        into a number of nonempty unlabeled subsets
+                partition of an interval: ~
+            partitions of labeled elements into labeled bins: ~
+    permutation:
+        multiset permutation: ~
+        lexicographic permutations: ~
+    combination:
+        multiset combination: ~
+        binomial coefficients:
+            __synonyms__: ["Pascal's triangle"]
+            multinomial coefficients: ~
+    factorial: ~
+    probability:
+        dice: ~
+        expected value: ~
+        variance: ~
+    urn problem:
+        drawing with replacement:
+            binomial distribution: ~
+            multinomial distribution: ~
+        drawing without replacement:
+            hypergeometric distribution: ~
+            multivariate hypergeometric distribution: ~
+
+geometry:
+    lattice points: ~
+    #tessellation: ~ ?
+    triangles:
+        Pythagorean triples:
+            __synonyms__: [right triangles]
+        trigonometry: ~
+    reflection: ~
+
+graph theory:
+    graph traversal:
+        shortest path: ~
+        maximum path: ~
+    binary tree: ~
+    ### something for Sudoku
+
+sequences:
+    integer sequences:
+        Fibonacci numbers: ~
+        arithmetic sequence: ~
+        hexagonal numbers: ~
+        pentagonal numbers: ~
+        triangle numbers: ~
+        number spiral: ~
+    partial sums: ~
+
+iterated functions:
+    __synonyms__: [chain]
+    Collatz conjecture:
+        __synonyms__: [Collatz sequence]
+        Collatz variants: ~
+
+algebra:
+    polynomials:
+        Lagrange interpolation: ~
+        quadratic equations: ~
+
+fractions:
+    continued fractions:
+        __synonyms__: [convergents]
+
+optimization:
+    __synonyms__: [minimization, maximization]
+
+games:
+    nim: ~
+    Sudoku: ~
+
+text:
+    ASCII values: ~
+    English: ~
+    isopsephy:
+        __definition__: adding up the number values of the letters in a word
+
+ordering:
+    __synonyms__: [order, sort, sorting]
+    lexicographic order: ~
+
+NP-complete problems: ~
+calculus: ~
+perfect cube: ~
+perfect square: ~
+physics: ~
+square root: ~
+subset sums: ~
+# `subset products` for euler0011.py?
+calendar: ~
+pi: ~
+e: ~

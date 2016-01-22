@@ -14,6 +14,8 @@ r"""The prime factorisation of binomial coefficients
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter
 
+__tags__ = ['factorization', 'binomial coefficients']
+
 n = 20000000
 r = 15000000
 
@@ -27,5 +29,9 @@ def facdiv(n,p):
         pexp *= p
     return k
 
-print sum(p * (facdiv(n,p) - facdiv(r,p) - facdiv(n-r,p))
-          for p in primeIter(bound=n))
+def solve():
+    return sum(p * (facdiv(n,p) - facdiv(r,p) - facdiv(n-r,p))
+               for p in primeIter(bound=n))
+
+if __name__ == '__main__':
+    print solve()

@@ -15,12 +15,16 @@
 # is), we only need to find one triplet whose sum divides 1000 and then
 # multiply each element by the quotient.
 
-import sys
-from   eulerlib import perfectSqrt
+from eulerlib import perfectSqrt
 
-for a in xrange(1, 1000):
-    for b in range(a+1, (1000-a+1)//2):
-        c = perfectSqrt(a*a + b*b)
-        if c is not None and 1000 % (a+b+c) == 0:
-            print a*b*c * (1000 // (a+b+c))**3
-            sys.exit()
+__tags__ = ['Pythagorean triples']
+
+def solve():
+    for a in xrange(1, 1000):
+        for b in range(a+1, (1000-a+1)//2):
+            c = perfectSqrt(a*a + b*b)
+            if c is not None and 1000 % (a+b+c) == 0:
+                return a*b*c * (1000 // (a+b+c))**3
+
+if __name__ == '__main__':
+    print solve()

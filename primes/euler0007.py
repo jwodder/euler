@@ -8,11 +8,14 @@
 
 from   math     import ceil, log
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from   eulerlib import sieve, primeIter
+from   eulerlib import sieve, primeIter, nth
 
-n = 10001
-sieve(ceil(n*log(n) + n*log(log(n))))
+__tags__ = ['prime numbers']
 
-p = primeIter()
-for _ in xrange(n-1): p.next()
-print p.next()
+def solve():
+    n = 10001
+    sieve(ceil(n*log(n) + n*log(log(n))))
+    return nth(primeIter(), n-1)
+
+if __name__ == '__main__':
+    print solve()

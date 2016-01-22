@@ -23,29 +23,34 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import generateAsc
 
+__tags__ = ['digits', 'palindromic number']
+
 def mknext(node):
     _, s, c = node
     yield ((s+1)**2 + c**3, s+1, c)
     if s == 2:
         yield (s**2 + (c+1)**3, s, c+1)
 
-current = None
-runlen = 0
-accum = 0
-found = 0
-for x, _, _ in generateAsc([(12, 2, 2)], mknext):
-    if x == current:
-        runlen += 1
-    else:
-        if runlen == 4:
-            accum += current
-            found += 1
-            if found == 5:
-                print accum
-                break
-        current = None
-        runlen = None
-        xstr = str(x)
-        if xstr == xstr[::-1]:
-            current = x
-            runlen = 1
+def solve():
+    current = None
+    runlen = 0
+    accum = 0
+    found = 0
+    for x, _, _ in generateAsc([(12, 2, 2)], mknext):
+        if x == current:
+            runlen += 1
+        else:
+            if runlen == 4:
+                accum += current
+                found += 1
+                if found == 5:
+                    return accum
+            current = None
+            runlen = None
+            xstr = str(x)
+            if xstr == xstr[::-1]:
+                current = x
+                runlen = 1
+
+if __name__ == '__main__':
+    print solve()

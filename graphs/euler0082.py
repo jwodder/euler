@@ -18,37 +18,43 @@
    Link/Target As...'), a 31K text file containing a 80 by 80 matrix, from the
    left column to the right column."""
 
-from __future__ import with_statement
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib   import dijkstraLength
+from eulerlib import dijkstraLength
 
-with open('../data/matrix.txt') as fp:
-    matrix = map(lambda s: map(int, s.split(',')), fp)
+__tags__ = ['graph theory', 'graph traversal', 'shortest path']
 
-width  = len(matrix[0])
-height = len(matrix)
+def solve():
+    with open('../data/matrix.txt') as fp:
+        matrix = map(lambda s: map(int, s.split(',')), fp)
 
-# Pseudo-points with value 0 to the left of the left column and right of the
-# right column:
-start = (-1, -1)
-destination = (height, width)
-matrix.append([0] * (width+1))
+    width  = len(matrix[0])
+    height = len(matrix)
 
-def neighbors(node):
-    if node == start:
-        for y in xrange(height):
-            yield (y,0)
-    elif node != destination:
-        (y,x) = node
-        if y > 0:
-            yield (y-1, x)
-        if y+1 < height:
-            yield (y+1, x)
-        if x+1 < width:
-            yield (y, x+1)
-        if x == width-1:
-            yield destination
+    # Pseudo-points with value 0 to the left of the left column and right of
+    # the right column:
+    start = (-1, -1)
+    destination = (height, width)
+    matrix.append([0] * (width+1))
 
-def length(_, node): return matrix[node[0]][node[1]]
+    def neighbors(node):
+        if node == start:
+            for y in xrange(height):
+                yield (y,0)
+        elif node != destination:
+            (y,x) = node
+            if y > 0:
+                yield (y-1, x)
+            if y+1 < height:
+                yield (y+1, x)
+            if x+1 < width:
+                yield (y, x+1)
+            if x == width-1:
+                yield destination
 
-print dijkstraLength(start, destination, neighbors, length)
+    def length(_, node):
+        return matrix[node[0]][node[1]]
+
+    return dijkstraLength(start, destination, neighbors, length)
+
+if __name__ == '__main__':
+    print solve()

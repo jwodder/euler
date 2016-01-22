@@ -28,5 +28,11 @@ r"""1000-digit Fibonacci number
 
 from math import ceil, log10, sqrt
 
-# ceil(log(10**999 * sqrt(5), phi))
-print int(ceil((999 + log10(sqrt(5))) / log10((1+sqrt(5))/2)))
+__tags__ = ['Fibonacci numbers', 'number of digits']
+
+def solve():
+    # ceil(log(10**999 * sqrt(5), phi))
+    return int(ceil((999 + log10(sqrt(5))) / log10((1+sqrt(5))/2)))
+
+if __name__ == '__main__':
+    print solve()

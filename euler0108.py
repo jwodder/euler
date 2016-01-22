@@ -28,7 +28,13 @@ r"""Diophantine reciprocals I
 from eulerlib           import product
 from eulerlib.oldprimes import factor
 
-n = 1
-while product(k*2+1 for _,k in factor(n)) // 2 + 1 <= 1000:
-    n += 1
-print n
+__tags__ = ['Diophantine equation', 'optic equation']
+
+def solve():
+    n = 1
+    while product(k*2+1 for _,k in factor(n)) // 2 + 1 <= 1000:
+        n += 1
+    return n
+
+if __name__ == '__main__':
+    print solve()

@@ -9,19 +9,24 @@
    Find the smallest cube for which exactly five permutations of its digits are
    cube."""
 
-i = 1
-cubeQtys = {}
-cubelen = 1
-while True:
-    cubestr = ''.join(sorted(str(i**3))).lstrip('0')
-    if len(cubestr) > cubelen:
-        try:
-            match = min(j for q,j in cubeQtys.values() if q == 5)
-        except ValueError:  # empty list
-            cubelen = len(cubestr)
-            cubeQtys = {}
-        else:
-            print match**3
-            break
-    cubeQtys.setdefault(cubestr, [0,i])[0] += 1
-    i += 1
+__tags__ = ['digits', 'digit permutation']
+
+def solve():
+    i = 1
+    cubeQtys = {}
+    cubelen = 1
+    while True:
+        cubestr = ''.join(sorted(str(i**3))).lstrip('0')
+        if len(cubestr) > cubelen:
+            try:
+                match = min(j for q,j in cubeQtys.values() if q == 5)
+            except ValueError:  # empty list
+                cubelen = len(cubestr)
+                cubeQtys = {}
+            else:
+                return match**3
+        cubeQtys.setdefault(cubestr, [0,i])[0] += 1
+        i += 1
+
+if __name__ == '__main__':
+    print solve()

@@ -21,6 +21,8 @@
 
 from eulerlib import memoize
 
+__tags__ = ['combinatorics', 'permutation', 'multiset permutation']
+
 @memoize
 def nonconsec(n):
     """Returns the number of binary strings of length `n` in which there are no
@@ -34,4 +36,8 @@ def nonconsec(n):
         #                       in a zero = number of tripleless strings of
         #                       length n-4]
 
-print nonconsec(30) + sum(nonconsec(i) * nonconsec(29-i) for i in xrange(30))
+def solve():
+    return nonconsec(30) + sum(nonconsec(i)*nonconsec(29-i) for i in xrange(30))
+
+if __name__ == '__main__':
+    print solve()

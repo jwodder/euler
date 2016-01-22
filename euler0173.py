@@ -23,6 +23,9 @@
    Using up to one million tiles how many different square laminae can be
    formed?"""
 
+__tags__ = ['integer sequences', 'arithmetic sequence', 'partial sums',
+            'integer partition']
+
 maxTiles = 1000000
 
 def countParity(start):
@@ -37,4 +40,8 @@ def countParity(start):
         qty += (outer - i) // 2 + 1
     return qty
 
-print countParity(2) + countParity(3)
+def solve():
+    return countParity(2) + countParity(3)
+
+if __name__ == '__main__':
+    print solve()

@@ -20,16 +20,21 @@
    Find the maximum prize fund that should be allocated to a single game in
    which fifteen turns are played."""
 
-# Requires Python v.2.6+
 from fractions import Fraction
 from itertools import combinations
 from eulerlib  import product
 
-turns = 15
-allRed = Fraction(1, turns+1)
+__tags__ = ['probability', 'expected value', 'urn problem']
 
-probability = Fraction(0)
-for blueQty in range(turns//2 + 1, turns+1):
-    for combo in combinations(range(1, turns+1), blueQty):
-        probability += allRed / product(combo)
-print int((1 - probability) / probability) + 1
+turns = 15
+
+def solve():
+    allRed = Fraction(1, turns+1)
+    probability = Fraction(0)
+    for blueQty in range(turns//2 + 1, turns+1):
+        for combo in combinations(range(1, turns+1), blueQty):
+            probability += allRed / product(combo)
+    return int((1 - probability) / probability) + 1
+
+if __name__ == '__main__':
+    print solve()

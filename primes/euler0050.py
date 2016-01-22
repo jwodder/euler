@@ -17,21 +17,27 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, isPrime
 
-maxPrime = 0
-maxTerms = 0
-primes = list(primeIter(bound=10**6))
-for i,p in enumerate(primes):
-    try:
-        accum = sum(primes[i+j] for j in xrange(maxTerms))
-    except IndexError:
-        break
-    if accum >= 1000000:
-        break
-    for j in xrange(maxTerms, len(primes)-i):
-        accum += primes[i+j]
+__tags__ = ['maximization', 'prime numbers']
+
+def solve():
+    maxPrime = 0
+    maxTerms = 0
+    primes = list(primeIter(bound=10**6))
+    for i,p in enumerate(primes):
+        try:
+            accum = sum(primes[i+j] for j in xrange(maxTerms))
+        except IndexError:
+            break
         if accum >= 1000000:
             break
-        if isPrime(accum):
-            maxPrime = accum
-            maxTerms = j+1
-print maxPrime
+        for j in xrange(maxTerms, len(primes)-i):
+            accum += primes[i+j]
+            if accum >= 1000000:
+                break
+            if isPrime(accum):
+                maxPrime = accum
+                maxTerms = j+1
+    return maxPrime
+
+if __name__ == '__main__':
+    print solve()

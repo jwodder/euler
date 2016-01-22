@@ -39,22 +39,28 @@ r"""Investigating multiple reflections of a laser beam
     How many times does the beam hit the internal surface of the white cell
     before exiting?"""
 
+__tags__ = ['geometry', 'reflection']
+
 # Note: Trying to use Fractions for this turns out to be colossally
 # inefficient.
 
-(x,y) = (1.4, -9.6)
-m = (y - 10.1) / x
-bounces = 0
+def solve():
+    (x,y) = (1.4, -9.6)
+    m = (y - 10.1) / x
+    bounces = 0
 
-while not (-0.01 <= x <= 0.01 and y > 0):
-    tanM = -4 * x / y
-    coef = (1 + m * tanM) / (1 + tanM * tanM)
-    mx = 1 - 2 * coef
-    my = m - 2 * coef * tanM
-    m = my / mx
+    while not (-0.01 <= x <= 0.01 and y > 0):
+        tanM = -4 * x / y
+        coef = (1 + m * tanM) / (1 + tanM * tanM)
+        mx = 1 - 2 * coef
+        my = m - 2 * coef * tanM
+        m = my / mx
 
-    t = -(8*x + 2*y*m) / (4 + m*m)
-    x += t
-    y += m*t
-    bounces += 1
-print bounces
+        t = -(8*x + 2*y*m) / (4 + m*m)
+        x += t
+        y += m*t
+        bounces += 1
+    return bounces
+
+if __name__ == '__main__':
+    print solve()

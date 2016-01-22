@@ -29,10 +29,12 @@
    each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal,
    and octagonal, is represented by a different number in the set."""
 
-from   collections import defaultdict, namedtuple
-from   fractions   import Fraction
-from   math        import ceil, floor, sqrt
-import sys
+from collections import defaultdict, namedtuple
+from fractions   import Fraction
+from math        import ceil, floor, sqrt
+
+__tags__ = ['digits', 'first n digits', 'last n digits', 'integer sequences',
+            'triangle numbers', 'pentagonal numbers', 'hexagonal numbers']
 
 def fourDigits(a,b):
     start = int(ceil((-b + sqrt(b*b + 4000 * a)) / (2*a)))
@@ -64,20 +66,22 @@ class Node(namedtuple('Node', 'digitPairs remaining')):
         return sum(int(a+b) for a,b in zip(self.digitPairs,self.digitPairs[1:]))
 
 
-digitmaps = []
-for a,b in coefs:
-    mapping = defaultdict(list)
-    for x in fourDigits(a,b):
-        d,e,f,g = str(x)
-        if f != '0':
-            mapping[d+e].append(f+g)
-    digitmaps.append(mapping)
+def solve():
+    digitmaps = []
+    for a,b in coefs:
+        mapping = defaultdict(list)
+        for x in fourDigits(a,b):
+            d,e,f,g = str(x)
+            if f != '0':
+                mapping[d+e].append(f+g)
+        digitmaps.append(mapping)
+    for x, xs in digitmaps[0].iteritems():
+        nodes = [Node((x,y), digitmaps[1:]) for y in xs]
+        for _ in xrange(len(digitmaps)-1):
+            nodes = [n2 for n1 in nodes for n2 in n1.nextNodes()]
+        for n in nodes:
+            if n.success():
+                return n.answer()
 
-for x, xs in digitmaps[0].iteritems():
-    nodes = [Node((x,y), digitmaps[1:]) for y in xs]
-    for _ in xrange(len(digitmaps)-1):
-        nodes = [n2 for n1 in nodes for n2 in n1.nextNodes()]
-    for n in nodes:
-        if n.success():
-            print n.answer()
-            sys.exit(0)
+if __name__ == '__main__':
+    print solve()

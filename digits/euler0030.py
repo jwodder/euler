@@ -17,15 +17,21 @@ r"""Digit fifth powers
     Find the sum of all the numbers that can be written as the sum of fifth
     powers of their digits."""
 
-from itertools import combinations_with_replacement  # requires Python v.2.7+
+from itertools import combinations_with_replacement
 
-maxDigits = 6
-digits = [(i**5, str(i)) for i in range(10)]
-accum = 0
-for ndigs in combinations_with_replacement(digits, maxDigits):
-    digPowers, digChars = zip(*ndigs)
-    n = sum(digPowers)
-    if n <= 1: continue
-    if ''.join(sorted(str(n))).lstrip('0') == ''.join(digChars).lstrip('0'):
-        accum += n
-print accum
+__tags__ = ['digits', 'sum of function of digits']
+
+def solve():
+    maxDigits = 6
+    digits = [(i**5, str(i)) for i in range(10)]
+    accum = 0
+    for ndigs in combinations_with_replacement(digits, maxDigits):
+        digPowers, digChars = zip(*ndigs)
+        n = sum(digPowers)
+        if n <= 1: continue
+        if ''.join(sorted(str(n))).lstrip('0') == ''.join(digChars).lstrip('0'):
+            accum += n
+    return accum
+
+if __name__ == '__main__':
+    print solve()

@@ -18,6 +18,8 @@
 
 from collections import defaultdict
 
+__tags__ = ['iterated functions', 'digits', 'sum of function of digits']
+
 def digits(n):
     ds = []
     while n > 0:
@@ -26,22 +28,26 @@ def digits(n):
     ds.sort()
     return tuple(ds)
 
-ones = set(map(digits, [44,32,13,10,1]))
+def solve():
+    ones = set(map(digits, [44,32,13,10,1]))
 
-eightyNines = defaultdict(set)
-for n in [85,89,145,42,20,4,16,37,58]:
-    eightyNines[digits(n)].add(n)
+    eightyNines = defaultdict(set)
+    for n in [85,89,145,42,20,4,16,37,58]:
+        eightyNines[digits(n)].add(n)
 
-for i in xrange(2,10000000):
-    j = digits(i)
-    chain = [(j,i)]
-    while j not in ones and j not in eightyNines:
-        i = sum(d*d for d in j)
+    for i in xrange(2,10000000):
         j = digits(i)
-        chain.append((j,i))
-    if j in ones:
-        ones.update(x for x,_ in chain)
-    else:
-        for x,y in chain:
-            eightyNines[x].add(y)
-print sum(len(s) for s in eightyNines.itervalues())
+        chain = [(j,i)]
+        while j not in ones and j not in eightyNines:
+            i = sum(d*d for d in j)
+            j = digits(i)
+            chain.append((j,i))
+        if j in ones:
+            ones.update(x for x,_ in chain)
+        else:
+            for x,y in chain:
+                eightyNines[x].add(y)
+    return sum(len(s) for s in eightyNines.itervalues())
+
+if __name__ == '__main__':
+    print solve()

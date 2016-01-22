@@ -14,16 +14,23 @@ r"""Pandigital products
     HINT: Some products can be obtained in more than one way so be sure to only
     include it once in your sum."""
 
-from itertools import permutations  # requires Python v.2.6+
+from itertools import permutations
 
-def fromDigits(xs): return int(''.join(xs))
+__tags__ = ['digits', 'pandigital']
 
-products = set()
-for pandigital in permutations('123456789'):
-    (a,b,c) = map(fromDigits, (pandigital[:1], pandigital[1:5], pandigital[5:]))
-    if a * b == c:
-        products.add(c)
-    (a,b,c) = map(fromDigits, (pandigital[:2], pandigital[2:5], pandigital[5:]))
-    if a * b == c:
-        products.add(c)
-print sum(products)
+def fromDigits(xs):
+    return int(''.join(xs))
+
+def solve():
+    products = set()
+    for pan in permutations('123456789'):
+        (a,b,c) = map(fromDigits, (pan[:1], pan[1:5], pan[5:]))
+        if a * b == c:
+            products.add(c)
+        (a,b,c) = map(fromDigits, (pan[:2], pan[2:5], pan[5:]))
+        if a * b == c:
+            products.add(c)
+    return sum(products)
+
+if __name__ == '__main__':
+    print solve()

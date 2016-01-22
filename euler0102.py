@@ -23,23 +23,29 @@ r"""Triangle containment
 
 from __future__ import with_statement
 
-qty = 0
-with open('data/triangles.txt') as fp:
-    for line in fp:
-        ax, ay, bx, by, cx, cy = map(int, line.split(','))
-        a = (ax,ay)
-        b = (bx,by)
-        c = (cx,cy)
-        sign = 0
-        for (v1, v2) in ((a,b), (b,c), (c,a)):
-            q = (v1[0] - v2[0]) * v1[1] - (v1[1] - v2[1]) * v1[0]
-            # q = (v1-v2)×v1 • ⟨0,0,1⟩
-            if q != 0:
-                qsign = 1 if q > 0 else -1
-                if sign == 0:
-                    sign = qsign
-                elif sign != qsign:
-                    break
-        else:
-            qty += 1
-print qty
+__tags__ = ['geometry', 'triangles']
+
+def solve():
+    qty = 0
+    with open('data/triangles.txt') as fp:
+        for line in fp:
+            ax, ay, bx, by, cx, cy = map(int, line.split(','))
+            a = (ax,ay)
+            b = (bx,by)
+            c = (cx,cy)
+            sign = 0
+            for (v1, v2) in ((a,b), (b,c), (c,a)):
+                q = (v1[0] - v2[0]) * v1[1] - (v1[1] - v2[1]) * v1[0]
+                # q = (v1-v2)×v1 • ⟨0,0,1⟩
+                if q != 0:
+                    qsign = 1 if q > 0 else -1
+                    if sign == 0:
+                        sign = qsign
+                    elif sign != qsign:
+                        break
+            else:
+                qty += 1
+    return qty
+
+if __name__ == '__main__':
+    print solve()

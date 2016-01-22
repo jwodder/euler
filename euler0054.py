@@ -58,6 +58,8 @@
 from __future__  import with_statement
 from collections import defaultdict
 
+__tags__ = ['games']
+
 cardlist = '23456789TJQKA'
 cardRanks = dict((c,i) for (i,c) in enumerate(cardlist))
 
@@ -89,10 +91,14 @@ def rankHand(hand):
     else:
         return (0,) + byQtyRanks
 
-wins = 0
-with open('data/poker.txt') as fp:
-    for line in fp:
-        cards = line.split()
-        if rankHand(cards[:5]) > rankHand(cards[5:]):
-            wins += 1
-print wins
+def solve():
+    wins = 0
+    with open('data/poker.txt') as fp:
+        for line in fp:
+            cards = line.split()
+            if rankHand(cards[:5]) > rankHand(cards[5:]):
+                wins += 1
+    return wins
+
+if __name__ == '__main__':
+    print solve()

@@ -37,25 +37,33 @@ import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib            import modInverse
 from eulerlib.polynomial import Polynomial
 
-reverseOps = {
-    'D': Polynomial(0,3),
-    'U': Polynomial(Fraction(-1,2), Fraction(3,4)),
-    'd': Polynomial(Fraction(1,2), Fraction(3,2)),
-}
+__tags__ = ['integer sequences', 'Collatz conjecture', 'Collatz variants',
+            'minimization', 'iterated functions']
 
-seq = 'UDDDUdddDDUDDddDdDddDDUDDdUUDd'
-poly = reduce(lambda accum, op: reverseOps[op](accum), seq[::-1], Polynomial.X)
+def solve():
+    reverseOps = {
+        'D': Polynomial(0,3),
+        'U': Polynomial(Fraction(-1,2), Fraction(3,4)),
+        'd': Polynomial(Fraction(1,2), Fraction(3,2)),
+    }
 
-# The resulting polynomial is of the form $(a/b)x + c/b$.  (Note that the
-# denominators are equal.)  We then need to find the smallest $z > 10^{15}$
-# that is in the range of this polynomial, i.e., the smallest $z > 10^{15}$
-# such that its preimage $(z - c/b)(b/a) = (zb - c)/a$ is an integer, i.e.,
-# such that $a$ divides $zb - c$, i.e., such that $z$ is congruent to $cb^{-1}$
-# _modulo_ $a$.
+    seq = 'UDDDUdddDDUDDddDdDddDDUDDdUUDd'
+    poly = reduce(lambda accum, op: reverseOps[op](accum), seq[::-1],
+                  Polynomial.X)
 
-a = poly.coef(1).numerator
-b = poly.coef(1).denominator
-c = poly.coef(0).numerator
+    # The resulting polynomial is of the form $(a/b)x + c/b$.  (Note that the
+    # denominators are equal.)  We then need to find the smallest $z > 10^{15}$
+    # that is in the range of this polynomial, i.e., the smallest $z > 10^{15}$
+    # such that its preimage $(z - c/b)(b/a) = (zb - c)/a$ is an integer, i.e.,
+    # such that $a$ divides $zb - c$, i.e., such that $z$ is congruent to
+    # $cb^{-1}$ _modulo_ $a$.
 
-rem = (c * modInverse(b,a)) % a
-print (10**15 // a + (10**15 % a > rem)) * a + rem
+    a = poly.coef(1).numerator
+    b = poly.coef(1).denominator
+    c = poly.coef(0).numerator
+
+    rem = (c * modInverse(b,a)) % a
+    return (10**15 // a + (10**15 % a > rem)) * a + rem
+
+if __name__ == '__main__':
+    print solve()

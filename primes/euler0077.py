@@ -17,6 +17,9 @@ import bisect
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib import primeIter
 
+__tags__ = ['prime numbers', 'combinatorics', 'partitions', 'integer partition',
+            'partitions of unlabeled elements into unlabeled bins']
+
 cache = {}
 
 def primesums(n):
@@ -35,12 +38,16 @@ def primesums(n):
             return cache[(n,i)]
     return subp(n,n)
 
-bound = 1000
-primes = list(primeIter(bound=bound))
-n = 2
-while primesums(n) <= 5000:
-    n += 1
-    if n >= bound:
-        bound *= 10
-        primes = list(primeIter(bound=bound))
-print n
+def solve():
+    bound = 1000
+    primes = list(primeIter(bound=bound))
+    n = 2
+    while primesums(n) <= 5000:
+        n += 1
+        if n >= bound:
+            bound *= 10
+            primes = list(primeIter(bound=bound))
+    return n
+
+if __name__ == '__main__':
+    print solve()

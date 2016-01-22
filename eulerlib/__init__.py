@@ -64,8 +64,10 @@ def isPrime(n, presieve=True):
         x = len(thesieve) - 1
         x = x + 1 - x % 2
         while True:
-            if x * x >  n: return True
-            if n % x == 0: return False
+            if x * x >  n:
+                return True
+            if n % x == 0:
+                return False
             x += 2
 
 def factor(n, presieve=True):
@@ -107,14 +109,17 @@ def divisors(n=None, factors=None, presieve=True):
 
 def aliquot(n):
     """Sum of proper divisors of `n`"""
-    if n < 1: raise ValueError('argument must be positive')
+    if n < 1:
+        raise ValueError('argument must be positive')
     return product(itertools.starmap(sumPowers, factor(n))) - n
 
 def totient(n):
-    if n <= 0: raise ValueError('n must be positive')
+    if n <= 0:
+        raise ValueError('n must be positive')
     return product(p**(k-1) * (p-1) for (p,k) in factor(n))
 
-def product(xs): return reduce(operator.mul, xs, 1)
+def product(xs):
+    return reduce(operator.mul, xs, 1)
 
 def sumPowers(n,k):
     """Like ``sum(n**i for i in range(k+1))``, but more efficient.  `n` must be
@@ -149,8 +154,8 @@ def modInverse(a,n):
 
 def gcd(x,y):
     (a,b) = (abs(x), abs(y))
-    if   a == 0 and b == 0: return 0
-    elif a == 0 or  b == 0: return a or b
+    if a == 0 or b == 0:
+        return a or b
     while b != 0:
         (a,b) = (b, a % b)
     return a
@@ -165,7 +170,8 @@ def reduceFrac(x,y):
     d = gcd(x,y)
     return (0,0) if d == 0 else (x // d, y // d)
 
-def factorial(n): return product(xrange(2,n+1))
+def factorial(n):
+    return product(xrange(2,n+1))
 
 def nPr(n,r):
     if 0 <= r <= n:
@@ -241,9 +247,12 @@ def intSqrt(n):
     """Returns the floor of the square root of an integral value _exactly_.
        Based on
        <http://www.haskell.org/haskellwiki/Generic_number_type#squareRoot>."""
-    if n < 0: raise ValueError('negative argument')
-    elif n == 0: return 0
-    elif n == 1: return 1
+    if n < 0:
+        raise ValueError('negative argument')
+    elif n == 0:
+        return 0
+    elif n == 1:
+        return 1
     else:
         (a,b) = (1,2)
         while n >= b*b:

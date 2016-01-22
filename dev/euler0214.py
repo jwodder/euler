@@ -27,9 +27,10 @@ r"""Totient Chains
     length 25?"""
 
 import itertools
-import sys
-sys.path.insert(1, sys.path[0] + '/..')
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, totient
+
+__tags__ = ['iterated functions', 'prime numbers', 'totient function']
 
 def length25(p):
     x = p-1
@@ -39,4 +40,8 @@ def length25(p):
         i += 1
     return i == 25
 
-print sum(itertools.ifilter(length25, primeIter(bound=40000000)))
+def solve():
+    return sum(itertools.ifilter(length25, primeIter(bound=40000000)))
+
+if __name__ == '__main__':
+    print solve()

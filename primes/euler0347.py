@@ -20,6 +20,8 @@ r"""Largest integer divisible by two primes
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter
 
+__tags__ = ['maximization', 'prime numbers', 'divisibility']
+
 n = 10000000
 
 def powers(p,n):
@@ -34,9 +36,14 @@ def last(seq):
         lastval = x
     return x
 
-accum = 0
-for p in primeIter(bound=n//2):
-    ppows = list(powers(p,n))
-    for q in primeIter(bound=min(p-1,n//p)):
-        accum += max(pk * last(powers(q, n//pk)) for pk in ppows if q <= n//pk)
-print accum
+def solve():
+    accum = 0
+    for p in primeIter(bound=n//2):
+        ppows = list(powers(p,n))
+        for q in primeIter(bound=min(p-1,n//p)):
+            accum += max(pk * last(powers(q, n//pk))
+                         for pk in ppows if q <= n//pk)
+    return accum
+
+if __name__ == '__main__':
+    print solve()

@@ -35,11 +35,17 @@ r"""Totient maximum
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter
 
-n = 1
-for p in primeIter(bound=1000):
-    np = n * p
-    if np <= 1000000:
-        n = np
-    else:
-        break
-print n
+__tags__ = ['maximization', 'totient function']
+
+def solve():
+    n = 1
+    for p in primeIter(bound=1000):
+        np = n * p
+        if np <= 1000000:
+            n = np
+        else:
+            break
+    return n
+
+if __name__ == '__main__':
+    print solve()

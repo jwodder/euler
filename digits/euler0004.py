@@ -13,6 +13,8 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import generateAsc
 
+__tags__ = ['digits', 'palindromic number', 'maximization']
+
 class Node(object):
     def __init__(self, x, y):
         self.x = x
@@ -29,8 +31,11 @@ class Node(object):
             yield Node(self.x, self.y-1)
 
 
-for node in generateAsc([Node(990, 999)], Node.mknext):
-    ns = str(node.x * node.y)
-    if ns == ns[::-1]:
-        print ns
-        break
+def solve():
+    for node in generateAsc([Node(990, 999)], Node.mknext):
+        ns = str(node.x * node.y)
+        if ns == ns[::-1]:
+            return ns
+
+if __name__ == '__main__':
+    print solve()

@@ -12,6 +12,8 @@
    contains 20 letters.  The use of "and" when writing out numbers is in
    compliance with British usage."""
 
+__tags__ = ['text', 'English']
+
 lengths = [0] * 1000
 lengths[0] = len('one')
 lengths[1] = len('two')
@@ -60,4 +62,8 @@ def numberLength(n):
                 lengths[n-1] += lengths[thousands-1] + len('thousand')
     return lengths[n-1]
 
-print sum(numberLength(i) for i in xrange(1, 1001))
+def solve():
+    return sum(numberLength(i) for i in xrange(1, 1001))
+
+if __name__ == '__main__':
+    print solve()

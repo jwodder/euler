@@ -17,6 +17,8 @@ r"""(prime-k) factorial
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, modInverse
 
+__tags__ = ['prime numbers', 'factorial', 'modular arithmetic']
+
 # By Wilson's theorem, $(p-1)!\equiv -1\pmod{p}$.  Therefore (denoting the
 # multiplicative inverse of $n$ _modulo_ $p$ as $n'$):
 #
@@ -33,7 +35,11 @@ def S(p):
     inv4 = modInverse(-4, p)
     return (inv2 * (1 + inv3 * (1 + inv4))) % p
 
-piter = primeIter(bound=10**8)
-piter.next()
-piter.next()
-print sum(S(p) for p in piter)
+def solve():
+    piter = primeIter(bound=10**8)
+    next(piter)
+    next(piter)
+    return sum(S(p) for p in piter)
+
+if __name__ == '__main__':
+    print solve()

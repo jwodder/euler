@@ -14,25 +14,28 @@
 
 # The answer must therefore be of the form 1_______30 or 1_______70.
 
-#from   math import sqrt, ceil
 import re
+
+__tags__ = ['digits']
 
 target = re.compile('^1.2.3.4.5.6.7.8.9.0$')
 
-i = 1010101030
-while i < 1389026623:
-    if target.search(str(i*i)):
-        print i
-        break
-    i += 40
-    s = str(i*i)
-    if target.search(s):
-        print i
-        break
-    # This attempt at skipping impossible candidates just ends up slowing
-    # things down:
-    #if s[2] > '2':
-        #i = int(ceil(sqrt(1e18 + (int(s[1]) + 1) * 1e17)))
-        #i += 30 - i % 100
-    #else:
-    i += 60
+def solve():
+    i = 1010101030
+    while i < 1389026623:
+        if target.search(str(i*i)):
+            return i
+        i += 40
+        s = str(i*i)
+        if target.search(s):
+            return i
+        # This attempt at skipping impossible candidates just ends up slowing
+        # things down:
+        #if s[2] > '2':
+        #    i = int(ceil(sqrt(1e18 + (int(s[1]) + 1) * 1e17)))
+        #    i += 30 - i % 100
+        #else:
+        i += 60
+
+if __name__ == '__main__':
+    print solve()

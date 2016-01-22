@@ -15,19 +15,22 @@
 
 from   collections import defaultdict
 from   itertools   import dropwhile
-import sys
-sys.path.insert(1, sys.path[0] + '/..')
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib    import primeIter
 
-primePerms = defaultdict(list)
-for p in dropwhile(lambda n: n<1000, primeIter(bound=10000)):
-    primePerms[''.join(sorted(str(p)))].append(p)
+__tags__ = ['arithmetic sequence', 'prime numbers', 'digit permutation']
 
-for perms in primePerms.itervalues():
-    if len(perms) >= 3 and 1487 not in perms:
-        for i,p1 in enumerate(perms[:-2]):
-            for j,p2 in enumerate(perms[i+1:-1]):
-                p3 = p2 + p2 - p1
-                if p3 in perms[j+i+2:]:
-                    print '%d%d%d' % (p1, p2, p3)
-                    sys.exit()
+def solve():
+    primePerms = defaultdict(list)
+    for p in dropwhile(lambda n: n<1000, primeIter(bound=10000)):
+        primePerms[''.join(sorted(str(p)))].append(p)
+    for perms in primePerms.itervalues():
+        if len(perms) >= 3 and 1487 not in perms:
+            for i,p1 in enumerate(perms[:-2]):
+                for j,p2 in enumerate(perms[i+1:-1]):
+                    p3 = p2 + p2 - p1
+                    if p3 in perms[j+i+2:]:
+                        return '%d%d%d' % (p1, p2, p3)
+
+if __name__ == '__main__':
+    print solve()

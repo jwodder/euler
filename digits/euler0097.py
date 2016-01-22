@@ -11,18 +11,26 @@
 
    Find the last ten digits of this prime number."""
 
+__tags__ = ['prime numbers', 'digits', 'last n digits']
+
 base = 10**10
 exp = 7830457
-a = 2
-i=1
-while not (exp & i):
-    a = (a*a) % base
-    i <<= 1
-b = a
-i <<= 1
-a = (a*a) % base
-while i <= exp:
-    if exp & i: b = (b*a) % base
+
+def solve():
+    a = 2
+    i=1
+    while not (exp & i):
+        a = (a*a) % base
+        i <<= 1
+    b = a
     i <<= 1
     a = (a*a) % base
-print '%010d' % ((28433 * b + 1) % base,)
+    while i <= exp:
+        if exp & i:
+            b = (b*a) % base
+        i <<= 1
+        a = (a*a) % base
+    return '%010d' % ((28433 * b + 1) % base,)
+
+if __name__ == '__main__':
+    print solve()

@@ -25,14 +25,20 @@ r"""Singular integer right triangles
 from math     import ceil, sqrt
 from eulerlib import gcd
 
+__tags__ = ['Pythagorean triples', 'Diophantine equation']
+
 bound = 1500000
 
-qtys = [0] * (bound+1)
-for m in xrange(2, int(ceil((sqrt(1+2*bound) - 1)/2))+1):
-    for n in xrange(2 - (m+1)%2, m, 2):
-        if gcd(m,n) != 1: continue
-        perim = 2*m*(m+n)
-        if perim > bound: break
-        for x in xrange(perim, bound+1, perim):
-            qtys[x] += 1
-print sum(1 for q in qtys if q == 1)
+def solve():
+    qtys = [0] * (bound+1)
+    for m in xrange(2, int(ceil((sqrt(1+2*bound) - 1)/2))+1):
+        for n in xrange(2 - (m+1)%2, m, 2):
+            if gcd(m,n) != 1: continue
+            perim = 2*m*(m+n)
+            if perim > bound: break
+            for x in xrange(perim, bound+1, perim):
+                qtys[x] += 1
+    return sum(1 for q in qtys if q == 1)
+
+if __name__ == '__main__':
+    print solve()

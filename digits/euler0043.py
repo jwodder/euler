@@ -18,9 +18,12 @@
 
    Find the sum of all 0 to 9 pandigital numbers with this property."""
 
-from itertools import permutations  # requires Python v.2.6+
+from itertools import permutations
 
-def insert(tup, i, d): return tup[:i] + (d,) + tup[i:]
+__tags__ = ['digits', 'pandigital', 'divisibility']
+
+def insert(tup, i, d):
+    return tup[:i] + (d,) + tup[i:]
 
 def potentials():
     for digits in permutations('12346789'):
@@ -39,14 +42,18 @@ def potentials():
                 digits2 = insert(digits, i, '5')
                 yield ''.join(insert(digits2, 5, '0'))
 
-accum = 0
-for pandigital in potentials():
-    #if pandigital[0] == '0': continue
-    #if pandigital[3] not in '02468' or pandigital[5] not in '05': continue
-    if int(pandigital[2:5]) % 3 == 0 \
-        and int(pandigital[4:7]) % 7 == 0 \
-        and int(pandigital[5:8]) % 11 == 0 \
-        and int(pandigital[6:9]) % 13 == 0 \
-        and int(pandigital[7:10]) % 17 == 0:
-        accum += int(pandigital)
-print accum
+def solve():
+    accum = 0
+    for pandigital in potentials():
+        #if pandigital[0] == '0': continue
+        #if pandigital[3] not in '02468' or pandigital[5] not in '05': continue
+        if int(pandigital[2:5]) % 3 == 0 \
+                and int(pandigital[4:7]) % 7 == 0 \
+                and int(pandigital[5:8]) % 11 == 0 \
+                and int(pandigital[6:9]) % 13 == 0 \
+                and int(pandigital[7:10]) % 17 == 0:
+            accum += int(pandigital)
+    return accum
+
+if __name__ == '__main__':
+    print solve()

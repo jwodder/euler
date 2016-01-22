@@ -12,14 +12,18 @@
    sums of the first one hundred decimal digits for all the irrational square
    roots."""
 
+__tags__ = ['square root', 'sum of digits']
+
 def sqrtStr(n, digits=100):
     """Calculates the square root of an integer `n` as a string of at most
        `digits` digits (possibly containing a decimal point).
 
        Based on <http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Digit-by-digit_calculation>"""
-    if n < 0: raise ValueError('negative argument')
+    if n < 0:
+        raise ValueError('negative argument')
     nstr = str(n)
-    if len(nstr) % 2 == 1: nstr = '0' + nstr
+    if len(nstr) % 2 == 1:
+        nstr = '0' + nstr
     dpairs = [int(nstr[i:i+2]) for i in range(0, len(nstr), 2)]
     s = ''
     p = 0
@@ -36,16 +40,22 @@ def sqrtStr(n, digits=100):
         c = c * 100 + leading
         for x in xrange(9, -1, -1):
             y = x * (20 * p + x)
-            if y <= c: break
+            if y <= c:
+                break
         p = p * 10 + x
         s += str(x)
         c -= y
-        if c == 0 and not dpairs: return s
+        if c == 0 and not dpairs:
+            return s
     return s
 
-accum = 0
-for n in xrange(1, 101):
-    root = sqrtStr(n)
-    if '.' in root:
-        accum += sum(int(c) for c in root if c != '.')
-print accum
+def solve():
+    accum = 0
+    for n in xrange(1, 101):
+        root = sqrtStr(n)
+        if '.' in root:
+            accum += sum(int(c) for c in root if c != '.')
+    return accum
+
+if __name__ == '__main__':
+    print solve()

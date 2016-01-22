@@ -6,10 +6,16 @@
 
    Find the sum of all the multiples of 3 or 5 below 1000."""
 
+__tags__ = ['divisibility']
+
 n = 1000
 
 def sum_of_mul(a,n):
     m = (n-1) // a
     return a * m * (m+1) // 2
 
-print sum_of_mul(3,n) + sum_of_mul(5,n) - sum_of_mul(15,n)
+def solve():
+    return sum_of_mul(3,n) + sum_of_mul(5,n) - sum_of_mul(15,n)
+
+if __name__ == '__main__':
+    print solve()

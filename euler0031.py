@@ -14,6 +14,9 @@ r"""Coin sums
 
     How many different ways can £2 be made using any number of coins?"""
 
+__tags__ = ['combinatorics', 'partitions', 'integer partition',
+            'partitions of unlabeled elements into unlabeled bins']
+
 def coinings(amount, coins):
     """Returns the number of ways to make `amount` pence using only the
        denominations in the (descending) list `coins`"""
@@ -29,4 +32,8 @@ def coinings(amount, coins):
         return sum(coinings(amount-x, coins[1:])
                    for x in range(0, amount+1, coins[0]))
 
-print coinings(200, [200, 100, 50, 20, 10, 5, 2, 1])
+def solve():
+    return coinings(200, [200, 100, 50, 20, 10, 5, 2, 1])
+
+if __name__ == '__main__':
+    print solve()

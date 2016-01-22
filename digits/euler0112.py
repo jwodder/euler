@@ -22,23 +22,27 @@
 
 import itertools
 
-bounceless = 2178
-n = 21780
+__tags__ = ['digits', 'bouncy number']
 
-while bounceless * 100 > n:
-    n += 1
-    nstr = [c for c,_ in itertools.groupby(str(n))]
-    if len(nstr) == 1:
-        bounceless += 1
-    else:
-        asc = nstr[0] < nstr[1]
-        c = nstr[1]
-        for d in nstr[2:]:
-            if (asc and c > d) or (not asc and c < d):
-                break
-            else:
-                c = d
-        else:
+def solve():
+    bounceless = 2178
+    n = 21780
+    while bounceless * 100 > n:
+        n += 1
+        nstr = [c for c,_ in itertools.groupby(str(n))]
+        if len(nstr) == 1:
             bounceless += 1
+        else:
+            asc = nstr[0] < nstr[1]
+            c = nstr[1]
+            for d in nstr[2:]:
+                if (asc and c > d) or (not asc and c < d):
+                    break
+                else:
+                    c = d
+            else:
+                bounceless += 1
+    return n
 
-print n
+if __name__ == '__main__':
+    print solve()

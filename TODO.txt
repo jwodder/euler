@@ -39,3 +39,8 @@ Code to focus on improving:
   c_k, \ldots)$ in ascending order
  - Also add a keyword argument for the other direction
  - Write a similar version for the likes of euler0124.py
+- Make euler0008.py, euler0011.py, and euler0018.py parse their docstrings for
+  their data instead of writing it twice
+- Derive an explicit formula for the elements of the diagonals of the number
+  spiral in euler0028.py and euler0058.py
+- Derive explicit formulas for euler0173.py and euler0174.py

@@ -39,7 +39,7 @@
    the top left corner of each solution grid; for example, 483 is the 3-digit
    number found in the top left corner of the solution grid above."""
 
-from __future__ import with_statement
+__tags__ = ['Sudoku']
 
 def solveSudoku(puzzle):   # `puzzle` must be a 9x9 2D list of ints.
     obstruct = [[0] * 9 for _ in xrange(9)]
@@ -101,14 +101,18 @@ def solveSudoku(puzzle):   # `puzzle` must be a 9x9 2D list of ints.
             j += 1
         i += 1
 
-accum = 0
-with open('data/sudoku.txt') as fp:
-    for _ in xrange(50):
-        print fp.readline().strip()
-        grid = [map(int, fp.readline().strip()) for _ in xrange(9)]
-        solveSudoku(grid)
-        for row in grid:
-            print ''.join(str(i) for i in row)
-        print
-        accum += grid[0][0] * 100 + grid[0][1] * 10 + grid[0][2]
-print accum
+def solve():
+    accum = 0
+    with open('data/sudoku.txt') as fp:
+        for _ in xrange(50):
+            print fp.readline().strip()
+            grid = [map(int, fp.readline().strip()) for _ in xrange(9)]
+            solveSudoku(grid)
+            for row in grid:
+                print ''.join(str(i) for i in row)
+            print
+            accum += grid[0][0] * 100 + grid[0][1] * 10 + grid[0][2]
+    return accum
+
+if __name__ == '__main__':
+    print solve()

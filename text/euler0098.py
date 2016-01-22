@@ -24,25 +24,30 @@ from string      import digits, maketrans
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib    import isPerfectSquare
 
-with open('../data/words.txt') as fp:
-    words = fp.read().strip('"').split('","')
+__tags__ = ['digits', 'perfect square', 'permutation', 'digit permutation',
+            'text']
 
-anagrams = defaultdict(list)
-for w in words:
-    anagrams[''.join(sorted(w))].append(w)
+def solve():
+    with open('../data/words.txt') as fp:
+        words = fp.read().strip('"').split('","')
+    anagrams = defaultdict(list)
+    for w in words:
+        anagrams[''.join(sorted(w))].append(w)
+    maxval = 0
+    for (letters, vals) in anagrams.iteritems():
+        letters = ''.join(c for c,_ in groupby(letters))
+        for word1, word2 in combinations(vals, 2):
+            for assignment in permutations(digits, len(letters)):
+                tbl = maketrans(letters, ''.join(assignment))
+                int1 = word1.translate(tbl)
+                int2 = word2.translate(tbl)
+                if int1[0] == '0' or int2[0] == '0':
+                    continue
+                int1 = int(int1)
+                int2 = int(int2)
+                if isPerfectSquare(int1) and isPerfectSquare(int2):
+                    maxval = max(maxval, int1, int2)
+    return maxval
 
-maxval = 0
-for (letters, vals) in anagrams.iteritems():
-    letters = ''.join(c for c,_ in groupby(letters))
-    for word1, word2 in combinations(vals, 2):
-        for assignment in permutations(digits, len(letters)):
-            tbl = maketrans(letters, ''.join(assignment))
-            int1 = word1.translate(tbl)
-            int2 = word2.translate(tbl)
-            if int1[0] == '0' or int2[0] == '0':
-                continue
-            int1 = int(int1)
-            int2 = int(int2)
-            if isPerfectSquare(int1) and isPerfectSquare(int2):
-                maxval = max(maxval, int1, int2)
-print maxval
+if __name__ == '__main__':
+    print solve()

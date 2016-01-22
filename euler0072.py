@@ -16,5 +16,12 @@ r"""Counting fractions
     for $d\leq 1,000,000$?"""
 
 from eulerlib import totient, sieve
-sieve(1000000)
-print sum(totient(n) for n in xrange(2, 1000001))
+
+__tags__ = ['fractions']
+
+def solve():
+    sieve(1000000)
+    return sum(totient(n) for n in xrange(2, 1000001))
+
+if __name__ == '__main__':
+    print solve()

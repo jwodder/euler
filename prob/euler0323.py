@@ -21,6 +21,8 @@ r"""Bitwise-OR operations on random integers
 from fractions import Fraction
 from eulerlib  import sprintFFraction
 
+__tags__ = ['probability', 'expected value']
+
 def pascalRow(n):
     c = 1
     yield c
@@ -28,9 +30,12 @@ def pascalRow(n):
         c = c * (n-r) // (r+1)
         yield c
 
-E = [Fraction(0)] + [None] * 32
-for n in xrange(1, 33):
-    E[n] = (1 + sum(nCi * (1+E[i]) for i,nCi in zip(range(n), pascalRow(n)))) \
-            / ((1 << n) - 1)
+def solve():
+    E = [Fraction(0)] + [None] * 32
+    for n in xrange(1, 33):
+        E[n] = (1 + sum(nCi*(1+E[i]) for i,nCi in zip(range(n), pascalRow(n))))\
+                / ((1 << n) - 1)
+    return sprintFFraction(10, E[32].numerator, E[32].denominator)
 
-print sprintFFraction(10, E[32].numerator, E[32].denominator)
+if __name__ == '__main__':
+    print solve()

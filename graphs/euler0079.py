@@ -15,22 +15,26 @@
 # Assume that no character is repeated in the passcode (which turns out to be
 # correct)
 
-from __future__  import with_statement
 from collections import defaultdict
 
-befores = defaultdict(set)
-afters  = defaultdict(set)
-allvals = set()
+__tags__ = ['graph theory']
 
-with open('../data/keylog.txt') as fp:
-    for line in fp:
-        a,b,c = line.strip()
-        allvals.update([a,b,c])
-        for x,y in ((a,b), (a,c), (b,c)):
-            afters[x].add(y)
-            for w in befores[x]:
-                afters[w].add(y)
-            befores[y].add(x)
-            for z in afters[y]:
-                befores[z].add(x)
-print ''.join(sorted(allvals, key=lambda c: befores[c]))
+def solve():
+    befores = defaultdict(set)
+    afters  = defaultdict(set)
+    allvals = set()
+    with open('../data/keylog.txt') as fp:
+        for line in fp:
+            a,b,c = line.strip()
+            allvals.update([a,b,c])
+            for x,y in ((a,b), (a,c), (b,c)):
+                afters[x].add(y)
+                for w in befores[x]:
+                    afters[w].add(y)
+                befores[y].add(x)
+                for z in afters[y]:
+                    befores[z].add(x)
+    return ''.join(sorted(allvals, key=lambda c: befores[c]))
+
+if __name__ == '__main__':
+    print solve()

@@ -12,4 +12,10 @@ r"""Factorial digit sum
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import factorial
 
-print sum(int(c) for c in str(factorial(100)))
+__tags__ = ['digits', 'sum of digits', 'factorial']
+
+def solve():
+    return sum(int(c) for c in str(factorial(100)))
+
+if __name__ == '__main__':
+    print solve()

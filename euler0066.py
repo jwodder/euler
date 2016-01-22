@@ -30,6 +30,8 @@ from __future__ import division
 from math       import sqrt, floor
 from eulerlib   import convergents
 
+__tags__ = ["Pell's equation", 'maximization', 'quadratic equations']
+
 def sqrtCF(d):
     """Returns the simple continued fraction representation of ``sqrt(d)``"""
     sqrtD = sqrt(d)
@@ -43,15 +45,19 @@ def sqrtCF(d):
 
 squares = set(i*i for i in range(32))  # all perfect squares <= 1000
 
-maxX = 0
-maxD = 0
-for d in xrange(2, 1001):
-    if d in squares:
-        continue
-    for (x,y) in convergents(sqrtCF(d)):
-        if x*x - d * y * y == 1:
-            if x > maxX:
-                maxX = x
-                maxD = d
-            break
-print maxD
+def solve():
+    maxX = 0
+    maxD = 0
+    for d in xrange(2, 1001):
+        if d in squares:
+            continue
+        for (x,y) in convergents(sqrtCF(d)):
+            if x*x - d * y * y == 1:
+                if x > maxX:
+                    maxX = x
+                    maxD = d
+                break
+    return maxD
+
+if __name__ == '__main__':
+    print solve()

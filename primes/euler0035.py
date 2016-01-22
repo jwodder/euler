@@ -12,13 +12,18 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import sieve, isPrime
 
-sieve(1000)
+__tags__ = ['prime numbers', 'digits']
 
-qty = 2  # 2 and 5
-for p in xrange(3, 1000000, 2):
-    pstr = str(p)
-    if all(c in '1379' for c in pstr) and isPrime(p, presieve=False) \
-        and all(isPrime(int(pstr[i:] + pstr[:i]), presieve=False)
-                for i in range(1, len(pstr))):
-        qty += 1
-print qty
+def solve():
+    sieve(1000)
+    qty = 2  # 2 and 5
+    for p in xrange(3, 1000000, 2):
+        pstr = str(p)
+        if all(c in '1379' for c in pstr) and isPrime(p, presieve=False) \
+            and all(isPrime(int(pstr[i:] + pstr[:i]), presieve=False)
+                    for i in range(1, len(pstr))):
+            qty += 1
+    return qty
+
+if __name__ == '__main__':
+    print solve()

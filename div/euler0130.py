@@ -22,6 +22,8 @@ from itertools import count, islice
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib  import isPrime, sieve
 
+__tags__ = ['divisibility', 'repunit']
+
 def A(n):
     k = 1
     rk_n = 1
@@ -35,5 +37,9 @@ def answers():
         if n % 2 and n % 5 and (n-1) % A(n) == 0 and not isPrime(n):
             yield n
 
-sieve(10**6)  # just a guess
-print sum(islice(answers(), 25))
+def solve():
+    sieve(10**6)  # just a guess
+    return sum(islice(answers(), 25))
+
+if __name__ == '__main__':
+    print solve()

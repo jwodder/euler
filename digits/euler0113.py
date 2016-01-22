@@ -19,6 +19,8 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import memoize
 
+__tags__ = ['digits', 'bouncy number']
+
 @memoize
 def partit(n,g):
     """Returns the number of possible partitions of `n` unlabelled objects into
@@ -32,15 +34,19 @@ def partit(n,g):
     else:
         return sum(partit(n-i, g-1) for i in xrange(n+1))
 
-qty = 0
-maxDigits = 100
-for digits in xrange(1, maxDigits+1):
-    p = partit(digits, 9)
-    qty += p + (p - 9) + p * (maxDigits - digits)
-    # - `p` increasing numbers with `digits` digits
-    # - `p` decreasing numbers with `digits` digits and no trailing zeroes
-    # - 9 `digits`-digit numbers that are both increasing and decreasing
-    # - `p * (maxDigits - digits)` decreasing numbers with at most `maxDigits`
-    #   digits, `digits` leading nonzero digits, and at least one trailing zero
-    #   digit
-print qty
+def solve():
+    qty = 0
+    maxDigits = 100
+    for digits in xrange(1, maxDigits+1):
+        p = partit(digits, 9)
+        qty += p + (p - 9) + p * (maxDigits - digits)
+        # - `p` increasing numbers with `digits` digits
+        # - `p` decreasing numbers with `digits` digits and no trailing zeroes
+        # - 9 `digits`-digit numbers that are both increasing and decreasing
+        # - `p * (maxDigits - digits)` decreasing numbers with at most
+        #   `maxDigits` digits, `digits` leading nonzero digits, and at least
+        #   one trailing zero digit
+    return qty
+
+if __name__ == '__main__':
+    print solve()

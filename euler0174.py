@@ -27,14 +27,21 @@ r"""Counting the number of "hollow" square laminae that can form one, two,
 
     What is $\sum N(n)$ for $1\leq n\leq 10$?"""
 
-maxTiles = 1000000
-qtys = [0] * (maxTiles + 1)
-for i in xrange(2, maxTiles//4 + 1):
-    used = i*4
-    outer = i
-    qtys[used] += 1
-    while used + (outer+2)*4 <= maxTiles:
-        outer += 2
-        used += outer*4
+__tags__ = ['integer sequences', 'arithmetic sequence', 'partial sums',
+            'integer partition']
+
+def solve():
+    maxTiles = 1000000
+    qtys = [0] * (maxTiles + 1)
+    for i in xrange(2, maxTiles//4 + 1):
+        used = i*4
+        outer = i
         qtys[used] += 1
-print sum(1 for x in qtys if 1 <= x <= 10)
+        while used + (outer+2)*4 <= maxTiles:
+            outer += 2
+            used += outer*4
+            qtys[used] += 1
+    return sum(1 for x in qtys if 1 <= x <= 10)
+
+if __name__ == '__main__':
+    print solve()

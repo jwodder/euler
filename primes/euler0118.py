@@ -12,7 +12,8 @@ from itertools import ifilter, permutations, imap
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib  import sieve, isPrime, subsets
 
-sieve(10**8)  # A 9-pandigital cannot be prime.
+__tags__ = ['prime numbers', 'digits', 'permutation', 'digit permutation',
+            'partitions of labeled elements into unlabeled bins']
 
 def primeSets(digits):
     if len(digits) == 0:
@@ -30,4 +31,9 @@ def primeSets(digits):
                 accum += arrangements * primeSets(igits.difference(ds))
         return accum
 
-print primeSets(set("123456789"))
+def solve():
+    sieve(10**8)  # A 9-pandigital cannot be prime.
+    return primeSets(set("123456789"))
+
+if __name__ == '__main__':
+    print solve()

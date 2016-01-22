@@ -68,6 +68,8 @@ r"""Odd period square roots
 from __future__ import division
 from math       import sqrt, floor, ceil
 
+__tags__ = ['continued fractions', 'square root']
+
 def sqrtCF_PQ(d):
     """Returns the P and Q values used in the calculation of the simple
        continued fraction representation of ``sqrt(d)``"""
@@ -80,17 +82,21 @@ def sqrtCF_PQ(d):
         P = a * Q - P
         Q = (d - P*P) // Q  # It can be shown that Q evenly divides d - P*P
 
-squares = set(i*i for i in xrange(1, int(ceil(sqrt(10000)))))
+def solve():
+    squares = set(i*i for i in xrange(1, int(ceil(sqrt(10000)))))
+    qty = 0
+    for n in xrange(2, 10000):
+        if n in squares:
+            continue
+        pqs = sqrtCF_PQ(n)
+        pqs.next()
+        start = pqs.next()
+        i = 1
+        while start != pqs.next():
+            i += 1
+        if i % 2 == 1:
+            qty += 1
+    return qty
 
-qty = 0
-for n in xrange(2, 10000):
-    if n in squares: continue
-    pqs = sqrtCF_PQ(n)
-    pqs.next()
-    start = pqs.next()
-    i = 1
-    while start != pqs.next():
-        i += 1
-    if i % 2 == 1:
-        qty += 1
-print qty
+if __name__ == '__main__':
+    print solve()

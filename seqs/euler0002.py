@@ -9,9 +9,15 @@
    By considering the terms in the Fibonacci sequence whose values do not
    exceed four million, find the sum of the even-valued terms."""
 
-accum = 0
-(a,b) = (1,2)
-while b <= 4000000:
-    accum += b
-    (a,b) = (2*b+a, 3*b+2*a)
-print accum
+__tags__ = ['Fibonacci numbers']
+
+def solve():
+    accum = 0
+    (a,b) = (1,2)
+    while b <= 4000000:
+        accum += b
+        (a,b) = (2*b+a, 3*b+2*a)
+    return accum
+
+if __name__ == '__main__':
+    print solve()

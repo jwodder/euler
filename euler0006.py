@@ -15,5 +15,12 @@ r"""Sum square difference
     Find the difference between the sum of the squares of the first one hundred
     natural numbers and the square of the sum."""
 
+__tags__ = ['integer sequences', 'triangle numbers', 'perfect square']
+
 n = 100
-print (n*(n+1)//2)**2 - (n * (n+1) * (2*n + 1) // 6)
+
+def solve():
+    return (n*(n+1)//2)**2 - (n * (n+1) * (2*n + 1) // 6)
+
+if __name__ == '__main__':
+    print solve()

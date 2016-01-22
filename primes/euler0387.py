@@ -40,22 +40,28 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import sieve, isPrime
 
-sieve(10**7)
-new = [(d,d) for d in range(1, 10)]
-accum = 0
-for _ in xrange(12):
-    newer = []
-    for n,s in new:
-        for d in xrange(10):
-            n2 = n*10 + d
-            s2 = s + d
-            q,r = divmod(n2, s2)
-            if r == 0:
-                newer.append((n2, s2))
-                if isPrime(q, presieve=False):
-                    for e in [1,3,7,9]:
-                        m = n2 * 10 + e
-                        if isPrime(m, presieve=False):
-                            accum += m
-    new = newer
-print accum
+__tags__ = ['digits', 'sum of digits', 'divisibility', 'prime numbers']
+
+def solve():
+    sieve(10**7)
+    new = [(d,d) for d in range(1, 10)]
+    accum = 0
+    for _ in xrange(12):
+        newer = []
+        for n,s in new:
+            for d in xrange(10):
+                n2 = n*10 + d
+                s2 = s + d
+                q,r = divmod(n2, s2)
+                if r == 0:
+                    newer.append((n2, s2))
+                    if isPrime(q, presieve=False):
+                        for e in [1,3,7,9]:
+                            m = n2 * 10 + e
+                            if isPrime(m, presieve=False):
+                                accum += m
+        new = newer
+    return accum
+
+if __name__ == '__main__':
+    print solve()

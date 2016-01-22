@@ -16,17 +16,22 @@ r"""Prime pair connection
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import modInverse, allprimes
 
-piter = allprimes()
-piter.next()
-piter.next()
-p1 = piter.next()
-p2 = piter.next()
-nextMag = 10
+__tags__ = ['prime numbers', 'digits', 'divisibility']
 
-accum = 0
-while p1 <= 1000000:
-    while nextMag < p1:
-        nextMag *= 10
-    accum += p1 + nextMag * ((p2 - p1) * modInverse(nextMag, p2) % p2)
-    (p1, p2) = (p2, piter.next())
-print accum
+def solve():
+    piter = allprimes()
+    next(piter)
+    next(piter)
+    p1 = next(piter)
+    p2 = next(piter)
+    nextMag = 10
+    accum = 0
+    while p1 <= 1000000:
+        while nextMag < p1:
+            nextMag *= 10
+        accum += p1 + nextMag * ((p2 - p1) * modInverse(nextMag, p2) % p2)
+        (p1, p2) = (p2, next(piter))
+    return accum
+
+if __name__ == '__main__':
+    print solve()

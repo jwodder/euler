@@ -28,9 +28,7 @@ from   fractions import Fraction
 import operator
 from   eulerlib  import sieve, isPrime
 
-sieve(500)
-P = [Fraction(2 if isPrime(i) else 1, 3) for i in xrange(1, 501)]
-N = [1 - p for p in P]
+__tags__ = ['prime numbers', 'probability']
 
 def jump(state):
     state2 = map(operator.add, [p/2 for p in state[1:]] + [0],
@@ -39,7 +37,14 @@ def jump(state):
     state2[-2] += state[-1]/2
     return state2
 
-state = [Fraction(1, 500)] * 500
-for primal in [P if c == 'P' else N for c in 'PPPPNNPPPNPPNPN']:
-    state = jump(map(operator.mul, state, primal))
-print sum(state)
+def solve():
+    sieve(500)
+    P = [Fraction(2 if isPrime(i) else 1, 3) for i in xrange(1, 501)]
+    N = [1 - p for p in P]
+    state = [Fraction(1, 500)] * 500
+    for primal in [P if c == 'P' else N for c in 'PPPPNNPPPNPPNPN']:
+        state = jump(map(operator.mul, state, primal))
+    return sum(state)
+
+if __name__ == '__main__':
+    print solve()

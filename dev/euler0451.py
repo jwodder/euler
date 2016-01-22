@@ -1,5 +1,4 @@
-import sys
-sys.path.insert(1, sys.path[0] + '/..')
+import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import factor, modInverse, cross, sieve
 
 def I(n):

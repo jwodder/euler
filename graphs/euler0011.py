@@ -54,6 +54,8 @@ grid = [[ 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8],
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import product
 
+__tags__ = ['maximization']
+
 N = 4
 
 def seqmax(seq):
@@ -84,4 +86,8 @@ def sequences():
     for y0 in range(N-1, size):
         yield [grid[y0-x][x] for x in range(0, y0)]
 
-print max(map(seqmax, sequences()))
+def solve():
+    return max(map(seqmax, sequences()))
+
+if __name__ == '__main__':
+    print solve()

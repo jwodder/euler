@@ -35,19 +35,25 @@
 from __future__ import division
 from math       import sqrt, floor, ceil
 
-n = 2000000
-bestDelta = n
-bestArea = 0
+__tags__ = ['optimization']
 
-# For widths beyond 2000, the number of subrectangles is always considerably
-# greater than two million.
-for w in xrange(1, 2001):
-    # For each W, the best H is the one that minimizes $|n - WH(W+1)(H+1)/4|$,
-    # i.e., the closest integer to $\sqrt{4n/W/(W+1)}$.
-    happrox = sqrt(4*n / w / (w+1))
-    for h in (int(floor(happrox)), int(ceil(happrox))):
-        rects = w * h * (w+1) * (h+1) // 4
-        if abs(n - rects) < bestDelta:
-            bestDelta = abs(n - rects)
-            bestArea = w*h
-print bestArea
+n = 2000000
+
+def solve():
+    bestDelta = n
+    bestArea = 0
+    # For widths beyond 2000, the number of subrectangles is always
+    # considerably greater than two million.
+    for w in xrange(1, 2001):
+        # For each W, the best H is the one that minimizes $|n -
+        # WH(W+1)(H+1)/4|$, i.e., the closest integer to $\sqrt{4n/W/(W+1)}$.
+        happrox = sqrt(4*n / w / (w+1))
+        for h in (int(floor(happrox)), int(ceil(happrox))):
+            rects = w * h * (w+1) * (h+1) // 4
+            if abs(n - rects) < bestDelta:
+                bestDelta = abs(n - rects)
+                bestArea = w*h
+    return bestArea
+
+if __name__ == '__main__':
+    print solve()

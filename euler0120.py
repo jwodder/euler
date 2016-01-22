@@ -9,6 +9,8 @@ r"""Square remainders
 
     For $3\leq a\leq 1000$, find $\sum r_{\max}$."""
 
+__tags__ = ['maximization', 'modular arithmetic']
+
 # Basic algebra shows that $(a-1)^n + (a+1)^n$ is congruent to $na(-1)^{n-1} +
 # (-1)^n + na + 1$ _modulo_ $a^2$.
 #  - When $n$ is even, this is equal to 2, which is never the maximum value for
@@ -18,5 +20,9 @@ r"""Square remainders
 #    is congruent to $2qa$ _modulo_ $a^2$; thus, the only values of $n$ that
 #    need to be inspected are those in $[0,a)$.
 
-print sum(max((2*q*a) % (a*a) for q in xrange(1, a, 1 if a%2 else 2))
-          for a in xrange(3, 1001))
+def solve():
+    return sum(max((2*q*a) % (a*a) for q in xrange(1, a, 1 if a%2 else 2))
+               for a in xrange(3, 1001))
+
+if __name__ == '__main__':
+    print solve()

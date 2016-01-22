@@ -14,4 +14,12 @@
    positive integers?"""
 
 from eulerlib import partitionNums, nth
-print nth(partitionNums(), 100) - 1
+
+__tags__ = ['partitions','partitions of unlabeled elements into unlabeled bins',
+            'integer partition']
+
+def solve():
+    return nth(partitionNums(), 100) - 1
+
+if __name__ == '__main__':
+    print solve()

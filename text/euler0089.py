@@ -32,19 +32,23 @@
    Note: You can assume that all the Roman numerals in the file contain no more
    than four consecutive identical units."""
 
-from __future__ import with_statement
+__tags__ = ['text']
 
-qty = 0
-with open('data/roman.txt') as fp:
-    for line in fp:
-        line = line.strip()
-        origLen = len(line)
-        for i,v,x in ('IVX', 'XLC', 'CDM'):
-            line = line.replace(i * 5, v)
-            line = line.replace(v + i * 4, i + x)
-            line = line.replace(i * 4, i + v)
-            line = line.replace(i + v + i, v)
-            line = line.replace(v * 2, x)
-            line = line.replace(i + x + i, x)
-        qty += origLen - len(line)
-print qty
+def solve():
+    qty = 0
+    with open('data/roman.txt') as fp:
+        for line in fp:
+            line = line.strip()
+            origLen = len(line)
+            for i,v,x in ('IVX', 'XLC', 'CDM'):
+                line = line.replace(i * 5, v)
+                line = line.replace(v + i * 4, i + x)
+                line = line.replace(i * 4, i + v)
+                line = line.replace(i + v + i, v)
+                line = line.replace(v * 2, x)
+                line = line.replace(i + x + i, x)
+            qty += origLen - len(line)
+    return qty
+
+if __name__ == '__main__':
+    print solve()

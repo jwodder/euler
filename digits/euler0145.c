@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 
+// __tags__ = ['digits']
+
 int main(void) {
  int qty = 120;
  for (int n=1000; n < 1000000000; n++) {

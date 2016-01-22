@@ -17,6 +17,8 @@ r"""Crack-free Walls
 
     Calculate $W(32,10)$."""
 
+__tags__ = ['graph traversal', 'partitions', 'partition of an interval']
+
 def crackless(n, start, cracks):
     if n == start:
         yield ()
@@ -42,11 +44,12 @@ def crackless(n, start, cracks):
 width = 32
 height = 10
 
-paths = {row: 1 for row in crackless(width, 0, ())}
+def solve():
+    paths = {row: 1 for row in crackless(width, 0, ())}
+    beneath = {row: list(crackless(width, 0, row)) for row in paths}
+    for _ in xrange(height-1):
+        paths = {row: sum(paths[b] for b in beneath[row]) for row in paths}
+    return sum(paths.itervalues())
 
-beneath = {row: list(crackless(width, 0, row)) for row in paths}
-
-for _ in xrange(height-1):
-    paths = {row: sum(paths[b] for b in beneath[row]) for row in paths}
-
-print sum(paths.itervalues())
+if __name__ == '__main__':
+    print solve()

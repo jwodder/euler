@@ -11,12 +11,18 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter, isPrime
 
-accum = 0
-for n1 in primeIter(bound=100000000):
-    n = n1 - 1
-    for d in xrange(2, int(n**0.5)+1):
-        if n % d == 0 and not isPrime(d + n // d):
-            break
-    else:
-        accum += n
-print accum
+__tags__ = ['divisibility', 'prime numbers']
+
+def solve():
+    accum = 0
+    for n1 in primeIter(bound=100000000):
+        n = n1 - 1
+        for d in xrange(2, int(n**0.5)+1):
+            if n % d == 0 and not isPrime(d + n // d):
+                break
+        else:
+            accum += n
+    return accum
+
+if __name__ == '__main__':
+    print solve()

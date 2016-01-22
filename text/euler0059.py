@@ -28,45 +28,48 @@
    the plain text must contain common English words, decrypt the message and
    find the sum of the ASCII values in the original text."""
 
-from __future__ import with_statement
-from itertools  import cycle
-from string     import ascii_letters, digits
+from itertools import cycle
+from string    import ascii_letters, digits
 
-with open('../data/cipher1.txt') as fp:
-    bytes = map(int, fp.read().split(','))
+__tags__ = ['text', 'ASCII values', 'English']
 
 acceptable = map(ord, ascii_letters + digits + " .,();!'")
 # The value for `acceptable` was found by first calculating the possible
 # decrypted texts that consisted of printable ASCII, manually inspecting them
 # to find the correct decrypted text, and identifying the non-letters used.
 
-lowercase = range(ord('a'), ord('z')+1)
-passchars = (lowercase[:], lowercase[:], lowercase[:])
-indices = [0, 0, 0]
-while True:
-    abc = tuple(arg[i] for (arg, i) in zip(passchars, indices))
-    accum = 0
-    for (i, (byte, passc)) in enumerate(zip(bytes, cycle(abc))):
-        byte ^= passc
-        #if 0x20 <= byte <= 0x7E: accum += byte
-        if byte in acceptable: accum += byte
+def solve():
+    with open('../data/cipher1.txt') as fp:
+        bytes = map(int, fp.read().split(','))
+    lowercase = range(ord('a'), ord('z')+1)
+    passchars = (lowercase[:], lowercase[:], lowercase[:])
+    indices = [0, 0, 0]
+    while True:
+        abc = tuple(arg[i] for (arg, i) in zip(passchars, indices))
+        accum = 0
+        for (i, (byte, passc)) in enumerate(zip(bytes, cycle(abc))):
+            byte ^= passc
+            #if 0x20 <= byte <= 0x7E: accum += byte
+            if byte in acceptable: accum += byte
+            else:
+                i %= 3
+                passchars[i].remove(passc)
+                for j in range(i+1, 3):
+                    indices[j] = len(passchars[j])
+                indices[i] -= 1
+                break
         else:
-            i %= 3
-            passchars[i].remove(passc)
-            for j in range(i+1, 3):
-                indices[j] = len(passchars[j])
-            indices[i] -= 1
-            break
-    else:
-        #print ''.join(map(chr, abc))
-        #print ''.join(chr(b^p) for (b,p) in zip(bytes, cycle(abc)))
-        print accum
-        break
-    for i in range(len(indices)-1, -1, -1):
-        indices[i] += 1
-        if indices[i] >= len(passchars[i]):
-            indices[i] = 0
+            #return ''.join(map(chr, abc))
+            #return ''.join(chr(b^p) for (b,p) in zip(bytes, cycle(abc)))
+            return accum
+        for i in range(len(indices)-1, -1, -1):
+            indices[i] += 1
+            if indices[i] >= len(passchars[i]):
+                indices[i] = 0
+            else:
+                break
         else:
             break
-    else:
-        break
+
+if __name__ == '__main__':
+    print solve()

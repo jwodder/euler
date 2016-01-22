@@ -22,7 +22,12 @@ from   itertools import islice
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib  import allprimes
 
-for n,p in islice(enumerate(allprimes(), start=1), 0, None, 2):
-    if 2 * n * p > 10**10:
-        break
-print n
+__tags__ = ['minimization', 'prime numbers', 'modular arithmetic']
+
+def solve():
+    for n,p in islice(enumerate(allprimes(), start=1), 0, None, 2):
+        if 2 * n * p > 10**10:
+            return n
+
+if __name__ == '__main__':
+    print solve()

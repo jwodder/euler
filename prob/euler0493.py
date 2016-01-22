@@ -14,6 +14,9 @@
 from itertools import groupby
 from eulerlib  import sprintFFraction, nCr, product, factorial
 
+__tags__ = ['probability', 'expected value', 'urn problem',
+            'drawing without replacement']
+
 def partitions():
     def gen(left, bound, slots):
         """Returns an iterable of the ways to divide `left` unlabeled items
@@ -27,14 +30,17 @@ def partitions():
                     yield (i,) + uc
     return gen(20, 10, 7)
 
-colorsum = 0
-qty = 0
-fac7 = factorial(7)
-for spectrum in partitions():
-    weight = product(nCr(10,c) for c in spectrum) * fac7 // \
-        product(factorial(len(list(gr))) for _, gr in groupby(spectrum))
-    colorsum += sum(1 for c in spectrum if c>0) * weight
-    qty += weight
+def solve():
+    colorsum = 0
+    qty = 0
+    fac7 = factorial(7)
+    for spectrum in partitions():
+        weight = product(nCr(10,c) for c in spectrum) * fac7 // \
+            product(factorial(len(list(gr))) for _, gr in groupby(spectrum))
+        colorsum += sum(1 for c in spectrum if c>0) * weight
+        qty += weight
+    #assert qty == nCr(70,20)
+    return sprintFFraction(9, colorsum, qty)
 
-#assert qty == nCr(70,20)
-print sprintFFraction(9, colorsum, qty)
+if __name__ == '__main__':
+    print solve()

@@ -29,30 +29,35 @@ r"""Ordered radicals
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib import primeIter, generateAsc
 
+__tags__ = ['radical', 'prime numbers', 'ordering', 'factorization']
+
 bound = 100000
 index = 10000
 
-primes = tuple(primeIter(bound=bound))
-seen = 0
+def solve():
+    primes = tuple(primeIter(bound=bound))
+    seen = 0
 
-def nextNodes(x):
-    rad, ps, nextI = x
-    if nextI < len(primes):
-        nextP = primes[nextI]
-        yield (rad*nextP, ps+[nextP], nextI+1)
-        if ps:
-            yield (rad//ps[-1] * nextP, ps[:-1]+[nextP], nextI+1)
+    def nextNodes(x):
+        rad, ps, nextI = x
+        if nextI < len(primes):
+            nextP = primes[nextI]
+            yield (rad*nextP, ps+[nextP], nextI+1)
+            if ps:
+                yield (rad//ps[-1] * nextP, ps[:-1]+[nextP], nextI+1)
 
-for (rad, ps, nextI) in generateAsc([(1,[],0)], nextNodes):
-    expses = [rad]
-    for p in ps:
-        for x in expses[:]:
-            x *= p
-            while x <= bound:
-                expses.append(x)
+    for (rad, ps, nextI) in generateAsc([(1,[],0)], nextNodes):
+        expses = [rad]
+        for p in ps:
+            for x in expses[:]:
                 x *= p
-    seen += len(expses)
-    if seen >= index:
-        expses.sort()
-        print expses[index - seen - 1]
-        break
+                while x <= bound:
+                    expses.append(x)
+                    x *= p
+        seen += len(expses)
+        if seen >= index:
+            expses.sort()
+            return expses[index - seen - 1]
+
+if __name__ == '__main__':
+    print solve()

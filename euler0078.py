@@ -17,7 +17,17 @@
 
 from eulerlib import partitionNums
 
-for n,pn in enumerate(partitionNums()):
-    if pn % 1000000 == 0:
-        print n
-        break
+__tags__ = [
+    'partitions',
+    'partitions of unlabeled elements into unlabeled bins',
+    'integer partition',
+    'divisibility',
+]
+
+def solve():
+    for n,pn in enumerate(partitionNums()):
+        if pn % 1000000 == 0:
+            return n
+
+if __name__ == '__main__':
+    print solve()

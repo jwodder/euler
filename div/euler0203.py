@@ -30,16 +30,20 @@ from operator  import add
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib.oldprimes import factor
 
-numbers = set()
-row = [1]
+__tags__ = ["Pascal's triangle", 'squarefree numbers']
 
-for i in xrange(51):
-    for n in row:
-        if all(k < 2 for _,k in factor(n)):
-            numbers.add(n)
-    row2 = list(imap(add, row, [0] + row))
-    if i % 2 == 1:
-        row2.append(row[-1] * 2)
-    row = row2
+def solve():
+    numbers = set()
+    row = [1]
+    for i in xrange(51):
+        for n in row:
+            if all(k < 2 for _,k in factor(n)):
+                numbers.add(n)
+        row2 = list(imap(add, row, [0] + row))
+        if i % 2 == 1:
+            row2.append(row[-1] * 2)
+        row = row2
+    return sum(numbers)
 
-print sum(numbers)
+if __name__ == '__main__':
+    print solve()

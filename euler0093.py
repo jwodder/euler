@@ -27,6 +27,8 @@ from   fractions import Fraction
 import itertools
 from   operator  import add, sub, mul, div
 
+__tags__ = ['binary tree', 'maximization']
+
 trees = [
     lambda op1, op2, op3: lambda a,b,c,d: op1(a, op2(b, op3(c, d))),
     lambda op1, op2, op3: lambda a,b,c,d: op1(a, op2(op3(b, c), d)),
@@ -55,5 +57,9 @@ def consecExpr(vals):
                         beyondN.remove(n)
     return n
 
-print ''.join(map(str, max(itertools.combinations((1,2,3,4,5,6,7,8,9), 4),
-                           key=consecExpr)))
+def solve():
+    return ''.join(map(str, max(itertools.combinations((1,2,3,4,5,6,7,8,9), 4),
+                                key=consecExpr)))
+
+if __name__ == '__main__':
+    print solve()

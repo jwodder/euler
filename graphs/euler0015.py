@@ -13,4 +13,11 @@ r"""Lattice paths
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import nCr
-print nCr(40, 20)
+
+__tags__ = ['graph traversal']
+
+def solve():
+    return nCr(40, 20)
+
+if __name__ == '__main__':
+    print solve()

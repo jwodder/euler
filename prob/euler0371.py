@@ -51,11 +51,15 @@
 from fractions import Fraction
 from eulerlib  import sprintFFraction
 
-E = Fraction(501, 250)
-Eprime = Fraction(1000 + 2 * (1000 - 2*499), 1000 - 499)
+__tags__ = ['probability', 'expected value']
 
-for n in xrange(498, -1, -1):
-    (E, Eprime) = ((1000 + Eprime + E * (1000 - 2*n - 2)) / (1000 - n - 1),
-                   (1000 + Eprime * (1000 - 2*n)) / (1000 - n))
+def solve():
+    E = Fraction(501, 250)
+    Eprime = Fraction(1000 + 2 * (1000 - 2*499), 1000 - 499)
+    for n in xrange(498, -1, -1):
+        (E, Eprime) = ((1000 + Eprime + E * (1000 - 2*n - 2)) / (1000 - n - 1),
+                       (1000 + Eprime * (1000 - 2*n)) / (1000 - n))
+    return sprintFFraction(8, E.numerator, E.denominator)
 
-print sprintFFraction(8, E.numerator, E.denominator)
+if __name__ == '__main__':
+    print solve()

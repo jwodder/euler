@@ -13,9 +13,14 @@ r"""Names scores
 
     What is the total of all the name scores in the file?"""
 
-from __future__ import with_statement
+__tags__ = ['text', 'isopsephy']
 
-with open('../data/names.txt') as fp:
-    names = fp.read().strip('"').split('","')
-names.sort()
-print sum((i+1)*sum(ord(c) - 64 for c in name) for (i,name) in enumerate(names))
+def solve():
+    with open('../data/names.txt') as fp:
+        names = fp.read().strip('"').split('","')
+    names.sort()
+    return sum((i+1)*sum(ord(c) - 64 for c in name)
+               for (i,name) in enumerate(names))
+
+if __name__ == '__main__':
+    print solve()

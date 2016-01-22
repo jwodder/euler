@@ -18,9 +18,15 @@ r"""Ordered fractions
 
 from eulerlib import gcd
 
-(maxN, maxD) = (0,1)
-for d in xrange(2, 1000001):
-    n = (3*d - 1) // 7
-    if gcd(n,d) == 1 and n * maxD > maxN * d:
-        (maxN, maxD) = (n,d)
-print maxN
+__tags__ = ['fractions']
+
+def solve():
+    (maxN, maxD) = (0,1)
+    for d in xrange(2, 1000001):
+        n = (3*d - 1) // 7
+        if gcd(n,d) == 1 and n * maxD > maxN * d:
+            (maxN, maxD) = (n,d)
+    return maxN
+
+if __name__ == '__main__':
+    print solve()

@@ -20,18 +20,25 @@
    Find the value of $d<1000$ for which 1/d contains the longest recurring
    cycle in its decimal fraction part."""
 
-maxD = 1
-maxCycle = 0
-for i in xrange(3, 1000, 2):
-    # Values divisible by 2 or 5 have the same cycle length as other, smaller
-    # numbers, so we can skip them.
-    if i % 5 == 0: continue
-    x = 10 % i
-    n = 1
-    while x != 1:
-        x = (x * 10) % i
-        n += 1
-    if n > maxCycle:
-        maxD = i
-        maxCycle = n
-print maxD
+__tags__ = ['fractions', 'digits', 'chain']
+
+def solve():
+    maxD = 1
+    maxCycle = 0
+    for i in xrange(3, 1000, 2):
+        # Values divisible by 2 or 5 have the same cycle length as other,
+        # smaller numbers, so we can skip them.
+        if i % 5 == 0:
+            continue
+        x = 10 % i
+        n = 1
+        while x != 1:
+            x = (x * 10) % i
+            n += 1
+        if n > maxCycle:
+            maxD = i
+            maxCycle = n
+    return maxD
+
+if __name__ == '__main__':
+    print solve()

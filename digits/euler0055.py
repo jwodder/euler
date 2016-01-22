@@ -31,14 +31,20 @@
    NOTE: Wording was modified slightly on 24 April 2007 to emphasise the
    theoretical nature of Lychrel numbers."""
 
-qty = 0
-for i in xrange(1, 10000):
-    istr = str(i)
-    for _ in xrange(49):
-        i += int(istr[::-1])
+__tags__ = ['digits', 'palindromic number', 'iterated functions']
+
+def solve():
+    qty = 0
+    for i in xrange(1, 10000):
         istr = str(i)
-        if istr == istr[::-1]:
-            break
-    else:
-        qty += 1
-print qty
+        for _ in xrange(49):
+            i += int(istr[::-1])
+            istr = str(i)
+            if istr == istr[::-1]:
+                break
+        else:
+            qty += 1
+    return qty
+
+if __name__ == '__main__':
+    print solve()

@@ -45,20 +45,27 @@ r"""Optimum polynomial
 from __future__          import division
 from eulerlib.polynomial import Polynomial
 
-points = tuple((x, 1 - x + x**2 - x**3 + x**4 - x**5 + x**6 - x**7 + x**8 - x**9 + x**10) for x in xrange(1, 12))
+__tags__ = ['polynomials', 'Lagrange interpolation', 'optimization']
 
-terms = []
-accum = 0
-for (i, (xi, yi)) in enumerate(points):
-    newTerm = Polynomial(yi)
-    for (j, (xj, _)) in enumerate(points[:i]):
-        terms[j] *= Polynomial(-xi/(xj-xi), 1/(xj-xi))
-        newTerm *= Polynomial(-xj/(xi-xj), 1/(xi-xj))
-    terms.append(newTerm)
-    op = sum(terms)
-    for (xk, yk) in points[i+1:]:
-        guess = op(xk)
-        if guess != yk:
-            accum += guess
-            break
-print int(accum)
+points = tuple((x, 1 - x + x**2 - x**3 + x**4 - x**5 + x**6 - x**7 + x**8
+                     - x**9 + x**10) for x in xrange(1, 12))
+
+def solve():
+    terms = []
+    accum = 0
+    for (i, (xi, yi)) in enumerate(points):
+        newTerm = Polynomial(yi)
+        for (j, (xj, _)) in enumerate(points[:i]):
+            terms[j] *= Polynomial(-xi/(xj-xi), 1/(xj-xi))
+            newTerm *= Polynomial(-xj/(xi-xj), 1/(xi-xj))
+        terms.append(newTerm)
+        op = sum(terms)
+        for (xk, yk) in points[i+1:]:
+            guess = op(xk)
+            if guess != yk:
+                accum += guess
+                break
+    return int(accum)
+
+if __name__ == '__main__':
+    print solve()

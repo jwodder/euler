@@ -13,8 +13,15 @@ r"""Semiprimes
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import primeIter
 
+__tags__ = ['prime numbers', 'factorization']
+
 def ilen(seq):
     return sum(1 for _ in seq)
 
 n = 100000000
-print sum(ilen(primeIter(bound=min(p,n//p))) for p in primeIter(bound=n//2))
+
+def solve():
+    return sum(ilen(primeIter(bound=min(p,n//p))) for p in primeIter(bound=n//2))
+
+if __name__ == '__main__':
+    print solve()

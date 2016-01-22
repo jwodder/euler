@@ -10,12 +10,18 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import factor, sieve
 
-factors = [0] * 20
-accum = 1
-sieve(20)
-for i in xrange(1, 21):
-    for p,k in factor(i):
-        if k > factors[p-1]:
-            accum *= p ** (k - factors[p-1])
-            factors[p-1] = k
-print accum
+__tags__ = ['divisibility', 'LCM']
+
+def solve():
+    factors = [0] * 20
+    accum = 1
+    sieve(20)
+    for i in xrange(1, 21):
+        for p,k in factor(i):
+            if k > factors[p-1]:
+                accum *= p ** (k - factors[p-1])
+                factors[p-1] = k
+    return accum
+
+if __name__ == '__main__':
+    print solve()

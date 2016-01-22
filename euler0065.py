@@ -43,6 +43,8 @@ r"""Convergents of e
 from itertools import count
 from eulerlib  import convergents, nth
 
+__tags__ = ['e', 'continued fractions', 'sum of digits']
+
 def eCF():
     yield 2
     for i in count(1):
@@ -50,4 +52,8 @@ def eCF():
         yield 2*i
         yield 1
 
-print sum(int(c) for c in str(nth(convergents(eCF()), 99)[0]))
+def solve():
+    return sum(int(c) for c in str(nth(convergents(eCF()), 99)[0]))
+
+if __name__ == '__main__':
+    print solve()

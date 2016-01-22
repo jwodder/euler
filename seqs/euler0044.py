@@ -20,6 +20,8 @@ import itertools
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib import generateAsc
 
+__tags__ = ['minimization', 'pentagonal numbers', 'integer sequences']
+
 def pent(n):
     return n*(3*n-1) // 2
 
@@ -45,7 +47,10 @@ def nextPents(x):
         Pk_1 = next(pents)
         yield (Pk_1 + 3*(k+1), Pk_1, k+1, 1)
 
-for (D, _, _, n) in generateAsc([(4, 1, 1, 1)], nextPents):
-    if isPent(D) and isPent(2*pent(n) + D):
-        print D
-        break
+def solve():
+    for (D, _, _, n) in generateAsc([(4, 1, 1, 1)], nextPents):
+        if isPent(D) and isPent(2*pent(n) + D):
+            return D
+
+if __name__ == '__main__':
+    print solve()

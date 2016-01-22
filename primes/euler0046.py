@@ -21,6 +21,8 @@ r"""Goldbach's other conjecture
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib import allprimes, generateAsc
 
+__tags__ = ['prime numbers']
+
 class Node(object):
     def __init__(self, prime, n=None):
         self.prime = prime
@@ -41,12 +43,15 @@ class Node(object):
         return cmp(type(self), type(other)) or cmp(self.val, other.val)
 
 
-piter = allprimes()
-next(piter)
-i = 3
-for node in generateAsc([Node(piter)], Node.next):
-    if node.val > i:
-        print i
-        break
-    elif node.val == i:
-        i += 2
+def solve():
+    piter = allprimes()
+    next(piter)
+    i = 3
+    for node in generateAsc([Node(piter)], Node.next):
+        if node.val > i:
+            return i
+        elif node.val == i:
+            i += 2
+
+if __name__ == '__main__':
+    print solve()

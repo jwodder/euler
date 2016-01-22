@@ -23,19 +23,25 @@ r"""Longest Collatz sequence
     **NOTE:** Once the chain starts the terms are allowed to go above one
     million."""
 
-lengths = {1: 1}
-longest = 1
-for i in xrange(2, 1000001):
-    chain = []
-    j = i
-    while j not in lengths:
-        chain.append(j)
-        if j % 2: j = 3*j + 1
-        else: j //= 2
-    l = lengths[j]
-    for k in reversed(chain):
-        l += 1
-        lengths[k] = l
-    if l > lengths[longest]:
-        longest = i
-print longest
+__tags__ = ['iterated functions', 'Collatz sequence', 'maximization']
+
+def solve():
+    lengths = {1: 1}
+    longest = 1
+    for i in xrange(2, 1000001):
+        chain = []
+        j = i
+        while j not in lengths:
+            chain.append(j)
+            if j % 2: j = 3*j + 1
+            else: j //= 2
+        l = lengths[j]
+        for k in reversed(chain):
+            l += 1
+            lengths[k] = l
+        if l > lengths[longest]:
+            longest = i
+    return longest
+
+if __name__ == '__main__':
+    print solve()

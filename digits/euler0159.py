@@ -44,16 +44,21 @@ r"""Digital root sums of factorisations
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import sieve, divisors
 
+__tags__ = ['maximization', 'digital root', 'factorization']
+
 def droot(n):
     return n and (n % 9 or 9)
 
-sieve(10**6)
+def solve():
+    sieve(10**6)
+    mdrs = [None] * 10**6
+    mdrs[0] = 0  # to emulate the omission of 1 from factorizations
+    accum = 0
+    for n in xrange(2, 10**6):
+        val = max(droot(d) + mdrs[n // d - 1] for d in divisors(n) if d != 1)
+        accum += val
+        mdrs[n-1] = val
+    return accum
 
-mdrs = [None] * 10**6
-mdrs[0] = 0  # to emulate the omission of 1 from factorizations
-accum = 0
-for n in xrange(2, 10**6):
-    val = max(droot(d) + mdrs[n // d - 1] for d in divisors(n) if d != 1)
-    accum += val
-    mdrs[n-1] = val
-print accum
+if __name__ == '__main__':
+    print solve()

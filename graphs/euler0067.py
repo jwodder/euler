@@ -21,12 +21,15 @@ r"""Maximum path sum II
     it would take over twenty billion years to check them all.  There is an
     efficient algorithm to solve it. ;o)"""
 
-from __future__ import with_statement
+__tags__ = ['graph theory', 'graph traversal', 'maximum path']
 
-with open('../data/triangle.txt') as fp:
-    triangle = map(lambda s: map(int, s.split()), fp)
+def solve():
+    with open('../data/triangle.txt') as fp:
+        triangle = map(lambda s: map(int, s.split()), fp)
+    accums = triangle[0]
+    for row in triangle[1:]:
+        accums = map(lambda a,b,c: a + max(b,c), row, accums+[0], [0]+accums)
+    return max(accums)
 
-accums = triangle[0]
-for row in triangle[1:]:
-    accums = map(lambda a,b,c: a + max(b,c), row, accums+[0], [0]+accums)
-print max(accums)
+if __name__ == '__main__':
+    print solve()

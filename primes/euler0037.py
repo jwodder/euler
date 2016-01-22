@@ -14,26 +14,31 @@
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib.oldprimes import isPrime
 
-leftTruncate  = set([2,3,5,7])
-rightTruncate = set([2,3,5,7])
-bothTruncate  = set()
-magnitude = 1
+__tags__ = ['digits', 'prime numbers']
 
-while len(bothTruncate) < 11:
-    magnitude *= 10
-    lt2 = set()
-    for p in leftTruncate:
-        for d in xrange(1,10):
-            x = d * magnitude + p
-            if isPrime(x):
-                lt2.add(x)
-    leftTruncate = lt2
-    rt2 = set()
-    for p in rightTruncate:
-        for d in (1,3,7,9):
-            x = p * 10 + d
-            if isPrime(x):
-                rt2.add(x)
-    rightTruncate = rt2
-    bothTruncate.update(leftTruncate & rightTruncate)
-print sum(bothTruncate)
+def solve():
+    leftTruncate  = set([2,3,5,7])
+    rightTruncate = set([2,3,5,7])
+    bothTruncate  = set()
+    magnitude = 1
+    while len(bothTruncate) < 11:
+        magnitude *= 10
+        lt2 = set()
+        for p in leftTruncate:
+            for d in xrange(1,10):
+                x = d * magnitude + p
+                if isPrime(x):
+                    lt2.add(x)
+        leftTruncate = lt2
+        rt2 = set()
+        for p in rightTruncate:
+            for d in (1,3,7,9):
+                x = p * 10 + d
+                if isPrime(x):
+                    rt2.add(x)
+        rightTruncate = rt2
+        bothTruncate.update(leftTruncate & rightTruncate)
+    return sum(bothTruncate)
+
+if __name__ == '__main__':
+    print solve()

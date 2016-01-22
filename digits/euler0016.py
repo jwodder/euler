@@ -5,4 +5,10 @@
 
    What is the sum of the digits of the number $2^{1000}$?"""
 
-print sum(int(c) for c in str(1 << 1000))
+__tags__ = ['digits', 'sum of digits']
+
+def solve():
+    return sum(int(c) for c in str(1 << 1000))
+
+if __name__ == '__main__':
+    print solve()

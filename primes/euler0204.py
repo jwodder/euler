@@ -20,16 +20,22 @@ from collections import deque
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib    import primeIter
 
-limit = 1000000000
-primes = tuple(primeIter(bound=100))
+__tags__ = ['generalized Hamming number']
 
-qty = 1
-queue = deque([(1,0)])
-while queue:
-    (n, pi) = queue.popleft()
-    for j in xrange(pi, len(primes)):
-        m = n * primes[j]
-        if m <= limit:
-            queue.append((m,j))
-            qty += 1
-print qty
+limit = 1000000000
+
+def solve():
+    primes = tuple(primeIter(bound=100))
+    qty = 1
+    queue = deque([(1,0)])
+    while queue:
+        (n, pi) = queue.popleft()
+        for j in xrange(pi, len(primes)):
+            m = n * primes[j]
+            if m <= limit:
+                queue.append((m,j))
+                qty += 1
+    return qty
+
+if __name__ == '__main__':
+    print solve()

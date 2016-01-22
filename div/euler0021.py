@@ -16,13 +16,19 @@ r"""Amicable numbers
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from eulerlib import aliquot, sieve
 
-sieve(10000)
-cache = {}
-accum = 0
-for i in xrange(2, 10001):
-    j = aliquot(i)
-    if j < i and cache.get(j) == i:
-        accum += i + j
-    elif j > i:
-        cache[i] = j
-print accum
+__tags__ = ['amicable pair']
+
+def solve():
+    sieve(10000)
+    cache = {}
+    accum = 0
+    for i in xrange(2, 10001):
+        j = aliquot(i)
+        if j < i and cache.get(j) == i:
+            accum += i + j
+        elif j > i:
+            cache[i] = j
+    return accum
+
+if __name__ == '__main__':
+    print solve()

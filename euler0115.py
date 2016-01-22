@@ -24,13 +24,19 @@
 
 from collections import deque
 
-buffer = deque([1] * 50, 50)
-running = 0
+__tags__ = ['combinatorics', 'partitions', 'partitions of labeled elements',
+            'partition of an interval']
 
-n = 49
-while buffer[-1] <= 1000000:
-    n += 1
-    oldest = buffer[0]
-    buffer.append(buffer[-1] + 1 + running)
-    running += oldest
-print n
+def solve():
+    buffer = deque([1] * 50, 50)
+    running = 0
+    n = 49
+    while buffer[-1] <= 1000000:
+        n += 1
+        oldest = buffer[0]
+        buffer.append(buffer[-1] + 1 + running)
+        running += oldest
+    return n
+
+if __name__ == '__main__':
+    print solve()

@@ -18,7 +18,14 @@
 
    NOTE: This is related to Problem 116."""
 
-repl = []
-for n in xrange(51):
-    repl.append(1 + sum(sum(repl[:max(n-sz+1,0)]) for sz in [2,3,4]))
-print repl[-1]
+__tags__ = ['combinatorics', 'partitions', 'partition of an interval',
+            'partitions of labeled elements into labeled bins']
+
+def solve():
+    repl = []
+    for n in xrange(51):
+        repl.append(1 + sum(sum(repl[:max(n-sz+1,0)]) for sz in [2,3,4]))
+    return repl[-1]
+
+if __name__ == '__main__':
+    print solve()
