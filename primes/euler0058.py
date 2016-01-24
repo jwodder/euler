@@ -22,6 +22,7 @@ r"""Spiral primes
     what is the side length of the square spiral for which the ratio of primes
     along both diagonals first falls below $10%$?"""
 
+from   itertools          import count
 import sys; sys.path.insert(1, sys.path[0] + '/..')
 from   eulerlib.oldprimes import isPrime
 
@@ -29,22 +30,13 @@ __tags__ = ['prime numbers', 'integer sequences', 'number spiral']
 
 def solve():
     primeQty = 0
-    compositeQty = 1
-    prev = 1
-    sidelen = 2  # Actually the side length minus 1
-    while primeQty * 9 >= compositeQty or sidelen == 2:
-        ur = prev + sidelen
-        ul = ur + sidelen
-        ll = ul + sidelen
-        lr = ll + sidelen
-        for n in (ur, ul, ll, lr):
+    for diam in count(2, step=2):
+        base = diam*diam + 1
+        for n in xrange(base - diam, base + 3*diam, diam):
             if isPrime(n):
                 primeQty += 1
-            else:
-                compositeQty += 1
-        prev = lr
-        sidelen += 2
-    return sidelen - 1
+        if primeQty * 10 < 2*diam + 1:
+            return diam + 1
 
 if __name__ == '__main__':
     print solve()
