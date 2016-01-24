@@ -20,16 +20,16 @@ Code to focus on improving:
  - euler0206.py
  - euler0347.py
  - euler0348.py
+ - Primes & factorization code:
+  - Give aliquot() and totient() `presieve` arguments and the option to take a
+    pre-computed factorization of `n` as an argument in addition to/instead of
+    `n` itself
+  - Give primeIter() a `presieve` argument
+  - Stop using eulerlib/oldprimes.py
+  - Make factor() able to work without calling sieve() beforehand?
+  - Write a variant of/rewrite primeIter() so that primes are yielded as soon
+    as sieve() finds them rather than waiting for sieve() to finish
 
-- Give aliquot() and totient() `presieve` arguments and the option to take a
-  pre-computed factorization of `n` as an argument in addition to/instead of
-  `n` itself
-- Give primeIter() a `presieve` argument
-- Use the new sieve algorithm in Primes.hs and eulerlib.cpp
-- Stop using eulerlib/oldprimes.py
-- Make factor() able to work without calling sieve() beforehand?
-- Write a variant of/rewrite primeIter() so that primes are yielded as soon as
-  sieve() finds them rather than waiting for sieve() to finish
 - Write Python versions of all non-Python solutions so that the latter can be
   deleted
 - Write a generalized version of generateAsc() that takes a function $f$ and
@@ -39,6 +39,6 @@ Code to focus on improving:
   c_k, \ldots)$ in ascending order
  - Also add a keyword argument for the other direction
  - Write a similar version for the likes of euler0124.py
-- Derive an explicit formula for the elements of the diagonals of the number
-  spiral in euler0028.py and euler0058.py
+ - Instead of sequences, take an $n$ indicating the $\N^n$ to use for input?
+- Write a function that returns a generator of the positive integers factored
 - Derive explicit formulas for euler0173.py and euler0174.py
