@@ -41,4 +41,14 @@ Code to focus on improving:
  - Write a similar version for the likes of euler0124.py
  - Instead of sequences, take an $n$ indicating the $\N^n$ to use for input?
 - Write a function that returns a generator of the positive integers factored
-- Derive explicit formulas for euler0173.py and euler0174.py
+- Look into where `intSqrt` can be replaced with
+  `int(math.floor(math.sqrt(x)))` without loss of accuracy
+
+- Functions to consider adding to eulerlib:
+ - `triangle(n): n*(n-1)/2`
+ - `sum_of_squares(n): sum(i*i for i in xrange(n+1))`
+  - Add a "sum of squares" tag?
+ - `ceildiv(a,b): (a+b-1) // b`
+ - `intceil`?
+ - `sum_of_digits`?
+ - `is_palindrome`?

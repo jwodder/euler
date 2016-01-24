@@ -23,25 +23,25 @@
    Using up to one million tiles how many different square laminae can be
    formed?"""
 
+# The number of laminae with an inner hole of side length $s$ that can be
+# formed from at most 1e6 tiles is $(S-s)/2$ where $S$ is the largest integer
+# of the same parity as $s$ such that $S^2 - s^2 \leq 1e6$, i.e., `S =
+# floor(sqrt(1e6 + s*s))`, possibly minus 1 (difference eliminated by rounding
+# down when dividing by 2).
+
+import math
+
 __tags__ = ['integer sequences', 'arithmetic sequence', 'partial sums',
             'integer partition']
 
 maxTiles = 1000000
 
-def countParity(start):
-    used = start*4 + (start-2) * 4
-    outer = start
-    qty = 0
-    for i in xrange(start, maxTiles//4 + 1, 2):
-        used -= (i-2)*4
-        while used + (outer+2)*4 <= maxTiles:
-            outer += 2
-            used += outer*4
-        qty += (outer - i) // 2 + 1
-    return qty
+def intSqrt(x):
+    # faster than the one in eulerlib, and just as accurate
+    return int(math.floor(math.sqrt(x)))
 
 def solve():
-    return countParity(2) + countParity(3)
+    return sum((intSqrt(maxTiles + s*s) - s)//2 for s in xrange(1, maxTiles//4))
 
 if __name__ == '__main__':
     print solve()

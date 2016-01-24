@@ -21,7 +21,7 @@ __tags__ = ['text', 'isopsephy', 'triangle numbers']
 def solve():
     with open('../data/words.txt') as fp:
         words = fp.read().strip('"').split('","')
-    triangles = set([1, 3, 6, 10, 15]);
+    triangles = {1, 3, 6, 10, 15}
     maxTri = 15
     qty = 0
     for word in words:

@@ -121,26 +121,12 @@ def totient(n):
 def product(xs):
     return reduce(operator.mul, xs, 1)
 
+cross = itertools.product
+
 def sumPowers(n,k):
     """Like ``sum(n**i for i in range(k+1))``, but more efficient.  `n` must be
        an integer greater than 1."""
     return (n ** (k+1) - 1) // (n-1)
-
-cross = itertools.product  # Python v.2.6+
-#def cross(*args):
-#    args = map(tuple, args)
-#    if not all(args): return
-#    indices = [0] * len(args)
-#    while True:
-#       yield tuple(arg[i] for (arg, i) in zip(args, indices))
-#       for i in range(len(indices)-1, -1, -1):
-#           indices[i] += 1
-#           if indices[i] >= len(args[i]):
-#               indices[i] = 0
-#           else:
-#               break
-#       else:
-#           break
 
 def modInverse(a,n):
     (u, uc) = (abs(n), 0)
