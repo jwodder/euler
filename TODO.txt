@@ -43,6 +43,9 @@ Code to focus on improving:
 - Write a function that returns a generator of the positive integers factored
 - Look into where `intSqrt` can be replaced with
   `int(math.floor(math.sqrt(x)))` without loss of accuracy
+- Derive an even more explicit/closed formula for euler0173.py?
+- Set up a CI system for benchmarking everything (and making sure it's still
+  correct?) after each change?
 
 - Functions to consider adding to eulerlib:
  - `triangle(n): n*(n-1)/2`
