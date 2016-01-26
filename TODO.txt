@@ -13,7 +13,6 @@ Code to focus on improving:
  - euler0096.py
  - euler0112.py (cf. euler0113.py)
  - euler0130.py
- - euler0145.c
  - euler0179.py
  - euler0204.py?
  - euler0205.py?
@@ -50,8 +49,10 @@ Code to focus on improving:
 - Functions to consider adding to eulerlib:
  - `triangle(n): n*(n-1)/2`
  - `sum_of_squares(n): sum(i*i for i in xrange(n+1))`
+  - name "`pyramid`"?
   - Add a "sum of squares" tag?
  - `ceildiv(a,b): (a+b-1) // b`
  - `intceil`?
  - `sum_of_digits`?
  - `is_palindrome`?
+ - `number_of_digits`?
