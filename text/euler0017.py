@@ -14,56 +14,54 @@
 
 __tags__ = ['text', 'English']
 
-lengths = [0] * 1000
-lengths[0] = len('one')
-lengths[1] = len('two')
-lengths[2] = len('three')
-lengths[3] = len('four')
-lengths[4] = len('five')
-lengths[5] = len('six')
-lengths[6] = len('seven')
-lengths[7] = len('eight')
-lengths[8] = len('nine')
-lengths[9] = len('ten')
-lengths[10] = len('eleven')
-lengths[11] = len('twelve')
-lengths[12] = len('thirteen')
-lengths[13] = len('fourteen')
-lengths[14] = len('fifteen')
-lengths[15] = len('sixteen')
-lengths[16] = len('seventeen')
-lengths[17] = len('eighteen')
-lengths[18] = len('nineteen')
-lengths[19] = len('twenty')
-lengths[29] = len('thirty')
-lengths[39] = len('forty')
-lengths[49] = len('fifty')
-lengths[59] = len('sixty')
-lengths[69] = len('seventy')
-lengths[79] = len('eighty')
-lengths[89] = len('ninety')
+lengths    = [None] * 1001
+lengths[0] = 0  # empty string
+lengths[1] = len('one')
+lengths[2] = len('two')
+lengths[3] = len('three')
+lengths[4] = len('four')
+lengths[5] = len('five')
+lengths[6] = len('six')
+lengths[7] = len('seven')
+lengths[8] = len('eight')
+lengths[9] = len('nine')
+lengths[10] = len('ten')
+lengths[11] = len('eleven')
+lengths[12] = len('twelve')
+lengths[13] = len('thirteen')
+lengths[14] = len('fourteen')
+lengths[15] = len('fifteen')
+lengths[16] = len('sixteen')
+lengths[17] = len('seventeen')
+lengths[18] = len('eighteen')
+lengths[19] = len('nineteen')
+lengths[20] = len('twenty')
+lengths[30] = len('thirty')
+lengths[40] = len('forty')
+lengths[50] = len('fifty')
+lengths[60] = len('sixty')
+lengths[70] = len('seventy')
+lengths[80] = len('eighty')
+lengths[90] = len('ninety')
 
 def numberLength(n):
-    if lengths[n-1] == 0:
-        lastTwo = n % 100
-        if lastTwo != 0:
-            if lengths[lastTwo-1] == 0:
-                lengths[lastTwo-1] = lengths[lastTwo - lastTwo%10 - 1] \
-                                   + lengths[lastTwo%10 - 1]
-            lengths[n-1] = lengths[lastTwo-1]
-        firstTwo = n // 100
-        if firstTwo != 0:
-            if lastTwo != 0: lengths[n-1] += len('and')
-            hundreds = firstTwo % 10
-            if hundreds != 0:
-                lengths[n-1] += lengths[hundreds-1] + len('hundred')
-            thousands = firstTwo // 10
-            if thousands != 0:
-                lengths[n-1] += lengths[thousands-1] + len('thousand')
-    return lengths[n-1]
+    if lengths[n] is None:
+        ab, cd = divmod(n, 100)
+        if lengths[cd] is None:
+            d = n % 10
+            lengths[cd] = lengths[cd-d] + lengths[d]
+        lengths[n] = lengths[cd]
+        a,b = divmod(ab, 10)
+        if ab != 0 and cd != 0:
+            lengths[n] += len('and')
+        if b != 0:
+            lengths[n] += lengths[b] + len('hundred')
+        if a != 0:
+            lengths[n] += lengths[a] + len('thousand')
+    return lengths[n]
 
 def solve():
-    return sum(numberLength(i) for i in xrange(1, 1001))
+    return sum(map(numberLength, xrange(1, 1001)))
 
 if __name__ == '__main__':
     print solve()
