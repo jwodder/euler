@@ -63,11 +63,15 @@
 
 __tags__ = ['digits']
 
-qty = 0
-for i in xrange(1,5):
-    # Reversible numbers with 2*i digits:
-    qty += 20 * 30**(i-1)
-    # Reversible numbers with 2*i+1 digits:
-    if i % 2:
-        qty += 20**((i+1)//2) * 25**(i//2) * 5
-print qty
+def solve():
+    qty = 0
+    for i in xrange(1,5):
+        # Reversible numbers with 2*i digits:
+        qty += 20 * 30**(i-1)
+        # Reversible numbers with 2*i+1 digits:
+        if i % 2:
+            qty += 20**((i+1)//2) * 25**(i//2) * 5
+    return qty
+
+if __name__ == '__main__':
+    print solve()

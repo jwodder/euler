@@ -27,7 +27,9 @@ number theory:
             radical:
                 __definition__: product of distinct prime factors
             generalized Hamming number:
+                __synonyms__: [smooth number, friable number]
                 Hamming number:
+                    __synonyms__: [5-smooth number, regular number]
                     __definition__: >-
                         a positive integer with no prime factor greater than 5
     Diophantine equation:
