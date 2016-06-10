@@ -40,13 +40,15 @@ class Polynomial(object):
     @classmethod
     def lagrange(cls, points):
         terms = []
+        xs = []
         for (xi, yi) in points:
             newTerm = (yi,)
-            for (j, (xj, _)) in enumerate(terms):
+            for (j, xj) in enumerate(xs):
                 terms[j] *= cls(-xi/(xj-xi), 1/(xj-xi))
                 newTerm  *= cls(-xj/(xi-xj), 1/(xi-xj))
-            terms.append((xi, newTerm))
-        return sum((t for _,t in terms), cls())
+            terms.append(newTerm)
+            xs.append(xi)
+        return sum(terms, cls())
 
     def __lshift__(self, n):  # Multiply by x^n (n>=0)
         if n < 0:
