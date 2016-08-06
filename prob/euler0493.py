@@ -11,8 +11,9 @@
 # The balls are labeled, and the selection is done at once (i.e., not one ball
 # at a time) without replacement.
 
+from math      import factorial
 from itertools import groupby
-from eulerlib  import sprintFFraction, nCr, product, factorial
+from eulerlib  import sprintFFraction, nCr, product
 
 __tags__ = ['probability', 'expected value', 'urn problem',
             'drawing without replacement']

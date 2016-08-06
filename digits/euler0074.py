@@ -29,7 +29,8 @@
    How many chains, with a starting number below one million, contain exactly
    sixty non-repeating terms?"""
 
-__tags__ = ['digits', 'sum of function of digits', 'iterated functions']
+__tags__ = ['digits', 'sum of function of digits', 'iterated functions',
+            'factorial']
 
 facs = (1,)
 for i in xrange(9):

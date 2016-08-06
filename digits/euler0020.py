@@ -9,8 +9,7 @@ r"""Factorial digit sum
 
     Find the sum of the digits in the number 100!"""
 
-import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import factorial
+from math import factorial
 
 __tags__ = ['digits', 'sum of digits', 'factorial']
 

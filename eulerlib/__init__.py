@@ -156,9 +156,6 @@ def reduceFrac(x,y):
     d = gcd(x,y)
     return (0,0) if d == 0 else (x // d, y // d)
 
-def factorial(n):
-    return product(xrange(2,n+1))
-
 def nPr(n,r):
     if 0 <= r <= n:
         return product(xrange(n-r+1, n+1))
@@ -167,7 +164,7 @@ def nPr(n,r):
 
 def nCr(n,r):
     if 0 <= r <= n:
-        return nPr(n,r) // factorial(r)
+        return nPr(n,r) // math.factorial(r)
     else:
         return 0
 
