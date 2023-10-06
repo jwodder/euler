@@ -301,8 +301,8 @@ def subsets(xs, nonempty=False, proper=False):
 
 def sprintFFraction(d, num, denom):
     """Converts ``num / denom`` to a string of the form ``[-]d.dddd``
-       containing exactly `n` digits after the decimal place, rounded to the
-       nearest ``10**-n``"""
+       containing exactly `d` digits after the decimal place, rounded to the
+       nearest ``10**-d``"""
     if d < 0:
         raise ValueError('d must be nonnegative')
     sign = ''

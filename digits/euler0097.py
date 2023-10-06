@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Large non-Mersenne prime
+r"""Large non-Mersenne prime
 
    The first known prime found to exceed one million digits was discovered in
    1999, and is a Mersenne prime of the form $2^{6972593}-1$; it contains
