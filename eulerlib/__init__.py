@@ -359,3 +359,89 @@ def generateAsc(init, mknext):
         yield node
         for n in mknext(node):
             heapq.heappush(queue, n)
+
+def ascending_range2(f, keyfunc=None):
+    if keyfunc is None:
+        def mknode(i,j):
+            value = f(i,j)
+            return (value, i, j, value)
+    else:
+        def mknode(i,j):
+            value = f(i,j)
+            return (keyfunc(value), i, j, value)
+    queue = [mknode(0,0)]
+    while True:
+        _, i, j, value = heapq.heappop(queue)
+        yield value
+        #heapq.heappush(queue, mknode(i+1, j))
+        #if i == 0:
+        #    heapq.heappush(queue, mknode(i, j+1))
+        heapq.heappush(queue, mknode(i, j+1))
+        if j == 0:
+            heapq.heappush(queue, mknode(i+1, j))
+"""
+        node = heapq.heappop(queue)
+        yield node[3]
+        heapq.heappush(queue, mknode(node[1], node[2]+1))
+        if node[2] == 0:
+            heapq.heappush(queue, mknode(node[1]+1, node[2]))
+"""
+
+def ascending_range(f, n, keyfunc=None):
+    r"""
+    Given a monotonically nondecreasing function $f\colon\N^n\to A$,
+    ``generateAsc2(f,n)`` returns a generator that yields the range of $f$ in
+    ascending order.
+    """
+    def mknode(indices):
+        value = f(*indices)
+        key = value if keyfunc is None else keyfunc(value)
+        return (key, indices, value)
+    queue = [mknode([0] * n)]
+    while True:
+        _, ix, value = heapq.heappop(queue)
+        yield value
+        for i in xrange(n):
+            newdices = ix[:]
+            newdices[i] += 1
+            heapq.heappush(queue, mknode(newdices))
+            if ix[i] != 0:
+                break
+
+def all_factored():
+    yield (1, [])
+    queue = [(2, [(2,1)])]
+    piter = allprimes()
+    primes = [next(piter)]
+    while True:
+        n, fctrs = heapq.heappop(queue)
+        yield (n, fctrs)
+        maxP, maxK = fctrs[0]
+        for p in primes:
+            if p > maxP:
+                break
+            elif p == maxP:
+                heapq.heappush(queue, (n*p, [(maxP, maxK+1)] + fctrs[1:]))
+            else:
+                heapq.heappush(queue, (n*p, [(p,1)] + fctrs))
+        else:
+            # All known primes exhausted
+            p2 = next(piter)
+            primes.append(p2)
+            heapq.heappush(queue, (p2, [(p2,1)]))
+
+def factored(bound=None, primes=None):
+    """
+    Returns a generator of ``(n, list(factor(n)))`` pairs in ascending order.
+    If ``bound`` is non-``None``, only values of ``n`` less than ``bound`` are
+    returned.  If ``primes`` is a non-``None`` sequence, only values of ``n``
+    made by multiplying together elements of ``primes`` are returned.
+    """
+    if bound is None and primes is None:
+        return all_factored()
+    if primes is None:
+        primes = tuple(primeIter(bound=bound))
+    gen = ascending_range(lambda *ix: product(map(pow,primes,ix)), len(primes))
+    if bound is not None:
+        gen = itertools.takewhile(lambda n: n < bound, gen)
+    return gen

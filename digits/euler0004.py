@@ -11,29 +11,14 @@ r"""Largest palindrome product
 # a multiple of 11.
 
 import sys; sys.path.insert(1, sys.path[0] + '/..')
-from eulerlib import generateAsc
+from eulerlib import ascending_range
 
 __tags__ = ['digits', 'palindromic number', 'maximization']
 
-class Node(object):
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __cmp__(self, other):
-        return cmp(type(self), type(other)) \
-            or cmp(other.x * other.y, self.x * self.y)
-
-    def mknext(self):
-        if self.x - 11 >= 100:
-            yield Node(self.x-11, self.y)
-        if self.x == 990 and self.y - 1 >= 100:
-            yield Node(self.x, self.y-1)
-
-
 def solve():
-    for node in generateAsc([Node(990, 999)], Node.mknext):
-        ns = str(node.x * node.y)
+    for n in ascending_range(lambda i,j: (990 - 11*i) * (999 - j), 2,
+                             keyfunc=lambda n: -n):
+        ns = str(n)
         if ns == ns[::-1]:
             return ns
 

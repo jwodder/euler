@@ -56,3 +56,5 @@ Code to focus on improving:
  - `sum_of_digits`?
  - `is_palindrome`?
  - `number_of_digits`?
+
+- Give `ascending_range` a keyword argument for when `f` is nonincreasing?
