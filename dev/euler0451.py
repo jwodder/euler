@@ -4,7 +4,7 @@ from eulerlib import factor, modInverse, cross, sieve
 def I(n):
     terms = []
     for (p,k) in factor(n):
-        if p % 2 == 0 and k>1:
+        if p == 2 and k>1:
             residues = (1, -1, (1<<k-1)-1, (1<<k-1)+1)
         else:
             residues = (1, -1)
@@ -16,4 +16,4 @@ def I(n):
 sieve(2 * 10**7)
 #print sum(I(i) for i in xrange(3, 20000001))
 for i in xrange(3, 20000001):
-    print '%d\t%d' % (i, I(i))
+    print '%d\t%d\t%s' % (i, I(i), ' '.join('%d^%d' % pk for pk in factor(i)))
