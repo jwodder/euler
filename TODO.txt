@@ -42,13 +42,15 @@ Code to focus on improving:
   `int(math.floor(math.sqrt(x)))` without loss of accuracy
 - Derive an even more explicit/closed formula for euler0173.py?
 - Set up a CI system for benchmarking everything (and making sure it's still
-  correct?) after each change?
+  correct) after each change?
 
 - Functions to consider adding to eulerlib:
- - `triangle(n): n*(n-1)/2`
+ - `triangle(n): n*(n+1)/2`
+  - used by: #1, #6, #12, #45, #61?
  - `sum_of_squares(n): sum(i*i for i in xrange(n+1))`
   - name "`pyramid`"?
   - Add a "sum of squares" tag?
+  - used by: #6
  - `ceildiv(a,b): (a+b-1) // b`
  - `intceil`?
  - `sum_of_digits`?
